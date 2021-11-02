@@ -19,6 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 20)
+    private String companyName;
+
     @NotBlank
     @Size(max = 20)
     private String username;
@@ -41,8 +44,9 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String companyName ,String email, String password) {
         this.username = username;
+        this.companyName = companyName;
         this.email = email;
         this.password = password;
     }
@@ -61,6 +65,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getEmail() {
