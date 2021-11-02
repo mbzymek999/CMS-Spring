@@ -89,6 +89,18 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getCompanyName(),
+                signUpRequest.getShortCompanyName(),
+                signUpRequest.getNip(),
+                signUpRequest.getRegon(),
+                signUpRequest.getPhone(),
+                signUpRequest.getStreet(),
+                signUpRequest.getStreetNumber(),
+                signUpRequest.getBuildingNumber(),
+                signUpRequest.getCity(),
+                signUpRequest.getPostcode(),
+                signUpRequest.getProvince(),
+                signUpRequest.getCountry(),
+                signUpRequest.getAdditionalFields(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
