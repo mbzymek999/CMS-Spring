@@ -16,7 +16,7 @@ public class TestController {
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasRole('USER') or hasRole('OWNER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('OWNER') or hasRole('EMPLOYEE') or hasRole('ADMIN')")
     public String userAccess() {
         return "User Content.";
     }
@@ -25,6 +25,12 @@ public class TestController {
     @PreAuthorize("hasRole('OWNER')")
     public String ownerAccess() {
         return "Owner Board.";
+    }
+
+    @GetMapping("/employee")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    public String employeeAccess() {
+        return "Employee Board.";
     }
 
     @GetMapping("/admin")

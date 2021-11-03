@@ -71,6 +71,7 @@ public class User {
     public User() {
     }
 
+    // owner user
     public User(@NotBlank @Size(max = 20) String username, @Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
         this.companyName = companyName;
@@ -86,6 +87,21 @@ public class User {
         this.province = province;
         this.country = country;
         this.additionalFields = additionalFields;
+        this.email = email;
+        this.password = password;
+    }
+
+    // employee user
+    public User(@NotBlank @Size(max = 20) String username, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+        this.username = username;
+        this.phone = phone;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.buildingNumber = buildingNumber;
+        this.city = city;
+        this.postcode = postcode;
+        this.province = province;
+        this.country = country;
         this.email = email;
         this.password = password;
     }
