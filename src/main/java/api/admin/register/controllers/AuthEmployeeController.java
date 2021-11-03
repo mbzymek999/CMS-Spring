@@ -58,6 +58,8 @@ public class AuthEmployeeController {
 
         // Create new employee user's account
         User user = new User(signUpEmployeeRequest.getUsername(),
+                signUpEmployeeRequest.getName(),
+                signUpEmployeeRequest.getLastName(),
                 signUpEmployeeRequest.getPhone(),
                 signUpEmployeeRequest.getStreet(),
                 signUpEmployeeRequest.getStreetNumber(),

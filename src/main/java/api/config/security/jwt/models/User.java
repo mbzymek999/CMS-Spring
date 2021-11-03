@@ -23,6 +23,10 @@ public class User {
     @Size(max = 20)
     private String username;
 
+    private String name;
+
+    private String lastName;
+
     @Size(max = 50)
     private String companyName;
 
@@ -92,8 +96,10 @@ public class User {
     }
 
     // employee user
-    public User(@NotBlank @Size(max = 20) String username, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+    public User(@NotBlank @Size(max = 20) String username, String name, String lastName, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
+        this.name = name;
+        this.lastName = lastName;
         this.phone = phone;
         this.street = street;
         this.streetNumber = streetNumber;
@@ -120,6 +126,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCompanyName() {
