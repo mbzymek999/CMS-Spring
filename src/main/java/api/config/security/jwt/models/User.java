@@ -1,5 +1,7 @@
 package api.config.security.jwt.models;
 
+import api.owner.entities.Task;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,6 +60,11 @@ public class User {
 
     private String additionalFields;
 
+    @OneToMany(mappedBy = "owner")
+    private Set<Task> owner;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<Task> employee;
 
     @NotBlank
     @Size(max = 50)
@@ -279,5 +286,21 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Task> getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Set<Task> owner) {
+        this.owner = owner;
+    }
+
+    public Set<Task> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Set<Task> employee) {
+        this.employee = employee;
     }
 }
