@@ -1,5 +1,6 @@
 package api.config.security.jwt.models;
 
+import api.owner.entities.Agreement;
 import api.owner.entities.Task;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -67,6 +68,12 @@ public class User {
 
     @OneToMany(mappedBy = "employee")
     private Set<Task> employee;
+
+    @OneToMany(mappedBy = "ownerAgreement")
+    private Set<Agreement> ownerAgreement;
+
+    @OneToOne(mappedBy = "employeeAgreement")
+    private Agreement agreementEmployee;
 
     @NotBlank
     @Size(max = 50)
@@ -304,5 +311,21 @@ public class User {
 
     public void setEmployee(Set<Task> employee) {
         this.employee = employee;
+    }
+
+    public Set<Agreement> getOwnerAgreement() {
+        return ownerAgreement;
+    }
+
+    public void setOwnerAgreement(Set<Agreement> ownerAgreement) {
+        this.ownerAgreement = ownerAgreement;
+    }
+
+    public Agreement getAgreementEmployee() {
+        return agreementEmployee;
+    }
+
+    public void setAgreementEmployee(Agreement agreementEmployee) {
+        this.agreementEmployee = agreementEmployee;
     }
 }
