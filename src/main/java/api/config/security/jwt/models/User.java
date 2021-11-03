@@ -27,6 +27,8 @@ public class User {
 
     private String lastName;
 
+    private String position;
+
     @Size(max = 50)
     private String companyName;
 
@@ -96,18 +98,17 @@ public class User {
     }
 
     // employee user
-    public User(@NotBlank @Size(max = 20) String username, String name, String lastName, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+    public User(@NotBlank @Size(max = 20) String username, String name, String lastName, String position, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
         this.name = name;
         this.lastName = lastName;
+        this.position = position;
         this.phone = phone;
         this.street = street;
         this.streetNumber = streetNumber;
         this.buildingNumber = buildingNumber;
         this.city = city;
         this.postcode = postcode;
-        this.province = province;
-        this.country = country;
         this.email = email;
         this.password = password;
     }
@@ -142,6 +143,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getCompanyName() {

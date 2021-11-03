@@ -60,14 +60,13 @@ public class AuthEmployeeController {
         User user = new User(signUpEmployeeRequest.getUsername(),
                 signUpEmployeeRequest.getName(),
                 signUpEmployeeRequest.getLastName(),
+                signUpEmployeeRequest.getPosition(),
                 signUpEmployeeRequest.getPhone(),
                 signUpEmployeeRequest.getStreet(),
                 signUpEmployeeRequest.getStreetNumber(),
                 signUpEmployeeRequest.getBuildingNumber(),
                 signUpEmployeeRequest.getCity(),
                 signUpEmployeeRequest.getPostcode(),
-                signUpEmployeeRequest.getProvince(),
-                signUpEmployeeRequest.getCountry(),
                 signUpEmployeeRequest.getEmail(),
                 encoder.encode(signUpEmployeeRequest.getPassword()));
 

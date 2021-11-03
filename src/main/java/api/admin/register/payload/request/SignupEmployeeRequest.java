@@ -13,6 +13,8 @@ public class SignupEmployeeRequest {
 
     private String lastName;
 
+    private String position;
+
     private String phone;
 
     private String street;
@@ -24,10 +26,6 @@ public class SignupEmployeeRequest {
     private String city;
 
     private String postcode;
-
-    private String province;
-
-    private String country;
 
     @NotBlank
     @Size(max = 50)
@@ -62,6 +60,14 @@ public class SignupEmployeeRequest {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getPhone() {
@@ -110,22 +116,6 @@ public class SignupEmployeeRequest {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getEmail() {
