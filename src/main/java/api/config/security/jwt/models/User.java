@@ -1,6 +1,7 @@
 package api.config.security.jwt.models;
 
 import api.owner.entities.Task;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,8 @@ import javax.validation.constraints.Size;
         })
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "inc")
+    @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
 
     @NotBlank
