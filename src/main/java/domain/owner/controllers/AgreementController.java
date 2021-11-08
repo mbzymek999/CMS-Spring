@@ -1,4 +1,4 @@
-package domain.owner.controller;
+package domain.owner.controllers;
 
 import domain.owner.request.AgreementRequest;
 import domain.owner.service.AgreementService;

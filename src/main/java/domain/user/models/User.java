@@ -1,5 +1,6 @@
 package domain.user.models;
 
+import domain.employee.entitiy.Employee;
 import domain.owner.entities.Agreement;
 import domain.owner.entities.Task;
 import org.hibernate.annotations.GenericGenerator;
@@ -71,6 +72,9 @@ public class User {
 
     @OneToMany(mappedBy = "ownerAgreement")
     private Set<Agreement> ownerAgreement;
+
+    @OneToOne(mappedBy = "user")
+    private Employee employeeUser;
 
     @NotBlank
     @Size(max = 50)
@@ -318,4 +322,11 @@ public class User {
         this.ownerAgreement = ownerAgreement;
     }
 
+    public Employee getEmployeeUser() {
+        return employeeUser;
+    }
+
+    public void setEmployeeUser(Employee employeeUser) {
+        this.employeeUser = employeeUser;
+    }
 }

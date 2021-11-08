@@ -1,10 +1,9 @@
-package domain.admin.register.controllers;
+package domain.admin.controllers;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import domain.user.models.ERole;
 import domain.user.models.Role;
 import domain.user.models.User;
-import domain.admin.register.payload.request.SignupEmployeeRequest;
+import domain.admin.payload.request.SignupEmployeeRequest;
 import domain.user.payload.response.MessageResponse;
 import domain.user.repository.RoleRepository;
 import domain.user.repository.UserRepository;

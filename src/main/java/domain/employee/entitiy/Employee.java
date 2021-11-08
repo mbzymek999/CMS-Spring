@@ -1,13 +1,17 @@
-package domain.admin.register.payload.request;
+package domain.employee.entitiy;
 
-import java.util.Set;
+import domain.user.models.User;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.validation.constraints.*;
+import javax.persistence.*;
 
-public class SignupEmployeeRequest {
-    @NotBlank
-    @Size(min = 3, max = 20)
-    private String username;
+@Entity
+@Table(name = "employees")
+public class Employee {
+    @Id
+    @GeneratedValue(generator = "inc")
+    @GenericGenerator(name = "inc", strategy = "increment")
+    private Long id;
 
     private String name;
 
@@ -27,23 +31,16 @@ public class SignupEmployeeRequest {
 
     private String postcode;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
-    private String email;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private Set<String> role;
-
-    @NotBlank
-    @Size(min = 6, max = 40)
-    private String password;
-
-    public String getUsername() {
-        return username;
+    public Long getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -118,28 +115,11 @@ public class SignupEmployeeRequest {
         this.postcode = postcode;
     }
 
-    public String getEmail() {
-        return email;
+    public User getUser() {
+        return user;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<String> getRole() {
-        return this.role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
-
