@@ -27,20 +27,24 @@ import domain.user.security.jwt.JwtUtils;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthEmployeeController {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
+    final AuthenticationManager authenticationManager;
 
-    @Autowired
-    RoleRepository roleRepository;
+    final UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
+    final RoleRepository roleRepository;
 
-    @Autowired
-    JwtUtils jwtUtils;
+    final PasswordEncoder encoder;
+
+    final JwtUtils jwtUtils;
+
+    public AuthEmployeeController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.jwtUtils = jwtUtils;
+    }
 
     @PostMapping("/signup/employee")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupEmployeeRequest signUpEmployeeRequest) {

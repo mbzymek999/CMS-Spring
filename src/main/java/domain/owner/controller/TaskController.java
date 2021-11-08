@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TaskController {
-    @Autowired
+
     private final TaskService service;
+
     Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     public TaskController(TaskService service) {

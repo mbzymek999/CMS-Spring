@@ -36,20 +36,24 @@ import domain.user.security.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    JwtUtils jwtUtils;
+    private final PasswordEncoder encoder;
+
+    private final JwtUtils jwtUtils;
+
+    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.jwtUtils = jwtUtils;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
