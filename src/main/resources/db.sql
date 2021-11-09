@@ -9,19 +9,6 @@ CREATE table users
     id          BIGINT primary key auto_increment,
     username    varchar(100),
     email       varchar(100) not null,
-    company_name    varchar(50),
-    short_company_name    varchar(50),
-    nip    varchar(10),
-    regon    varchar(50),
-    phone    varchar(50),
-    street    varchar(50),
-    street_number    varchar(50),
-    building_number    varchar(50),
-    city    varchar(50),
-    postcode    varchar(50),
-    province    varchar(50),
-    country    varchar(50),
-    additional_fields varchar(300),
     password    varchar(100) not null
 );
 
@@ -37,6 +24,26 @@ CREATE table employees
     building_number    varchar(50),
     city    varchar(50),
     postcode    varchar(50),
+    user_id         BIGINT not null,
+    foreign key (user_id) references users (id)
+);
+
+CREATE table companies
+(
+    id          BIGINT primary key auto_increment,
+    company_name    varchar(50),
+    short_company_name    varchar(50),
+    nip    varchar(10),
+    regon    varchar(50),
+    phone    varchar(50),
+    street    varchar(50),
+    street_number    varchar(50),
+    building_number    varchar(50),
+    city    varchar(50),
+    postcode    varchar(50),
+    province    varchar(50),
+    country    varchar(50),
+    additional_fields varchar(300),
     user_id         BIGINT not null,
     foreign key (user_id) references users (id)
 );

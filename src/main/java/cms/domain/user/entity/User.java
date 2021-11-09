@@ -26,35 +26,6 @@ public class User {
     @Size(max = 20)
     private String username;
 
-    @Size(max = 50)
-    private String companyName;
-
-    @Size(max = 20)
-    private String shortCompanyName;
-
-    @Size(max = 10)
-    private String nip;
-
-    private String regon;
-
-    private String phone;
-
-    private String street;
-
-    private String streetNumber;
-
-    private String buildingNumber;
-
-    private String city;
-
-    private String postcode;
-
-    private String province;
-
-    private String country;
-
-    private String additionalFields;
-
     @NotBlank
     @Size(max = 50)
     @Email
@@ -67,6 +38,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Employee employeeUser;
 
+    @OneToOne(mappedBy = "user")
+    private Employee companyUser;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -78,19 +52,6 @@ public class User {
 
     public User(@NotBlank @Size(max = 20) String username, @Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
-        this.companyName = companyName;
-        this.shortCompanyName = shortCompanyName;
-        this.nip = nip;
-        this.regon = regon;
-        this.phone = phone;
-        this.street = street;
-        this.streetNumber = streetNumber;
-        this.buildingNumber = buildingNumber;
-        this.city = city;
-        this.postcode = postcode;
-        this.province = province;
-        this.country = country;
-        this.additionalFields = additionalFields;
         this.email = email;
         this.password = password;
     }
@@ -109,110 +70,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getShortCompanyName() {
-        return shortCompanyName;
-    }
-
-    public void setShortCompanyName(String shortCompanyName) {
-        this.shortCompanyName = shortCompanyName;
-    }
-
-    public String getNip() {
-        return nip;
-    }
-
-    public void setNip(String nip) {
-        this.nip = nip;
-    }
-
-    public String getRegon() {
-        return regon;
-    }
-
-    public void setRegon(String regon) {
-        this.regon = regon;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public String getBuildingNumber() {
-        return buildingNumber;
-    }
-
-    public void setBuildingNumber(String buildingNumber) {
-        this.buildingNumber = buildingNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getAdditionalFields() {
-        return additionalFields;
-    }
-
-    public void setAdditionalFields(String additionalFields) {
-        this.additionalFields = additionalFields;
     }
 
     public String getEmail() {
@@ -245,5 +102,13 @@ public class User {
 
     public void setEmployeeUser(Employee employeeUser) {
         this.employeeUser = employeeUser;
+    }
+
+    public Employee getCompanyUser() {
+        return companyUser;
+    }
+
+    public void setCompanyUser(Employee companyUser) {
+        this.companyUser = companyUser;
     }
 }
