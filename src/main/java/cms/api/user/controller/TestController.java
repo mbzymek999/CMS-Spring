@@ -16,15 +16,15 @@ public class TestController {
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasAnyRole('USER','OWNER','EMPLOYEE','ADMIN')")
+    @PreAuthorize("hasAnyRole('USER','COMPANY','EMPLOYEE','ADMIN')")
     public String userAccess() {
         return "User Content.";
     }
 
-    @GetMapping("/owner")
-    @PreAuthorize("hasRole('OWNER')")
-    public String ownerAccess() {
-        return "Owner Board.";
+    @GetMapping("/company")
+    @PreAuthorize("hasRole('COMPANY')")
+    public String companyAccess() {
+        return "Company Board.";
     }
 
     @GetMapping("/employee")

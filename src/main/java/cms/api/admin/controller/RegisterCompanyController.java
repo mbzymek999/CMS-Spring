@@ -104,7 +104,7 @@ public class RegisterCompanyController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_OWNER)
+            Role userRole = roleRepository.findByName(ERole.ROLE_COMPANY)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -116,10 +116,10 @@ public class RegisterCompanyController {
                         roles.add(adminRole);
 
                         break;
-                    case "owner":
-                        Role ownerRole = roleRepository.findByName(ERole.ROLE_OWNER)
+                    case "company":
+                        Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(ownerRole);
+                        roles.add(companyRole);
 
                         break;
                     default:

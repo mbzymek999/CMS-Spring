@@ -1,5 +1,6 @@
 package cms.domain.user.entity;
 
+import cms.domain.employee.entity.Employee;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -54,7 +55,6 @@ public class User {
 
     private String additionalFields;
 
-
     @NotBlank
     @Size(max = 50)
     @Email
@@ -63,6 +63,9 @@ public class User {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    @OneToOne(mappedBy = "user")
+    private Employee employeeUser;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -234,5 +237,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Employee getEmployeeUser() {
+        return employeeUser;
+    }
+
+    public void setEmployeeUser(Employee employeeUser) {
+        this.employeeUser = employeeUser;
     }
 }

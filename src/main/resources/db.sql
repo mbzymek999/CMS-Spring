@@ -25,6 +25,22 @@ CREATE table users
     password    varchar(100) not null
 );
 
+CREATE table employees
+(
+    id          BIGINT primary key auto_increment,
+    name    varchar(100),
+    last_name    varchar(100),
+    position varchar(100),
+    phone    varchar(50),
+    street    varchar(50),
+    street_number    varchar(50),
+    building_number    varchar(50),
+    city    varchar(50),
+    postcode    varchar(50),
+    user_id         BIGINT not null,
+    foreign key (user_id) references users (id)
+);
+
 create table user_roles
 (
     id      int primary key auto_increment,
@@ -33,6 +49,6 @@ create table user_roles
 );
 
 INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_OWNER');
+INSERT INTO roles(name) VALUES('ROLE_COMPANY');
 INSERT INTO roles(name) VALUES('ROLE_EMPLOYEE');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
