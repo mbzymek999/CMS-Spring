@@ -40,7 +40,7 @@ public class TaskService {
             System.out.println("Company is null");
         }
 
-        Task task = taskRequest.getTask().toTask(employee);
+        Task task = taskRequest.getTask().toTask();
 
         task.setCompanyTask(company);
         task.setEmployeeTask(employee);
