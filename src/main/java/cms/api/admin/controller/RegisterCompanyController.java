@@ -86,9 +86,15 @@ public class RegisterCompanyController {
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-                Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                roles.add(userRole);
+                if ("company".equals(role)) {
+                    Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(companyRole);
+                } else {
+                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(userRole);
+                }
             });
         }
 
