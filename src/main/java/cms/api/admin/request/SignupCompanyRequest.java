@@ -1,11 +1,11 @@
-package cms.config.security.payload.request;
+package cms.api.admin.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
-public class SignupRequest {
+public class SignupCompanyRequest {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;

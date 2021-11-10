@@ -2,10 +2,12 @@ package cms.api.admin.controller;
 
 import cms.config.security.jwt.JwtUtils;
 import cms.config.security.payload.request.LoginRequest;
-import cms.config.security.payload.request.SignupRequest;
+import cms.api.admin.request.SignupCompanyRequest;
 import cms.config.security.payload.response.JwtResponse;
 import cms.config.security.payload.response.MessageResponse;
 import cms.config.security.services.UserDetailsImpl;
+import cms.domain.company.entity.Company;
+import cms.domain.company.repository.CompanyRepository;
 import cms.domain.user.entity.ERole;
 import cms.domain.user.entity.Role;
 import cms.domain.user.entity.User;
@@ -33,15 +35,18 @@ public class RegisterCompanyController {
 
     private final UserRepository userRepository;
 
+    private final CompanyRepository companyRepository;
+
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder encoder;
 
     private final JwtUtils jwtUtils;
 
-    public RegisterCompanyController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+    public RegisterCompanyController(AuthenticationManager authenticationManager, UserRepository userRepository, CompanyRepository companyRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
@@ -69,21 +74,26 @@ public class RegisterCompanyController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupCompanyRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Error: Nazwa użytkownika zajęta"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(new MessageResponse("Error: Email jest w zajęty"));
         }
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()));
+
+        // Create new company
+        Company company = new Company(
                 signUpRequest.getCompanyName(),
                 signUpRequest.getShortCompanyName(),
                 signUpRequest.getNip(),
@@ -97,8 +107,7 @@ public class RegisterCompanyController {
                 signUpRequest.getProvince(),
                 signUpRequest.getCountry(),
                 signUpRequest.getAdditionalFields(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                user);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -109,30 +118,16 @@ public class RegisterCompanyController {
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case "company":
-                        Role companyRole = roleRepository.findByName(ERole.ROLE_COMPANY)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(companyRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
+                Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                roles.add(userRole);
             });
         }
 
         user.setRoles(roles);
         userRepository.save(user);
+        companyRepository.save(company);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Company registered successfully!"));
     }
 }

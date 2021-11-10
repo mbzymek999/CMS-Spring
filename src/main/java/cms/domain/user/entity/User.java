@@ -50,7 +50,7 @@ public class User {
     public User() {
     }
 
-    public User(@NotBlank @Size(max = 20) String username, @Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+    public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
         this.email = email;
         this.password = password;

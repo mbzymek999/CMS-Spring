@@ -47,6 +47,23 @@ public class Company {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, User user) {
+        this.companyName = companyName;
+        this.shortCompanyName = shortCompanyName;
+        this.nip = nip;
+        this.regon = regon;
+        this.phone = phone;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.buildingNumber = buildingNumber;
+        this.city = city;
+        this.postcode = postcode;
+        this.province = province;
+        this.country = country;
+        this.additionalFields = additionalFields;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
