@@ -62,7 +62,9 @@ create table tasks
     type varchar(100),
     date_to DATE,
     company_id BIGINT,
-    foreign key (company_id) references companies (id)
+    employee_id BIGINT,
+    foreign key (company_id) references companies (id),
+    foreign key (employee_id) references employees (id)
 );
 
 INSERT INTO roles(name) VALUES('ROLE_USER');

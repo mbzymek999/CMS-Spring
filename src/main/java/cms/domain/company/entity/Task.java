@@ -1,5 +1,6 @@
 package cms.domain.company.entity;
 
+import cms.domain.employee.entity.Employee;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,6 +21,11 @@ public class Task {
     @JoinColumn(name = "company_id")
     @ManyToOne
     private Company companyTask;
+
+    //pracownik moze miec wiele zadan
+    @JoinColumn(name = "employee_id")
+    @ManyToOne
+    private Employee employeeTask;
 
     public int getId() {
         return id;
@@ -59,5 +65,13 @@ public class Task {
 
     public void setCompanyTask(Company companyTask) {
         this.companyTask = companyTask;
+    }
+
+    public Employee getEmployeeTask() {
+        return employeeTask;
+    }
+
+    public void setEmployeeTask(Employee employeeTask) {
+        this.employeeTask = employeeTask;
     }
 }

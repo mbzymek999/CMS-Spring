@@ -1,9 +1,11 @@
 package cms.domain.employee.entity;
 
+import cms.domain.company.entity.Task;
 import cms.domain.user.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -34,6 +36,9 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "employeeTask")
+    private Set<Task> employeeTask;
 
     public Long getId() {
         return id;
@@ -121,5 +126,13 @@ public class Employee {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Task> getEmployeeTask() {
+        return employeeTask;
+    }
+
+    public void setEmployeeTask(Set<Task> employeeTask) {
+        this.employeeTask = employeeTask;
     }
 }
