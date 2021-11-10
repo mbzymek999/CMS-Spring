@@ -41,7 +41,7 @@ public class RegisterCompanyController {
         this.encoder = encoder;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup/company")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupCompanyRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity

@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "companies")
@@ -47,6 +48,9 @@ public class Company {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "companyTask")
+    private Set<Task> companyTask;
+
     public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, User user) {
         this.companyName = companyName;
         this.shortCompanyName = shortCompanyName;
@@ -62,6 +66,9 @@ public class Company {
         this.country = country;
         this.additionalFields = additionalFields;
         this.user = user;
+    }
+
+    public Company() {
     }
 
     public Long getId() {
@@ -182,5 +189,13 @@ public class Company {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Task> getCompanyTask() {
+        return companyTask;
+    }
+
+    public void setCompanyTask(Set<Task> companyTask) {
+        this.companyTask = companyTask;
     }
 }

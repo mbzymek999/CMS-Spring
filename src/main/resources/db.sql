@@ -12,6 +12,13 @@ CREATE table users
     password    varchar(100) not null
 );
 
+create table user_roles
+(
+    id      int primary key auto_increment,
+    user_id BIGINT not null,
+    role_id int not null
+);
+
 CREATE table employees
 (
     id          BIGINT primary key auto_increment,
@@ -48,11 +55,14 @@ CREATE table companies
     foreign key (user_id) references users (id)
 );
 
-create table user_roles
+create table tasks
 (
-    id      int primary key auto_increment,
-    user_id BIGINT not null,
-    role_id int not null
+    id int primary key auto_increment,
+    name varchar(100),
+    type varchar(100),
+    date_to DATE,
+    company_id BIGINT,
+    foreign key (company_id) references companies (id)
 );
 
 INSERT INTO roles(name) VALUES('ROLE_USER');
