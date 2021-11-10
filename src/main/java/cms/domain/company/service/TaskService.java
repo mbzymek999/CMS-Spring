@@ -33,11 +33,13 @@ public class TaskService {
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
 
         Company company = companyRepository.findById(userImpl.getId()).orElse(null);
+        if(company == null){
+            System.out.println("Firma nie istnieje");
+        }
 
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
-
-        if(company == null){
-            System.out.println("Company is null");
+        if(employee == null){
+            System.out.println("Pracownik nie istnieje");
         }
 
         Task task = taskRequest.getTask().toTask();

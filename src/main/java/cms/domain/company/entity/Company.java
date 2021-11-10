@@ -51,6 +51,9 @@ public class Company {
     @OneToMany(mappedBy = "companyTask")
     private Set<Task> companyTask;
 
+    @OneToMany(mappedBy = "companyAgreement")
+    private Set<Agreement> companyAgreement;
+
     public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, User user) {
         this.companyName = companyName;
         this.shortCompanyName = shortCompanyName;
@@ -197,5 +200,13 @@ public class Company {
 
     public void setCompanyTask(Set<Task> companyTask) {
         this.companyTask = companyTask;
+    }
+
+    public Set<Agreement> getCompanyAgreement() {
+        return companyAgreement;
+    }
+
+    public void setCompanyAgreement(Set<Agreement> companyAgreement) {
+        this.companyAgreement = companyAgreement;
     }
 }

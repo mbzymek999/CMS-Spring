@@ -67,6 +67,18 @@ create table tasks
     foreign key (employee_id) references employees (id)
 );
 
+create table agreements
+(
+    id int primary key auto_increment,
+    agreement_type varchar(50),
+    assigned_date DATE,
+    date_from DATE,
+    date_to DATE,
+    salary double,
+    company_id BIGINT,
+    foreign key (company_id) references companies (id)
+);
+
 INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_COMPANY');
 INSERT INTO roles(name) VALUES('ROLE_EMPLOYEE');
