@@ -55,17 +55,6 @@ CREATE table companies
     foreign key (user_id) references users (id)
 );
 
-CREATE table agreement_tests
-(
-    id          BIGINT primary key auto_increment,
-    company_name    varchar(50),
-    name varchar(50),
-    assigned_date DATE,
-    user_id         BIGINT not null,
-    foreign key (user_id) references users (id)
-);
-
-
 create table tasks
 (
     id int primary key auto_increment,
@@ -87,7 +76,11 @@ create table agreements
     date_to DATE,
     salary double,
     company_id BIGINT,
-    foreign key (company_id) references companies (id)
+    user_id         BIGINT not null,
+    employee_id         BIGINT not null,
+    foreign key (company_id) references companies (id),
+    foreign key (user_id) references users (id),
+    foreign key (employee_id) references employees (id)
 );
 
 INSERT INTO roles(name) VALUES('ROLE_USER');

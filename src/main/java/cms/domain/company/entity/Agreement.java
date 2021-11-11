@@ -1,5 +1,7 @@
 package cms.domain.company.entity;
 
+import cms.domain.employee.entity.Employee;
+import cms.domain.user.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,6 +24,27 @@ public class Agreement {
     @JoinColumn(name = "company_id")
     @ManyToOne
     private Company companyAgreement;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employeeAgreement;
+
+    public Agreement(String agreementType, LocalDate assignedDate, LocalDate dateFrom, LocalDate dateTo, double salary, User user, Employee employeeAgreement) {
+        this.agreementType = agreementType;
+        this.assignedDate = assignedDate;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.salary = salary;
+        this.user = user;
+        this.employeeAgreement = employeeAgreement;
+    }
+
+    public Agreement() {
+    }
 
     public int getId() {
         return id;
@@ -77,5 +100,21 @@ public class Agreement {
 
     public void setCompanyAgreement(Company companyAgreement) {
         this.companyAgreement = companyAgreement;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Employee getEmployeeAgreement() {
+        return employeeAgreement;
+    }
+
+    public void setEmployeeAgreement(Employee employeeAgreement) {
+        this.employeeAgreement = employeeAgreement;
     }
 }

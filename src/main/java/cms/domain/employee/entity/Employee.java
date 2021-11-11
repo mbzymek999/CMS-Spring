@@ -40,6 +40,19 @@ public class Employee {
     @OneToMany(mappedBy = "employeeTask")
     private Set<Task> employeeTask;
 
+    public Employee(String name, String lastName, String position, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, User user) {
+        this.name = name;
+        this.lastName = lastName;
+        this.position = position;
+        this.phone = phone;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.buildingNumber = buildingNumber;
+        this.city = city;
+        this.postcode = postcode;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
