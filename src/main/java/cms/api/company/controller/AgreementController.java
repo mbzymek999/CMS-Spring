@@ -2,7 +2,9 @@ package cms.api.company.controller;
 
 import cms.api.company.request.AgreementRequest;
 import cms.config.security.payload.response.MessageResponse;
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
+import cms.domain.company.entity.Company;
 import cms.domain.company.repository.AgreementRepository;
 import cms.domain.company.repository.CompanyRepository;
 import cms.domain.employee.entity.Employee;
@@ -13,6 +15,8 @@ import cms.domain.user.entity.User;
 import cms.domain.user.repository.RoleRepository;
 import cms.domain.user.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +64,14 @@ public class AgreementController {
                     .body(new MessageResponse("Error: Email jest w zajęty"));
         }
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+
+        Company company = companyRepository.findById(userImpl.getId()).orElse(null);
+        if(company == null){
+            System.out.println("Firma nie istnieje");
+        }
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
@@ -86,9 +98,11 @@ public class AgreementController {
                 signUpRequest.getDateFrom(),
                 signUpRequest.getDateTo(),
                 signUpRequest.getSalary(),
+                company,
                 user,
                 employee
         );
+
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

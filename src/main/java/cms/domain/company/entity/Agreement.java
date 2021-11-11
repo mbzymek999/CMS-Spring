@@ -33,12 +33,13 @@ public class Agreement {
     @JoinColumn(name = "employee_id")
     private Employee employeeAgreement;
 
-    public Agreement(String agreementType, LocalDate assignedDate, LocalDate dateFrom, LocalDate dateTo, double salary, User user, Employee employeeAgreement) {
+    public Agreement(String agreementType, LocalDate assignedDate, LocalDate dateFrom, LocalDate dateTo, double salary, Company companyAgreement, User user, Employee employeeAgreement) {
         this.agreementType = agreementType;
         this.assignedDate = assignedDate;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.salary = salary;
+        this.companyAgreement = companyAgreement;
         this.user = user;
         this.employeeAgreement = employeeAgreement;
     }
