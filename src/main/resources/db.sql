@@ -55,6 +55,17 @@ CREATE table companies
     foreign key (user_id) references users (id)
 );
 
+CREATE table agreement_tests
+(
+    id          BIGINT primary key auto_increment,
+    company_name    varchar(50),
+    name varchar(50),
+    assigned_date DATE,
+    user_id         BIGINT not null,
+    foreign key (user_id) references users (id)
+);
+
+
 create table tasks
 (
     id int primary key auto_increment,

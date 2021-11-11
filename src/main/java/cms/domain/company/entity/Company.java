@@ -71,6 +71,15 @@ public class Company {
         this.user = user;
     }
 
+    public Company(User user) {
+        this.user = user;
+    }
+
+    public Company(@Size(max = 50) String companyName, User user) {
+        this.companyName = companyName;
+        this.user = user;
+    }
+
     public Company() {
     }
 
