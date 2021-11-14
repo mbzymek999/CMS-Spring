@@ -31,7 +31,6 @@ public class AgreementRequest {
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private double salary;
-    private int maxEmployees;
 
     //employee
     private String name;
@@ -114,14 +113,6 @@ public class AgreementRequest {
 
     public void setSalary(double salary) {
         this.salary = salary;
-    }
-
-    public int getMaxEmployees() {
-        return maxEmployees;
-    }
-
-    public void setMaxEmployees(int maxEmployees) {
-        this.maxEmployees = maxEmployees;
     }
 
     public String getName() {

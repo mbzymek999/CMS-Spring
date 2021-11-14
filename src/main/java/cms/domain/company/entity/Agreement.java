@@ -19,7 +19,6 @@ public class Agreement {
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private double salary;
-    private int maxEmployees;
 
     //wlasciciel moze miec wiele umow
     @JoinColumn(name = "company_id")
@@ -34,13 +33,12 @@ public class Agreement {
     @JoinColumn(name = "employee_id")
     private Employee employeeAgreement;
 
-    public Agreement(String agreementType, LocalDate assignedDate, LocalDate dateFrom, LocalDate dateTo, double salary, int maxEmployees, Company companyAgreement, User user, Employee employeeAgreement) {
+    public Agreement(String agreementType, LocalDate assignedDate, LocalDate dateFrom, LocalDate dateTo, double salary, Company companyAgreement, User user, Employee employeeAgreement) {
         this.agreementType = agreementType;
         this.assignedDate = assignedDate;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.salary = salary;
-        this.maxEmployees = maxEmployees;
         this.companyAgreement = companyAgreement;
         this.user = user;
         this.employeeAgreement = employeeAgreement;
@@ -95,14 +93,6 @@ public class Agreement {
 
     public void setSalary(double salary) {
         this.salary = salary;
-    }
-
-    public int getMaxEmployees() {
-        return maxEmployees;
-    }
-
-    public Company getCompanyAgreement() {
-        return companyAgreement;
     }
 
     public void setCompanyAgreement(Company companyAgreement) {

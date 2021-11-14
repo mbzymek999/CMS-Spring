@@ -10,7 +10,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/api/auth")
 public class AgreementController {
     private final AgreementService service;
     Logger logger = LoggerFactory.getLogger(AgreementController.class);
@@ -19,7 +21,7 @@ public class AgreementController {
     }
 
     @PostMapping("/create/agreement")
-    @PreAuthorize("hasRole('COMPANY')")
+//    @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addNewAgreement(@RequestBody AgreementRequest request) {
         try {
