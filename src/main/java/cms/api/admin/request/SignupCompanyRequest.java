@@ -39,6 +39,8 @@ public class SignupCompanyRequest {
 
     private String additionalFields;
 
+    private int maxEmployees;
+
     @NotBlank
     @Size(max = 50)
     @Email
@@ -160,6 +162,14 @@ public class SignupCompanyRequest {
 
     public void setAdditionalFields(String additionalFields) {
         this.additionalFields = additionalFields;
+    }
+
+    public int getMaxEmployees() {
+        return maxEmployees;
+    }
+
+    public void setMaxEmployees(int maxEmployees) {
+        this.maxEmployees = maxEmployees;
     }
 
     public String getEmail() {

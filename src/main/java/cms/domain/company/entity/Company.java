@@ -44,6 +44,8 @@ public class Company {
 
     private String additionalFields;
 
+    private int maxEmployees;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -54,7 +56,7 @@ public class Company {
     @OneToMany(mappedBy = "companyAgreement")
     private Set<Agreement> companyAgreement;
 
-    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, User user) {
+    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
         this.companyName = companyName;
         this.shortCompanyName = shortCompanyName;
         this.nip = nip;
@@ -68,6 +70,7 @@ public class Company {
         this.province = province;
         this.country = country;
         this.additionalFields = additionalFields;
+        this.maxEmployees = maxEmployees;
         this.user = user;
     }
 
@@ -193,6 +196,14 @@ public class Company {
 
     public void setAdditionalFields(String additionalFields) {
         this.additionalFields = additionalFields;
+    }
+
+    public int getMaxEmployees() {
+        return maxEmployees;
+    }
+
+    public void setMaxEmployees(int maxEmployees) {
+        this.maxEmployees = maxEmployees;
     }
 
     public User getUser() {

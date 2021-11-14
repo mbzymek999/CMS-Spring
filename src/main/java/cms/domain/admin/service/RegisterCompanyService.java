@@ -60,6 +60,7 @@ public class RegisterCompanyService {
                 signUpRequest.getProvince(),
                 signUpRequest.getCountry(),
                 signUpRequest.getAdditionalFields(),
+                signUpRequest.getMaxEmployees(),
                 user);
 
         Set<String> strRoles = signUpRequest.getRole();

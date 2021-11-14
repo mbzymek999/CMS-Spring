@@ -51,6 +51,7 @@ CREATE table companies
     province    varchar(50),
     country    varchar(50),
     additional_fields varchar(300),
+    max_employees int,
     user_id         BIGINT not null,
     foreign key (user_id) references users (id)
 );
