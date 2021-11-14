@@ -87,6 +87,7 @@ public class AgreementService {
                 signUpRequest.getDateFrom(),
                 signUpRequest.getDateTo(),
                 signUpRequest.getSalary(),
+                signUpRequest.getMaxEmployees(),
                 company,
                 user,
                 employee

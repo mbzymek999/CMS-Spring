@@ -75,6 +75,7 @@ create table agreements
     date_from DATE,
     date_to DATE,
     salary double,
+    max_employees int,
     company_id BIGINT,
     user_id         BIGINT not null,
     employee_id         BIGINT not null,

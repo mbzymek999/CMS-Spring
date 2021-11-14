@@ -1,6 +1,7 @@
 package cms.api.admin.controller;
 
 import cms.api.admin.request.SignupCompanyRequest;
+import cms.config.security.payload.response.MessageResponse;
 import cms.domain.admin.service.RegisterCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class RegisterCompanyController {
     }
 
     @PostMapping("/signup/company")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addNewCompany(@RequestBody SignupCompanyRequest request) {
         try {

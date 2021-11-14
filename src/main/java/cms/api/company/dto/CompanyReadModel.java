@@ -1,9 +1,13 @@
 package cms.api.company.dto;
 
 import cms.domain.company.entity.Company;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 
+@Data
+@NoArgsConstructor
 public class CompanyReadModel {
 
     private Long id;
