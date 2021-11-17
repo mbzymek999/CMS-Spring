@@ -1,6 +1,6 @@
 package cms.domain.admin.entity;
 
-import cms.config.payment.entity.Payment;
+import cms.domain.company.entity.Payment;
 import cms.domain.company.entity.Company;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,6 +32,12 @@ public class Invoice {
         this.pricePackage = pricePackage;
         this.company = company;
         this.payment = payment;
+    }
+
+    public Invoice(LocalDate dateFrom, LocalDate dateTo, double pricePackage) {
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.pricePackage = pricePackage;
     }
 
     public int getId() {

@@ -1,4 +1,4 @@
-package cms.config.payment.entity;
+package cms.domain.company.entity;
 
 import cms.domain.admin.entity.Invoice;
 import org.hibernate.annotations.GenericGenerator;
@@ -26,6 +26,13 @@ public class Payment {
     public Payment(LocalDate dateInvoice, double price, Invoice invoice) {
         this.dateInvoice = dateInvoice;
         this.price = price;
+        this.invoice = invoice;
+    }
+
+    public Payment(LocalDate dateInvoice, double price, boolean paymentDone, Invoice invoice) {
+        this.dateInvoice = dateInvoice;
+        this.price = price;
+        this.paymentDone = paymentDone;
         this.invoice = invoice;
     }
 
@@ -68,4 +75,5 @@ public class Payment {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
 }

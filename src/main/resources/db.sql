@@ -90,7 +90,7 @@ create table invoices
     date_from date,
     date_to date,
     price_package double,
-    company_id int,
+    company_id BIGINT,
     foreign key (company_id) references companies (id)
 );
 
