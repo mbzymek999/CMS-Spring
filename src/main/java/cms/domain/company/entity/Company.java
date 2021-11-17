@@ -1,5 +1,6 @@
 package cms.domain.company.entity;
 
+import cms.domain.admin.entity.Invoice;
 import cms.domain.user.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -55,6 +56,9 @@ public class Company {
 
     @OneToMany(mappedBy = "companyAgreement")
     private Set<Agreement> companyAgreement;
+
+    @OneToMany(mappedBy = "company")
+    private Set<Invoice> invoices;
 
     public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
         this.companyName = companyName;
@@ -228,5 +232,13 @@ public class Company {
 
     public void setCompanyAgreement(Set<Agreement> companyAgreement) {
         this.companyAgreement = companyAgreement;
+    }
+
+    public Set<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

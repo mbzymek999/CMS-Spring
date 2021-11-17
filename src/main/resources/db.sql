@@ -84,6 +84,26 @@ create table agreements
     foreign key (employee_id) references employees (id)
 );
 
+create table invoices
+(
+    id int primary key auto_increment,
+    date_from date,
+    date_to date,
+    price_package double,
+    company_id int,
+    foreign key (company_id) references companies (id)
+);
+
+create table payments
+(
+    id int primary key auto_increment,
+    date_invoice date,
+    price double,
+    payment_done bit,
+    invoice_id int,
+    foreign key (invoice_id) references invoices (id)
+);
+
 INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_COMPANY');
 INSERT INTO roles(name) VALUES('ROLE_EMPLOYEE');
