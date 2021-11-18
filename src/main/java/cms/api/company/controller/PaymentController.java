@@ -19,10 +19,9 @@ public class PaymentController {
     @PostMapping("/api/payment")
 //    @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createPayment(@RequestBody PaymentRequest request,
-                                                @RequestParam(value = "companyId") Long companyId) {
+    public ResponseEntity<String> createPayment(@RequestParam(value = "companyId") Long companyId) {
         try {
-            return ResponseEntity.ok(service.createPayment(request, companyId));
+            return ResponseEntity.ok(service.createPayment(companyId));
         }catch (NullPointerException e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();

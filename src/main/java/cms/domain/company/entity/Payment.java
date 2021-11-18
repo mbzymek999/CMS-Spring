@@ -1,6 +1,5 @@
 package cms.domain.company.entity;
 
-import cms.domain.admin.entity.Invoice;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,24 +15,22 @@ public class Payment {
     private LocalDate datePayment;
     private double price;
     private boolean paymentDone;
-    @JoinColumn(name = "invoice_id")
+    @JoinColumn(name = "company_id")
     @OneToOne
-    private Invoice invoice;
+    private Company company;
 
     public Payment() {
     }
 
-    public Payment(LocalDate datePayment, double price, Invoice invoice) {
+    public Payment(LocalDate datePayment, double price) {
         this.datePayment = datePayment;
         this.price = price;
-        this.invoice = invoice;
     }
 
-    public Payment(LocalDate datePayment, double price, boolean paymentDone, Invoice invoice) {
+    public Payment(LocalDate datePayment, double price, boolean paymentDone) {
         this.datePayment = datePayment;
         this.price = price;
         this.paymentDone = paymentDone;
-        this.invoice = invoice;
     }
 
     public int getId() {
@@ -68,12 +65,11 @@ public class Payment {
         this.paymentDone = paymentDone;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setCompany(Company company) {
+        this.company = company;
     }
-
 }
