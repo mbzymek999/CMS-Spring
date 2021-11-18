@@ -1,5 +1,6 @@
 package cms.domain.company.service;
 
+import cms.api.company.dto.PaymentWriteModel;
 import cms.api.company.request.PaymentRequest;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.admin.entity.Invoice;
@@ -40,14 +41,10 @@ public class PaymentService {
                 paymentRequest.getPricePackage()
         );
 
-        // Create new payment
-        Payment payment = new Payment(
-                paymentRequest.getDateInvoice(),
-                paymentRequest.getPrice(),
-                paymentRequest.isPaymentDone(),
-                invoice
-        );
+        // Create payment
+        Payment payment = new PaymentWriteModel().toPayment(company);
 
+        payment.setInvoice(invoice);
         invoice.setCompany(company);
         invoiceRepository.save(invoice);
         paymentRepository.save(payment);

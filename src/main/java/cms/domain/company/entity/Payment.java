@@ -13,7 +13,7 @@ public class Payment {
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private int id;
-    private LocalDate dateInvoice;
+    private LocalDate datePayment;
     private double price;
     private boolean paymentDone;
     @JoinColumn(name = "invoice_id")
@@ -23,14 +23,14 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(LocalDate dateInvoice, double price, Invoice invoice) {
-        this.dateInvoice = dateInvoice;
+    public Payment(LocalDate datePayment, double price, Invoice invoice) {
+        this.datePayment = datePayment;
         this.price = price;
         this.invoice = invoice;
     }
 
-    public Payment(LocalDate dateInvoice, double price, boolean paymentDone, Invoice invoice) {
-        this.dateInvoice = dateInvoice;
+    public Payment(LocalDate datePayment, double price, boolean paymentDone, Invoice invoice) {
+        this.datePayment = datePayment;
         this.price = price;
         this.paymentDone = paymentDone;
         this.invoice = invoice;
@@ -44,12 +44,12 @@ public class Payment {
         this.id = id;
     }
 
-    public LocalDate getDateInvoice() {
-        return dateInvoice;
+    public LocalDate getDatePayment() {
+        return datePayment;
     }
 
-    public void setDateInvoice(LocalDate dateInvoice) {
-        this.dateInvoice = dateInvoice;
+    public void setDatePayment(LocalDate datePayment) {
+        this.datePayment = datePayment;
     }
 
     public double getPrice() {

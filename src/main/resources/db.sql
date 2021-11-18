@@ -97,7 +97,7 @@ create table invoices
 create table payments
 (
     id int primary key auto_increment,
-    date_invoice date,
+    date_payment date,
     price double,
     payment_done bit,
     invoice_id int,
