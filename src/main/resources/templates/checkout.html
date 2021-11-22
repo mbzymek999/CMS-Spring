@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <title>Opłata</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'arial';
+        }
+
+        #checkout-form input,
+        #checkout-form button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <br><br><br><br><br>
+        <div class="card bg-light">
+            <div class="card-body">
+                <form action='/charge' method='POST' id='checkout-form'>
+
+                    <input type='hidden' th:value='${amount}' name='amount'/>
+                    <input type='hidden' th:value='${paymentId}' name='paymentId'/>
+                    <p class="text-center">Nazwa firmy:<span th:text='${companyName}' /><span/></p>
+                    <p class="text-center">id Platnosci:<span th:text='${paymentId}' /><span/></p>
+                    <label class="text-center">Cena:<span th:text='${amount/100}' /><span th:text=" zł" /></label>
+                    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+                    <script
+                            src='https://checkout.stripe.com/checkout.js'
+                            class='stripe-button'
+                            th:attr='data-key=${stripePublicKey},
+                         data-amount=${amount},
+                         data-currency=${currency}'
+                            data-name='Cms'
+                            data-description='Opłata abonamentu'
+                            data-image=''
+                            data-locale='auto'
+                            data-zip-code='false'
+                            data-label='Zapłać'
+                            data-panel-label="Zapłać kartą">
+                    </script>
+
+                </form>
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -2,11 +2,17 @@ package cms.config.payment.controller;
 
 import cms.config.payment.request.ChargeRequest;
 import cms.config.payment.service.StripeService;
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Payment;
 import cms.domain.company.repository.PaymentRepository;
+import cms.domain.user.entity.User;
+import cms.domain.user.repository.UserRepository;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,10 +23,12 @@ public class ChargeController {
 
     PaymentRepository paymentRepository;
     private StripeService paymentsService;
+    private UserRepository userRepository;
 
-    public ChargeController(PaymentRepository paymentRepository, StripeService paymentsService) {
+    public ChargeController(PaymentRepository paymentRepository, StripeService paymentsService, UserRepository userRepository) {
         this.paymentRepository = paymentRepository;
         this.paymentsService = paymentsService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/charge")
@@ -28,10 +36,25 @@ public class ChargeController {
         Payment payment = paymentRepository.findById(chargeRequest.getPaymentId()).orElseThrow();
         if(payment.isPaymentDone())
             throw new IllegalStateException("Pakiet został opłacony");
+
+        // nie pobiera tokena
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+//
+//        User user = userRepository.findById(userImpl.getId()).orElse(null);
+//
+//        if(user == null)
+//            throw new NullPointerException("nie znaleziono uzytkowonika");
+//
+//        if(user.getCompanyUser().getPayment().getId() != chargeRequest.getPaymentId())
+//            throw new SecurityException("użytkownik nie może dokonać płatności");
+
+
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(ChargeRequest.Currency.PLN);
         Charge charge = paymentsService.charge(chargeRequest);
         payment.setPaymentDone(true);
+        paymentRepository.save(payment);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());

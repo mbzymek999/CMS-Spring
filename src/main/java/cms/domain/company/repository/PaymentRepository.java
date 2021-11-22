@@ -11,5 +11,5 @@ public interface PaymentRepository extends JpaRepository<Payment,Integer> {
     @Override
     <S extends Payment> S save(S s);
 
-//    List<Payment> findAllByInvoice_Company_Id(Integer id);
+//        List<Payment> findAllCompanies(Long id);
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:th='http://www.thymeleaf.org'>
+<head>
+    <meta charset="UTF-8">
+    <title>Wyniki transakcji</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <br><br><br><br><br>
+        <div class="card bg-light">
+            <div class="card-body">
+
+                <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
+                <div th:unless='${error}'>
+                    <h3 style='color: green;'>Sukces!</h3>
+                    <div>Id.: <span th:text='${id}'/></div>
+                    <div>Status: <span th:text='${status}'/></div>
+                    <div>Opłata id.: <span th:text='${chargeId}'/></div>
+                    <div>Saldo transakcji id.: <span th:text='${balance_transaction}'/></div>
+                </div>
+                <a href='http://localhost:8081/all_payments'>Powrót</a>
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -29,6 +29,7 @@ public class CheckoutController {
         Payment payment = paymentRepository.findById(Integer.valueOf(idPayment)).orElseThrow();
         model.addAttribute("paymentId",payment.getId());
         model.addAttribute("amount", (int)payment.getPrice()*100);
+        model.addAttribute("companyName", payment.getCompany().getCompanyName());
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.PLN);
         return "checkout";

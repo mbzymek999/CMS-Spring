@@ -1,5 +1,7 @@
 package cms.domain.company.service;
 
+import cms.api.company.dto.CompanyReadModel;
+import cms.api.company.dto.PaymentReadModel;
 import cms.api.company.dto.PaymentWriteModel;
 import cms.api.company.request.PaymentRequest;
 import cms.config.security.services.UserDetailsImpl;
@@ -11,6 +13,9 @@ import cms.domain.employee.entity.Employee;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentService {
@@ -37,5 +42,15 @@ public class PaymentService {
         paymentRepository.save(payment);
 
         return "Payment created.!";
+    }
+
+    public List<PaymentReadModel> readAll() {
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+
+        return paymentRepository.findAll().stream().map(PaymentReadModel::new).collect(Collectors.toList());
+//        return paymentRepository.findAllCompanies(userImpl.getId()).stream().map(PaymentReadModel::new).collect(Collectors.toList());
+
     }
 }

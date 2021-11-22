@@ -1,5 +1,6 @@
 package cms.domain.user.entity;
 
+import cms.domain.company.entity.Company;
 import cms.domain.employee.entity.Employee;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,7 +40,7 @@ public class User {
     private Employee employeeUser;
 
     @OneToOne(mappedBy = "user")
-    private Employee companyUser;
+    private Company companyUser;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -104,11 +105,11 @@ public class User {
         this.employeeUser = employeeUser;
     }
 
-    public Employee getCompanyUser() {
+    public Company getCompanyUser() {
         return companyUser;
     }
 
-    public void setCompanyUser(Employee companyUser) {
+    public void setCompanyUser(Company companyUser) {
         this.companyUser = companyUser;
     }
 }
