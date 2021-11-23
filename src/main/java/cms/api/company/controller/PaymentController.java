@@ -1,5 +1,6 @@
 package cms.api.company.controller;
 
+import cms.api.company.dto.CompanyPaymentReadModel;
 import cms.api.company.dto.CompanyReadModel;
 import cms.api.company.dto.PaymentReadModel;
 import cms.api.company.request.PaymentRequest;
@@ -37,5 +38,17 @@ public class PaymentController {
     @RequestMapping("/payments")
     ResponseEntity<List<PaymentReadModel>> readAllPayments() {
         return ResponseEntity.ok(service.readAll());
+    }
+
+    @GetMapping
+    @RequestMapping("/company/payments")
+    ResponseEntity<List<CompanyPaymentReadModel>> readCompanyPayments() {
+        try {
+            logger.info("Reading company payments");
+            return ResponseEntity.ok(service.readCompanyPayments());
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 }
