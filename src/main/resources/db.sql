@@ -88,6 +88,7 @@ create table payments
 (
     id int primary key auto_increment,
     date_payment date,
+    term_payment date,
     price double,
     payment_done bit,
     company_id BIGINT,

@@ -1,7 +1,6 @@
 package cms.domain.company.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -15,6 +14,7 @@ public class Payment {
     private LocalDate datePayment;
     private double price;
     private boolean paymentDone;
+    private LocalDate termPayment;
     @JoinColumn(name = "company_id")
     @OneToOne
     private Company company;
@@ -47,6 +47,14 @@ public class Payment {
 
     public void setDatePayment(LocalDate datePayment) {
         this.datePayment = datePayment;
+    }
+
+    public LocalDate getTermPayment() {
+        return termPayment;
+    }
+
+    public void setTermPayment(LocalDate termPayment) {
+        this.termPayment = termPayment;
     }
 
     public double getPrice() {
