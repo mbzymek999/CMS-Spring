@@ -1,6 +1,7 @@
 package cms.domain.company.service;
 
 import cms.api.company.request.AgreementRequest;
+import cms.config.email.MailService;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.entity.Company;
@@ -35,13 +36,16 @@ public class AgreementService {
 
     private final AgreementRepository agreementRepository;
 
-    public AgreementService(UserRepository userRepository, CompanyRepository companyRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository) {
+    private final MailService mailService;
+
+    public AgreementService(UserRepository userRepository, CompanyRepository companyRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository, MailService mailService) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.agreementRepository = agreementRepository;
+        this.mailService = mailService;
     }
 
     public String registerUser(AgreementRequest signUpRequest) {
@@ -114,6 +118,8 @@ public class AgreementService {
             });
         }
 
+        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ signUpRequest.getPassword();
+        mailService.sendEmail(signUpRequest.getEmail(),"Dane logowania pracownika", emailBody);
         user.setRoles(roles);
         userRepository.save(user);
         employeeRepository.save(employee);
