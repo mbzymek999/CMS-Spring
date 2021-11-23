@@ -53,6 +53,9 @@ public class Employee {
         this.user = user;
     }
 
+    public Employee() {
+    }
+
     public Long getId() {
         return id;
     }

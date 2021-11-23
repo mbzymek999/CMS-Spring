@@ -3,7 +3,6 @@ package cms.api.company.controller;
 import cms.api.company.dto.CompanyPaymentReadModel;
 import cms.api.company.dto.CompanyReadModel;
 import cms.api.company.dto.PaymentReadModel;
-import cms.api.company.request.PaymentRequest;
 import cms.domain.company.service.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
