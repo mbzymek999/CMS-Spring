@@ -21,6 +21,8 @@ public class SignupAdminRequest {
     @Size(min = 6, max = 40)
     private String password;
 
+    private String idClient;
+
     public String getUsername() {
         return username;
     }
@@ -51,5 +53,13 @@ public class SignupAdminRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(String idClient) {
+        this.idClient = idClient;
     }
 }

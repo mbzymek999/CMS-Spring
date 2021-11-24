@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class RegisterAdminService {
@@ -35,8 +36,12 @@ public class RegisterAdminService {
             return "Error: Email jest w zajęty";
         }
 
+        String randomId = UUID.randomUUID().toString().replace("-", "");
+
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+        User user = new User(
+                randomId,
+                signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 

@@ -23,6 +23,8 @@ public class User {
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
 
+    private String idClient;
+
     @NotBlank
     @Size(max = 20)
     private String username;
@@ -57,12 +59,27 @@ public class User {
         this.password = password;
     }
 
+    public User(@NotBlank String idClient, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+        this.idClient = idClient;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(String idClient) {
+        this.idClient = idClient;
     }
 
     public String getUsername() {

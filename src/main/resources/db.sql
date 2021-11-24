@@ -7,6 +7,7 @@ create table roles
 CREATE table users
 (
     id          BIGINT primary key auto_increment,
+    id_client   varchar(100),
     username    varchar(100),
     email       varchar(100) not null,
     password    varchar(100) not null
