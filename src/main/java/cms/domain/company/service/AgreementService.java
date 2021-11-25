@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class AgreementService {
@@ -65,10 +66,12 @@ public class AgreementService {
             System.out.println("Firma nie istnieje");
         }
 
+        String randomPassword = UUID.randomUUID().toString().replace("-", "");
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(randomPassword));
 
         // Create new Employee
         Employee employee = new Employee(
@@ -118,7 +121,7 @@ public class AgreementService {
             });
         }
 
-        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ signUpRequest.getPassword();
+        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ randomPassword;
         mailService.sendEmail(signUpRequest.getEmail(),"Dane logowania pracownika", emailBody);
         user.setRoles(roles);
         userRepository.save(user);
