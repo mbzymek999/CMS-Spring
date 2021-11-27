@@ -18,10 +18,9 @@ public class EmployeeController {
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
-
     @GetMapping
     @RequestMapping("/employees")
-    ResponseEntity<List<EmployeeReadModel>> readAllEmployees() {
-        return ResponseEntity.ok(service.readAll());
+    List<EmployeeReadModel> readAllEmployees() {
+        return service.readAll();
     }
 }

@@ -1,6 +1,5 @@
-package cms.api.admin.controller;
+package cms.api.admin.register.admin;
 
-import cms.api.admin.request.SignupAdminRequest;
 import cms.domain.admin.service.RegisterAdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

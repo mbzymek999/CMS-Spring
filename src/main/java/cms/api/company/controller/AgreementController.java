@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,9 +25,9 @@ public class AgreementController {
     @PostMapping("/create/agreement")
 //    @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewAgreement(@RequestBody AgreementRequest request) {
+    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request) {
         try {
-            return ResponseEntity.ok(service.registerUser(request));
+            return ResponseEntity.ok(service.registerUser(request.validate()));
         }catch (NullPointerException e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();

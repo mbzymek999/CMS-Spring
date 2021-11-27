@@ -50,13 +50,10 @@ public class AgreementService {
     }
 
     public String registerUser(AgreementRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return"Error: Nazwa użytkownika zajęta";
-        }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return "Error: Email jest w zajęty";
-        }
+        checkIfUserNameAlreadyExist(signUpRequest);
+
+        checkIfEmailAlreadyExist(signUpRequest);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
@@ -129,6 +126,18 @@ public class AgreementService {
         agreementRepository.save(agreement);
 
         return "Employee registered successfully!";
+    }
+
+    private void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
+        }
+    }
+
+    public void checkIfEmailAlreadyExist(AgreementRequest signUpRequest) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new IllegalArgumentException("Error: Email jest już zajęty");
+        }
     }
 
 }

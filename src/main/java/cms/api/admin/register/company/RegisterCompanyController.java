@@ -1,13 +1,10 @@
-package cms.api.admin.controller;
+package cms.api.admin.register.company;
 
-import cms.api.admin.request.SignupCompanyRequest;
-import cms.config.security.payload.response.MessageResponse;
 import cms.domain.admin.service.RegisterCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

@@ -1,4 +1,4 @@
-package cms.api.admin.request;
+package cms.api.admin.register.company;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

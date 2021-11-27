@@ -1,4 +1,4 @@
-FROM openjdk:18-ea-alpine3.13
-ADD target/cms-0.0.1-SNAPSHOT.jar .
-EXPOSE 8000
-CMD java -jar cms-0.0.1-SNAPSHOT.jar
+FROM openjdk:11
+EXPOSE 8080
+ADD target/cms-0.0.1-SNAPSHOT.jar cms.jar
+ENTRYPOINT ["java", "-jar","/cms.jar"]

@@ -1,6 +1,6 @@
 package cms.domain.admin.service;
 
-import cms.api.admin.request.SignupAdminRequest;
+import cms.api.admin.register.admin.SignupAdminRequest;
 import cms.domain.user.entity.ERole;
 import cms.domain.user.entity.Role;
 import cms.domain.user.entity.User;

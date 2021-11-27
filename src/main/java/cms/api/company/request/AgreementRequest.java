@@ -16,9 +16,9 @@ public class AgreementRequest {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
-    @NotBlank
-    @Size(min = 6, max = 40)
-    private String password;
+//    @NotBlank
+//    @Size(min = 6, max = 40)
+//    private String password;
     @NotBlank
     @Size(max = 50)
     @Email
@@ -43,6 +43,12 @@ public class AgreementRequest {
     private String city;
     private String postcode;
 
+    public AgreementRequest validate() {
+        // bardziej skomplikowana walidacja name != lastName itp
+        // jezeli cos sie stanie wyrzuc blad np exception
+        return this;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -51,13 +57,13 @@ public class AgreementRequest {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getEmail() {
         return email;

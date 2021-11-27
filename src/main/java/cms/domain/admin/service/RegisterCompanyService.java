@@ -1,6 +1,6 @@
 package cms.domain.admin.service;
 
-import cms.api.admin.request.SignupCompanyRequest;
+import cms.api.admin.register.company.SignupCompanyRequest;
 import cms.domain.company.entity.Company;
 import cms.domain.company.repository.CompanyRepository;
 import cms.domain.user.entity.ERole;
@@ -10,7 +10,7 @@ import cms.domain.user.repository.RoleRepository;
 import cms.domain.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.HashSet;
 import java.util.Set;
 
