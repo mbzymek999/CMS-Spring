@@ -1,4 +1,4 @@
-package cms.api.company.dto;
+package cms.api.admin.payment;
 
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Payment;

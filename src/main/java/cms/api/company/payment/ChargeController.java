@@ -1,18 +1,11 @@
-package cms.config.payment.controller;
+package cms.api.company.payment;
 
-import cms.config.payment.request.ChargeRequest;
-import cms.config.payment.service.StripeService;
-import cms.config.security.services.UserDetailsImpl;
+import cms.external.payment.service.StripeService;
 import cms.domain.company.entity.Payment;
 import cms.domain.company.repository.PaymentRepository;
-import cms.domain.user.entity.User;
 import cms.domain.user.repository.UserRepository;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;

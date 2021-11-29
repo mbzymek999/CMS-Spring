@@ -1,9 +1,7 @@
 package cms.domain.company.service;
 
 import cms.api.company.dto.CompanyTaskReadModel;
-import cms.api.company.dto.TaskReadModel;
-import cms.api.company.request.TaskRequest;
-import cms.api.employee.dto.EmployeeTaskReadModel;
+import cms.api.company.task.TaskRequest;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Task;
@@ -21,14 +19,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskService {
+public class TaskCompanyService {
 
     private final TaskRepository repository;
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;
-    Logger logger = LoggerFactory.getLogger(TaskService.class);
+    Logger logger = LoggerFactory.getLogger(TaskCompanyService.class);
 
-    public TaskService(TaskRepository repository, CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
+    public TaskCompanyService(TaskRepository repository, CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
         this.repository = repository;
         this.companyRepository = companyRepository;
         this.employeeRepository = employeeRepository;
@@ -52,19 +50,9 @@ public class TaskService {
         return "Ok";
     }
 
-    public List<TaskReadModel> readAll() {
-        return repository.findAll().stream().map(TaskReadModel::new).collect(Collectors.toList());
-    }
-
     public List<CompanyTaskReadModel> readCompanyTasks() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
         return repository.findAllByCompanyTask_User_Id(userImpl.getId()).stream().map(CompanyTaskReadModel::new).collect(Collectors.toList());
-    }
-
-    public List<EmployeeTaskReadModel> readEmployeeTasks() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByEmployeeTask_User_Id(userImpl.getId()).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
     }
 }

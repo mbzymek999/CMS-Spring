@@ -1,9 +1,7 @@
-package cms.api.company.controller;
+package cms.api.company.task;
 
 import cms.api.company.dto.CompanyTaskReadModel;
-import cms.api.company.dto.TaskReadModel;
-import cms.api.company.request.TaskRequest;
-import cms.domain.company.service.TaskService;
+import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TaskController {
+public class TaskCompanyController {
 
-    private final TaskService service;
-    Logger logger = LoggerFactory.getLogger(TaskController.class);
-    public TaskController(TaskService service) {
+    private final TaskCompanyService service;
+    Logger logger = LoggerFactory.getLogger(TaskCompanyController.class);
+    public TaskCompanyController(TaskCompanyService service) {
         this.service = service;
     }
 
@@ -33,12 +31,6 @@ public class TaskController {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @GetMapping
-    @RequestMapping("/tasks")
-    ResponseEntity<List<TaskReadModel>> readAllTasks() {
-        return ResponseEntity.ok(service.readAll());
     }
 
     @GetMapping

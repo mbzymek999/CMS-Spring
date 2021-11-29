@@ -1,8 +1,7 @@
 package cms.api.employee.controller;
 
-import cms.api.company.controller.TaskController;
 import cms.api.employee.dto.EmployeeTaskReadModel;
-import cms.domain.company.service.TaskService;
+import cms.domain.employee.service.EmployeeTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,9 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class EmployeeTaskController {
 
-    private final TaskService service;
+    private final EmployeeTaskService service;
     Logger logger = LoggerFactory.getLogger(EmployeeTaskController.class);
-    public EmployeeTaskController(TaskService service) {
+    public EmployeeTaskController(EmployeeTaskService service) {
         this.service = service;
     }
 

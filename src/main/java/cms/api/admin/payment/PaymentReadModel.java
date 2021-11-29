@@ -1,4 +1,4 @@
-package cms.api.company.dto;
+package cms.api.admin.payment;
 
 import cms.domain.company.entity.Payment;
 import lombok.Data;

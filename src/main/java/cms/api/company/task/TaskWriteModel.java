@@ -1,4 +1,4 @@
-package cms.api.company.dto;
+package cms.api.company.task;
 
 import cms.domain.company.entity.Task;
 import cms.domain.employee.entity.Employee;

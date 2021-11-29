@@ -1,6 +1,5 @@
-package cms.config.payment.controller;
+package cms.api.company.payment;
 
-import cms.config.payment.request.ChargeRequest;
 import cms.domain.company.entity.Payment;
 import cms.domain.company.repository.PaymentRepository;
 import org.slf4j.Logger;

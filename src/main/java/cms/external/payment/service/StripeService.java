@@ -1,6 +1,6 @@
-package cms.config.payment.service;
+package cms.external.payment.service;
 
-import cms.config.payment.request.ChargeRequest;
+import cms.api.company.payment.ChargeRequest;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.Charge;

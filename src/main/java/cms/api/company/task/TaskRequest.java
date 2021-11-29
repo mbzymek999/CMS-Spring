@@ -1,6 +1,5 @@
-package cms.api.company.request;
+package cms.api.company.task;
 
-import cms.api.company.dto.TaskWriteModel;
 import lombok.Data;
 
 @Data

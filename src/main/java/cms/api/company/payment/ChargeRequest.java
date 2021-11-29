@@ -1,4 +1,4 @@
-package cms.config.payment.request;
+package cms.api.company.payment;
 
 import lombok.Data;
 
