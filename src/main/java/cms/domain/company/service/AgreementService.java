@@ -49,6 +49,8 @@ public class AgreementService {
         this.mailService = mailService;
     }
 
+    private final String randomPassword = UUID.randomUUID().toString().replace("-", "");
+
     public String registerUser(AgreementRequest signUpRequest) {
 
         checkIfUserNameAlreadyExist(signUpRequest);
@@ -57,13 +59,8 @@ public class AgreementService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-
         Company company = companyRepository.findById(userImpl.getId()).orElse(null);
-        if(company == null){
-            System.out.println("Firma nie istnieje");
-        }
-
-        String randomPassword = UUID.randomUUID().toString().replace("-", "");
+        checkIfCompanyExist(company);
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -118,14 +115,19 @@ public class AgreementService {
             });
         }
 
-        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ randomPassword;
-        mailService.sendEmail(signUpRequest.getEmail(),"Dane logowania pracownika", emailBody);
+        sendEmail(signUpRequest);
+
         user.setRoles(roles);
         userRepository.save(user);
         employeeRepository.save(employee);
         agreementRepository.save(agreement);
 
         return "Employee registered successfully!";
+    }
+
+    public void sendEmail(AgreementRequest signUpRequest) {
+        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ randomPassword;
+        mailService.sendEmail(signUpRequest.getEmail(),"Dane logowania pracownika", emailBody);
     }
 
     private void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {
@@ -137,6 +139,12 @@ public class AgreementService {
     public void checkIfEmailAlreadyExist(AgreementRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new IllegalArgumentException("Error: Email jest już zajęty");
+        }
+    }
+
+    public void checkIfCompanyExist(Company company) {
+        if(company == null){
+            throw new IllegalArgumentException("Firma nie istnieje");
         }
     }
 

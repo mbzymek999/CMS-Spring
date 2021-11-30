@@ -28,13 +28,9 @@ public class RegisterAdminService {
     }
 
     public String registerAdmin(SignupAdminRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return "Error: Nazwa użytkownika zajęta";
-        }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return "Error: Email jest w zajęty";
-        }
+        checkIfUserNameAlreadyExist(signUpRequest);
+        checkIfEmailAlreadyExist(signUpRequest);
 
         String randomId = UUID.randomUUID().toString().replace("-", "");
 
@@ -70,5 +66,17 @@ public class RegisterAdminService {
         userRepository.save(user);
 
         return "Admin registered successfully!";
+    }
+
+    private void checkIfUserNameAlreadyExist(SignupAdminRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
+        }
+    }
+
+    public void checkIfEmailAlreadyExist(SignupAdminRequest signUpRequest) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new IllegalArgumentException("Error: Email jest już zajęty");
+        }
     }
 }

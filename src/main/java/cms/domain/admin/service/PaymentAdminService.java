@@ -23,9 +23,9 @@ public class PaymentAdminService {
 
     public String createPayment(Long companyId) {
         Company company = companyRepository.findById(companyId).orElse(null);
-        if(company == null){
-            System.out.println("Firma nie istnieje");
-        }
+
+        checkIfCompanyExist(company);
+
         // Create payment
         Payment payment = new PaymentWriteModel().toPayment(company);
         payment.setCompany(company);
@@ -36,5 +36,11 @@ public class PaymentAdminService {
 
     public List<PaymentReadModel> readAll() {
         return paymentRepository.findAll().stream().map(PaymentReadModel::new).collect(Collectors.toList());
+    }
+
+    public void checkIfCompanyExist(Company company) {
+        if(company == null){
+            throw new IllegalArgumentException("Firma nie istnieje");
+        }
     }
 }

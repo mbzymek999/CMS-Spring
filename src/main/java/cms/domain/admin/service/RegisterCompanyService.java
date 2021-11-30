@@ -32,13 +32,9 @@ public class RegisterCompanyService {
     }
 
     public String registerUser(SignupCompanyRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return "Error: Nazwa użytkownika zajęta";
-        }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return "Error: Email jest w zajęty";
-        }
+        checkIfUserNameAlreadyExist(signUpRequest);
+        checkIfEmailAlreadyExist(signUpRequest);
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -89,5 +85,17 @@ public class RegisterCompanyService {
         companyRepository.save(company);
 
         return "Company registered successfully!";
+    }
+
+    private void checkIfUserNameAlreadyExist(SignupCompanyRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
+        }
+    }
+
+    public void checkIfEmailAlreadyExist(SignupCompanyRequest signUpRequest) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new IllegalArgumentException("Error: Email jest już zajęty");
+        }
     }
 }

@@ -35,14 +35,13 @@ public class TaskCompanyService {
     public String addNewTask(TaskRequest taskRequest, Long employeeId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+
         Company company = companyRepository.findById(userImpl.getId()).orElse(null);
-        if(company == null){
-            System.out.println("Firma nie istnieje");
-        }
+        checkIfCompanyExist(company);
+
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
-        if(employee == null){
-            System.out.println("Pracownik nie istnieje");
-        }
+        checkIfEmployeeExist(employee);
+
         Task task = taskRequest.getTask().toTask();
         task.setCompanyTask(company);
         task.setEmployeeTask(employee);
@@ -55,4 +54,16 @@ public class TaskCompanyService {
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
         return repository.findAllByCompanyTask_User_Id(userImpl.getId()).stream().map(CompanyTaskReadModel::new).collect(Collectors.toList());
     }
+
+    public void checkIfCompanyExist(Company company) {
+        if (company == null) {
+             throw new IllegalArgumentException("Firma nie istnieje");
+        }
+    }
+    public void checkIfEmployeeExist(Employee employee) {
+        if(employee == null){
+            throw new IllegalArgumentException("Pracownik nie istnieje");
+        }
+    }
+
 }

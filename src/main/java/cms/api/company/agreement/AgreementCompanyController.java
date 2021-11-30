@@ -23,12 +23,7 @@ public class AgreementCompanyController {
     @PostMapping("/create/agreement")
 //    @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request) {
-        try {
+    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request) throws Exception {
             return ResponseEntity.ok(service.registerUser(request.validate()));
-        }catch (NullPointerException e){
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
-        }
     }
 }
