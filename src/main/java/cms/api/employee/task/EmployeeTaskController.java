@@ -1,6 +1,5 @@
-package cms.api.employee.controller;
+package cms.api.employee.task;
 
-import cms.api.employee.dto.EmployeeTaskReadModel;
 import cms.domain.employee.service.EmployeeTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

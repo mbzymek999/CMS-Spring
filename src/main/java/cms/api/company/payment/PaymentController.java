@@ -1,6 +1,6 @@
 package cms.api.company.payment;
 
-import cms.domain.company.service.PaymentCompanyService;
+import cms.domain.company.service.CompanyPaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PaymentController {
-    private final PaymentCompanyService service;
+    private final CompanyPaymentService service;
     Logger logger = LoggerFactory.getLogger(PaymentController.class);
-    public PaymentController(PaymentCompanyService service) {
+    public PaymentController(CompanyPaymentService service) {
         this.service = service;
     }
 

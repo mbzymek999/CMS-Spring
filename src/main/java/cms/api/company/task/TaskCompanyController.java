@@ -1,6 +1,5 @@
 package cms.api.company.task;
 
-import cms.api.company.dto.CompanyTaskReadModel;
 import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

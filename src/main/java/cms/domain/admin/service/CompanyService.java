@@ -1,6 +1,6 @@
-package cms.domain.company.service;
+package cms.domain.admin.service;
 
-import cms.api.company.dto.CompanyReadModel;
+import cms.api.admin.users.company.CompanyReadModel;
 import cms.domain.company.repository.CompanyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

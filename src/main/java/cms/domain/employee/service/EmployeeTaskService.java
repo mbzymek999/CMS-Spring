@@ -1,6 +1,6 @@
 package cms.domain.employee.service;
 
-import cms.api.employee.dto.EmployeeTaskReadModel;
+import cms.api.employee.task.EmployeeTaskReadModel;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.repository.TaskRepository;
 import cms.domain.company.service.TaskCompanyService;

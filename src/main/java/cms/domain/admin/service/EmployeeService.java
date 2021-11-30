@@ -1,6 +1,6 @@
-package cms.domain.employee.service;
+package cms.domain.admin.service;
 
-import cms.api.employee.dto.EmployeeReadModel;
+import cms.api.admin.users.employee.EmployeeReadModel;
 import cms.domain.employee.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

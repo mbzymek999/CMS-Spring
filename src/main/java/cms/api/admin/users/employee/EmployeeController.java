@@ -1,10 +1,8 @@
-package cms.api.employee.controller;
+package cms.api.admin.users.employee;
 
-import cms.api.employee.dto.EmployeeReadModel;
-import cms.domain.employee.service.EmployeeService;
+import cms.domain.admin.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

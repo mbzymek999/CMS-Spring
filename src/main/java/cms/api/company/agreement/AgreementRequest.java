@@ -1,4 +1,4 @@
-package cms.api.company.request;
+package cms.api.company.agreement;
 
 //import cms.api.company.dto.AgreementWriteModel;
 import lombok.Data;

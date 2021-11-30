@@ -1,4 +1,4 @@
-package cms.api.employee.dto;
+package cms.api.admin.users.employee;
 
 import cms.domain.employee.entity.Employee;
 import lombok.Data;

@@ -1,7 +1,6 @@
-package cms.api.company.controller;
+package cms.api.admin.users.company;
 
-import cms.api.company.dto.CompanyReadModel;
-import cms.domain.company.service.CompanyService;
+import cms.domain.admin.service.CompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

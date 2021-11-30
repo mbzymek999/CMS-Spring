@@ -1,4 +1,4 @@
-package cms.api.company.dto;
+package cms.api.admin.users.company;
 
 import cms.domain.company.entity.Company;
 import lombok.Data;

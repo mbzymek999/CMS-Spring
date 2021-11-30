@@ -1,6 +1,6 @@
 package cms.domain.company.service;
 
-import cms.api.company.dto.CompanyTaskReadModel;
+import cms.api.company.task.CompanyTaskReadModel;
 import cms.api.company.task.TaskRequest;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Company;

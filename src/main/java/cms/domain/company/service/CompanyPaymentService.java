@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PaymentCompanyService {
+public class CompanyPaymentService {
 
     private final PaymentRepository paymentRepository;
-    public PaymentCompanyService(PaymentRepository paymentRepository) {
+    public CompanyPaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
 

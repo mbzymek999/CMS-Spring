@@ -1,7 +1,7 @@
 package cms.domain.company.service;
 
-import cms.api.company.request.AgreementRequest;
-import cms.config.email.MailService;
+import cms.api.company.agreement.AgreementRequest;
+import cms.external.email.service.MailService;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.entity.Company;
