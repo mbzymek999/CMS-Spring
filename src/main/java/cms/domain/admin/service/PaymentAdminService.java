@@ -23,7 +23,6 @@ public class PaymentAdminService {
 
     public String createPayment(Long companyId) {
         Company company = companyRepository.findById(companyId).orElse(null);
-
         checkIfCompanyExist(company);
 
         // Create payment

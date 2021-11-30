@@ -27,8 +27,6 @@ public class AgreementService {
 
     private final UserRepository userRepository;
 
-    private final CompanyRepository companyRepository;
-
     private final EmployeeRepository employeeRepository;
 
     private final RoleRepository roleRepository;
@@ -39,9 +37,8 @@ public class AgreementService {
 
     private final MailService mailService;
 
-    public AgreementService(UserRepository userRepository, CompanyRepository companyRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository, MailService mailService) {
+    public AgreementService(UserRepository userRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository, MailService mailService) {
         this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
@@ -59,8 +56,12 @@ public class AgreementService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        Company company = companyRepository.findById(userImpl.getId()).orElse(null);
+        User userId = userRepository.findById(userImpl.getId()).orElse(null);
+        Company company = userId.getCompanyUser();
+
         checkIfCompanyExist(company);
+
+        System.out.println();
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),

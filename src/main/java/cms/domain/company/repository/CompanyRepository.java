@@ -14,4 +14,5 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Override
     @RestResource(exported = false)
     void delete(Company Company);
+
 }

@@ -9,6 +9,8 @@ import cms.domain.company.repository.CompanyRepository;
 import cms.domain.company.repository.TaskRepository;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
+import cms.domain.user.entity.User;
+import cms.domain.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -22,21 +24,22 @@ import java.util.stream.Collectors;
 public class TaskCompanyService {
 
     private final TaskRepository repository;
-    private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
     Logger logger = LoggerFactory.getLogger(TaskCompanyService.class);
 
-    public TaskCompanyService(TaskRepository repository, CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
+    public TaskCompanyService(TaskRepository repository, UserRepository userRepository, EmployeeRepository employeeRepository) {
         this.repository = repository;
-        this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
         this.employeeRepository = employeeRepository;
     }
 
     public String addNewTask(TaskRequest taskRequest, Long employeeId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+        User user = userRepository.findById(userImpl.getId()).orElse(null);
 
-        Company company = companyRepository.findById(userImpl.getId()).orElse(null);
+        Company company = user.getCompanyUser();
         checkIfCompanyExist(company);
 
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
