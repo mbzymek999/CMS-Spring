@@ -56,8 +56,8 @@ public class Company {
     @OneToMany(mappedBy = "companyAgreement")
     private Set<Agreement> companyAgreement;
 
-    @OneToOne(mappedBy = "company", cascade=CascadeType.ALL)
-    private Payment payment;
+    @OneToMany(mappedBy = "company")
+    private Set<Payment> payment;
 
     public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
         this.companyName = companyName;
@@ -233,11 +233,11 @@ public class Company {
         this.companyAgreement = companyAgreement;
     }
 
-    public Payment getPayment() {
+    public Set<Payment> getPayment() {
         return payment;
     }
 
-    public void setPayment(Payment payment) {
+    public void setPayment(Set<Payment> payment) {
         this.payment = payment;
     }
 }

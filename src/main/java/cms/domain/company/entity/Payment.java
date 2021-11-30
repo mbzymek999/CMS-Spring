@@ -15,8 +15,9 @@ public class Payment {
     private double price;
     private boolean paymentDone;
     private LocalDate termPayment;
+
     @JoinColumn(name = "company_id")
-    @OneToOne
+    @ManyToOne
     private Company company;
 
     public Payment() {
