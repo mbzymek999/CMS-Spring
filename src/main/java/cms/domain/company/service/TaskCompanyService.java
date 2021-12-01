@@ -1,11 +1,10 @@
 package cms.domain.company.service;
 
-import cms.api.company.task.CompanyTaskReadModel;
+import cms.api.company.task.TaskCompanyReadModel;
 import cms.api.company.task.TaskRequest;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Task;
-import cms.domain.company.repository.CompanyRepository;
 import cms.domain.company.repository.TaskRepository;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
@@ -52,10 +51,10 @@ public class TaskCompanyService {
         return "Ok";
     }
 
-    public List<CompanyTaskReadModel> readCompanyTasks() {
+    public List<TaskCompanyReadModel> readCompanyTasks() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByCompanyTask_User_Id(userImpl.getId()).stream().map(CompanyTaskReadModel::new).collect(Collectors.toList());
+        return repository.findAllByCompanyTask_User_Id(userImpl.getId()).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
     }
 
     public void checkIfCompanyExist(Company company) {

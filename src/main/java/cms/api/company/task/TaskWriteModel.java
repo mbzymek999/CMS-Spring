@@ -13,18 +13,16 @@ public class TaskWriteModel {
 
     private String name;
     private String type;
+    private String description;
     private LocalDate dateTo;
-
-    public TaskWriteModel(Task task) {
-        this.name = task.getName();
-        this.type = task.getType();
-        this.dateTo = task.getDateTo();
-    }
 
     public Task toTask() {
         Task task = new Task();
         task.setName(this.name);
         task.setType(this.type);
+        task.setDescription(this.description);
+        task.setAccepted(false);
+        task.setCreatedDate(LocalDate.now());
         task.setDateTo(this.dateTo);
         return task;
     }

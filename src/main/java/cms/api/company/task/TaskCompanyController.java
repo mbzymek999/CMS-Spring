@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class TaskCompanyController {
 
     private final TaskCompanyService service;
@@ -34,7 +35,7 @@ public class TaskCompanyController {
 
     @GetMapping
     @RequestMapping("/company/tasks")
-    ResponseEntity<List<CompanyTaskReadModel>> readCompanyTasks() {
+    ResponseEntity<List<TaskCompanyReadModel>> readCompanyTasks() {
         try {
             logger.info("Reading company tasks");
             return ResponseEntity.ok(service.readCompanyTasks());

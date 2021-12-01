@@ -15,6 +15,9 @@ public class Task {
     private int id;
     private String name;
     private String type;
+    private String description;
+    private LocalDate createdDate;
+    private boolean isAccepted;
     private LocalDate dateTo;
 
     //firma moze miec wiele zadan
@@ -49,6 +52,30 @@ public class Task {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        isAccepted = accepted;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public LocalDate getDateTo() {
