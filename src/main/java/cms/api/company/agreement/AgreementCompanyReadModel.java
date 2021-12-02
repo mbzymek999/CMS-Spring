@@ -11,8 +11,8 @@ public class AgreementCompanyReadModel {
     private LocalDate assignedDate;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private Long employeeId;
     private double salary;
+    private Long employeeId;
     private String name;
     private String lastName;
 

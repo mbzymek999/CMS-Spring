@@ -133,7 +133,6 @@ public class AgreementService {
     public List<AgreementCompanyReadModel> readCompanyAgreements() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-
         return agreementRepository.findAllByCompanyAgreement_User_Id(userImpl.getId()).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
     }
 
