@@ -30,6 +30,16 @@ public class Task {
     @ManyToOne
     private Employee employeeTask;
 
+    public Task(String name, String type, String description, LocalDate dateTo) {
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.dateTo = dateTo;
+    }
+
+    public Task() {
+    }
+
     public int getId() {
         return id;
     }

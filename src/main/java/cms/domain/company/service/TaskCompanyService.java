@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +44,17 @@ public class TaskCompanyService {
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
         checkIfEmployeeExist(employee);
 
-        Task task = taskRequest.getTask().toTask();
+
+        // Create new task
+        Task task = new Task(
+                taskRequest.getName(),
+                taskRequest.getType(),
+                taskRequest.getDescription(),
+                taskRequest.getDateTo()
+        );
+
+        task.setCreatedDate(LocalDate.now());
+        task.setAccepted(false);
         task.setCompanyTask(company);
         task.setEmployeeTask(employee);
         repository.save(task);

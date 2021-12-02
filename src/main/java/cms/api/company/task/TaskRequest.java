@@ -2,16 +2,29 @@ package cms.api.company.task;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class TaskRequest {
 
-    private TaskWriteModel task;
+    private String name;
+    private String type;
+    private String description;
+    private LocalDate dateTo;
 
-    public TaskWriteModel getTask() {
-        return task;
+    public String getName() {
+        return name;
     }
 
-    public void setTask(TaskWriteModel task) {
-        this.task = task;
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
     }
 }

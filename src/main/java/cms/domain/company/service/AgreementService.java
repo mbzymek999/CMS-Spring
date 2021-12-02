@@ -2,13 +2,11 @@ package cms.domain.company.service;
 
 import cms.api.company.agreement.AgreementCompanyReadModel;
 import cms.api.company.agreement.AgreementRequest;
-import cms.api.company.payment.CompanyPaymentReadModel;
 import cms.external.email.service.MailService;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.entity.Company;
 import cms.domain.company.repository.AgreementRepository;
-import cms.domain.company.repository.CompanyRepository;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
 import cms.domain.user.entity.ERole;
