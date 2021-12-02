@@ -1,6 +1,8 @@
 package cms.domain.company.service;
 
+import cms.api.company.agreement.AgreementCompanyReadModel;
 import cms.api.company.agreement.AgreementRequest;
+import cms.api.company.payment.CompanyPaymentReadModel;
 import cms.external.email.service.MailService;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
@@ -19,8 +21,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AgreementService {
@@ -124,6 +128,13 @@ public class AgreementService {
         agreementRepository.save(agreement);
 
         return "Employee registered successfully!";
+    }
+
+    public List<AgreementCompanyReadModel> readCompanyAgreements() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+
+        return agreementRepository.findAllByCompanyAgreement_User_Id(userImpl.getId()).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
     }
 
     public void sendEmail(AgreementRequest signUpRequest) {

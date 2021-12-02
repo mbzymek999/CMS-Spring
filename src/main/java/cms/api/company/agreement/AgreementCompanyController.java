@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,5 +24,17 @@ public class AgreementCompanyController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request) throws Exception {
             return ResponseEntity.ok(service.registerUser(request.validate()));
+    }
+
+    @GetMapping
+    @RequestMapping("/company/agreements")
+    ResponseEntity<List<AgreementCompanyReadModel>> readCompanyAgreements() {
+        try {
+            logger.info("Reading company agreements");
+            return ResponseEntity.ok(service.readCompanyAgreements());
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 }

@@ -95,6 +95,10 @@ public class Agreement {
         this.salary = salary;
     }
 
+    public Company getCompanyAgreement() {
+        return companyAgreement;
+    }
+
     public void setCompanyAgreement(Company companyAgreement) {
         this.companyAgreement = companyAgreement;
     }
