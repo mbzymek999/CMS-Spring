@@ -50,7 +50,7 @@ public class TaskCompanyService {
                 taskRequest.getName(),
                 taskRequest.getType(),
                 taskRequest.getDescription(),
-                taskRequest.getDateTo()
+                taskRequest.getDateTo().plusDays(1)
         );
 
         task.setCreatedDate(LocalDate.now());
