@@ -63,7 +63,7 @@ create table tasks
     name varchar(100),
     type varchar(100),
     description varchar(100),
-    is_accepted bit,
+    status_task int,
     created_date DATE,
     date_to DATE,
     company_id BIGINT,

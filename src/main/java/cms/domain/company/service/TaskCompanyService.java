@@ -54,7 +54,7 @@ public class TaskCompanyService {
         );
 
         task.setCreatedDate(LocalDate.now());
-        task.setAccepted(false);
+        task.setStatusTask(0);
         task.setCompanyTask(company);
         task.setEmployeeTask(employee);
         repository.save(task);

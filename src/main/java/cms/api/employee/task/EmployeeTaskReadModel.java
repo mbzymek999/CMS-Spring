@@ -13,7 +13,7 @@ public class EmployeeTaskReadModel {
     private String type;
     private LocalDate dateTo;
     private LocalDate createdDate;
-    private boolean isAccepted;
+    private int statusTask;
 
     public EmployeeTaskReadModel(Task task) {
         this.idEmployee = task.getEmployeeTask().getId();
@@ -22,6 +22,6 @@ public class EmployeeTaskReadModel {
         this.type = task.getType();
         this.dateTo = task.getDateTo();
         this.createdDate = task.getCreatedDate();
-        this.isAccepted = task.isAccepted();
+        this.statusTask = task.getStatusTask();
     }
 }

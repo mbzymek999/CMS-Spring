@@ -17,7 +17,7 @@ public class Task {
     private String type;
     private String description;
     private LocalDate createdDate;
-    private boolean isAccepted;
+    private int statusTask;
     private LocalDate dateTo;
 
     //firma moze miec wiele zadan
@@ -72,12 +72,12 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isAccepted() {
-        return isAccepted;
+    public int getStatusTask() {
+        return statusTask;
     }
 
-    public void setAccepted(boolean accepted) {
-        isAccepted = accepted;
+    public void setStatusTask(int statusTask) {
+        this.statusTask = statusTask;
     }
 
     public LocalDate getCreatedDate() {

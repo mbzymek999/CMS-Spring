@@ -23,10 +23,10 @@ public class EmployeeTaskService {
         this.repository = repository;
     }
 
-    public List<EmployeeTaskReadModel> readEmployeeTasks() {
+    public List<EmployeeTaskReadModel> readEmployeeTasks(int statusTask) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByEmployeeTask_User_Id(userImpl.getId()).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
+        return repository.findAllByEmployeeTask_User_IdAndStatusTask(userImpl.getId(), statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
     }
 
 }

@@ -18,11 +18,11 @@ public class EmployeeTaskController {
     }
 
     @GetMapping
-    @RequestMapping("/employee/tasks")
-    ResponseEntity<List<EmployeeTaskReadModel>> readCompanyTasks() {
+    @RequestMapping("/employee/tasks/{statusTask}")
+    ResponseEntity<List<EmployeeTaskReadModel>> readCompanyTasks(@PathVariable int statusTask) {
         try {
             logger.info("Reading employee tasks");
-            return ResponseEntity.ok(service.readEmployeeTasks());
+            return ResponseEntity.ok(service.readEmployeeTasks(statusTask));
         }catch (Exception e){
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();
