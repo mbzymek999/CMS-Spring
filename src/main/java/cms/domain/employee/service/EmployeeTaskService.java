@@ -1,7 +1,9 @@
 package cms.domain.employee.service;
 
 import cms.api.employee.task.EmployeeTaskReadModel;
+import cms.api.employee.task.UpdateTaskRequest;
 import cms.config.security.services.UserDetailsImpl;
+import cms.domain.company.entity.Task;
 import cms.domain.company.repository.TaskRepository;
 import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
@@ -27,6 +29,13 @@ public class EmployeeTaskService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
         return repository.findAllByEmployeeTask_User_IdAndStatusTask(userImpl.getId(), statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
+    }
+
+    public EmployeeTaskReadModel updateTask(int id, UpdateTaskRequest updateTaskRequest) {
+        Task task = repository.findById(id).orElseThrow();
+        updateTaskRequest.getTask().updateEntity(task);
+        repository.save(task);
+        return new EmployeeTaskReadModel(task);
     }
 
 }
