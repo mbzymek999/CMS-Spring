@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -31,15 +30,8 @@ public class EmployeeTaskController {
         }
     }
 
-    @Transactional
     @RequestMapping(value = "/employee/task/update/{id}", method = RequestMethod.PUT)
-    ResponseEntity<EmployeeTaskReadModel> updateTask(@PathVariable(value = "id") Integer id, @RequestBody UpdateTaskRequest updateTaskRequest) {
-        try {
-            logger.info("Updating task");
-            return ResponseEntity.ok(service.updateTask(id, updateTaskRequest));
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return ResponseEntity.status(500).build();
-        }
+    EmployeeTaskReadModel updateTask(@PathVariable(value = "id") Integer id, @RequestBody UpdateTaskResponse updateTaskRequest) {
+        return service.updateTask(id, updateTaskRequest);
     }
 }

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 public class EmployeeTaskReadModel {
     private Long idEmployee;
+    private int idTask;
     private String name;
     private String description;
     private String type;
@@ -17,6 +18,7 @@ public class EmployeeTaskReadModel {
 
     public EmployeeTaskReadModel(Task task) {
         this.idEmployee = task.getEmployeeTask().getId();
+        this.idTask = task.getId();
         this.name = task.getName();
         this.description = task.getDescription();
         this.type = task.getType();

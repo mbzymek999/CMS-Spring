@@ -1,7 +1,7 @@
 package cms.domain.employee.service;
 
 import cms.api.employee.task.EmployeeTaskReadModel;
-import cms.api.employee.task.UpdateTaskRequest;
+import cms.api.employee.task.UpdateTaskResponse;
 import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Task;
 import cms.domain.company.repository.TaskRepository;
@@ -31,9 +31,9 @@ public class EmployeeTaskService {
         return repository.findAllByEmployeeTask_User_IdAndStatusTask(userImpl.getId(), statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
     }
 
-    public EmployeeTaskReadModel updateTask(int id, UpdateTaskRequest updateTaskRequest) {
+    public EmployeeTaskReadModel updateTask(int id, UpdateTaskResponse updateTaskRequest) {
         Task task = repository.findById(id).orElseThrow();
-        updateTaskRequest.getTask().updateEntity(task);
+        updateTaskRequest.updateEntity(task);
         repository.save(task);
         return new EmployeeTaskReadModel(task);
     }
