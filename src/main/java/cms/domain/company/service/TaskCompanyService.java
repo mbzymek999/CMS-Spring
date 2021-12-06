@@ -12,6 +12,8 @@ import cms.domain.user.entity.User;
 import cms.domain.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -61,10 +63,10 @@ public class TaskCompanyService {
         return "Ok";
     }
 
-    public List<TaskCompanyReadModel> readCompanyTasks() {
+    public List<TaskCompanyReadModel> readCompanyTasks(Pageable page) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByCompanyTask_User_Id(userImpl.getId()).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+         return repository.findAllByCompanyTask_User_Id(page,userImpl.getId()).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
     }
 
     public void checkIfCompanyExist(Company company) {

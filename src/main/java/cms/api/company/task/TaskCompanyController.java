@@ -3,6 +3,8 @@ package cms.api.company.task;
 import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,14 +37,9 @@ public class TaskCompanyController {
 
     @GetMapping
     @RequestMapping("/company/tasks")
-    ResponseEntity<List<TaskCompanyReadModel>> readCompanyTasks() {
-        try {
-            logger.info("Reading company tasks");
-            return ResponseEntity.ok(service.readCompanyTasks());
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return ResponseEntity.status(500).build();
-        }
+    List<TaskCompanyReadModel> readCompanyTasks(Pageable page) {
+        logger.info("Reading company tasks");
+        return service.readCompanyTasks(page);
     }
 
 }
