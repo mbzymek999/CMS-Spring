@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,6 +41,11 @@ public class TaskCompanyController {
     List<TaskCompanyReadModel> readCompanyTasks(Pageable page) {
         logger.info("Reading company tasks");
         return service.readCompanyTasks(page);
+    }
+
+    @GetMapping("/all/task/company")
+    public List<TaskDTO> getAllBrands(){
+        return service.getAllTasks().stream().map(TaskConverter::toDTO).collect(Collectors.toList());
     }
 
 }

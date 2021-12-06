@@ -69,6 +69,12 @@ public class TaskCompanyService {
          return repository.findAllByCompanyTask_User_Id(page,userImpl.getId()).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
     }
 
+    public List<Task> getAllTasks(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
+        return repository.findAllByCompanyTask_User_Id(userImpl.getId());
+    }
+
     public void checkIfCompanyExist(Company company) {
         if (company == null) {
              throw new IllegalArgumentException("Firma nie istnieje");
