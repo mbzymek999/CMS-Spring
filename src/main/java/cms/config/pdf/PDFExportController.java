@@ -1,8 +1,10 @@
 package cms.config.pdf;
 
-import cms.api.company.agreement.AgreementRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class PDFExportController {
 
     private final PDFGeneratorService pdfGeneratorService;
@@ -18,16 +21,16 @@ public class PDFExportController {
         this.pdfGeneratorService = pdfGeneratorService;
     }
 
-    @GetMapping("/pdf/generate")
-    public void generatePdf(HttpServletResponse response) throws IOException {
+    @GetMapping("/pdf/generate/{id}")
+    public void generatePdf(HttpServletResponse response, @PathVariable int id) throws IOException {
         response.setContentType("application/pdf");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String currentDateTime = dateFormat.format(new Date());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=pdf_"+currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=Umowa_"+currentDateTime + ".pdf";
         response.setHeader(headerKey,headerValue);
 
-        this.pdfGeneratorService.export(response);
+        this.pdfGeneratorService.export(response, id);
     }
 }

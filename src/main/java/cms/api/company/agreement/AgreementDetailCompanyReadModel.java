@@ -28,6 +28,7 @@ public class AgreementDetailCompanyReadModel {
     //company
     private String companyName;
     private String nip;
+    private String regon;
     private String streetCompany;
     private String streetNumberCompany;
     private String buildingNumberCompany;
@@ -50,6 +51,7 @@ public class AgreementDetailCompanyReadModel {
         this.postcodeEmployee = agreement.getEmployeeAgreement().getPostcode();
         this.companyName = agreement.getCompanyAgreement().getCompanyName();
         this.nip = agreement.getCompanyAgreement().getNip();
+        this.regon = agreement.getCompanyAgreement().getRegon();
         this.streetCompany = agreement.getCompanyAgreement().getStreet();
         this.streetNumberCompany = agreement.getCompanyAgreement().getStreetNumber();
         this.buildingNumberCompany = agreement.getCompanyAgreement().getBuildingNumber();

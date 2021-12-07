@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class AgreementCompanyReadModel {
+    private int idAgreement;
     private String agreementType;
     private LocalDate assignedDate;
     private LocalDate dateFrom;
@@ -17,6 +18,7 @@ public class AgreementCompanyReadModel {
     private String lastName;
 
     public AgreementCompanyReadModel(Agreement agreement) {
+        this.idAgreement = agreement.getId();
         this.agreementType = agreement.getAgreementType();
         this.assignedDate = agreement.getAssignedDate();
         this.dateFrom = agreement.getDateFrom();
