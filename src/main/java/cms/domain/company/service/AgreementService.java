@@ -1,6 +1,7 @@
 package cms.domain.company.service;
 
 import cms.api.company.agreement.AgreementCompanyReadModel;
+import cms.api.company.agreement.AgreementDetailCompanyReadModel;
 import cms.api.company.agreement.AgreementRequest;
 import cms.external.email.service.MailService;
 import cms.config.security.services.UserDetailsImpl;
@@ -128,10 +129,16 @@ public class AgreementService {
         return "Employee registered successfully!";
     }
 
-    public List<AgreementCompanyReadModel> readCompanyAgreements() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return agreementRepository.findAllByCompanyAgreement_User_Id(userImpl.getId()).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
+    public List<AgreementCompanyReadModel> readCompanyAgreements(Long id) {
+        return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
+    }
+
+    public AgreementDetailCompanyReadModel readCompanyDetails(Long id, int agreementId) {
+        Agreement agreement =  agreementRepository.findAllByCompanyAgreement_User_IdAndId(id, agreementId).orElse(null);
+        if(agreement != null){
+            return new AgreementDetailCompanyReadModel(agreement);
+        }
+        throw new NullPointerException("AgreementDetailCompanyReadModel - returned value from repository is null");
     }
 
     public void sendEmail(AgreementRequest signUpRequest) {

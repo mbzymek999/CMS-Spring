@@ -23,4 +23,6 @@ public interface AgreementRepository extends JpaRepository<Agreement, Integer> {
 
     List<Agreement> findAllByCompanyAgreement_User_Id(Long id);
 
+    Optional<Agreement> findAllByCompanyAgreement_User_IdAndId(Long id, int idAgreement);
+
 }

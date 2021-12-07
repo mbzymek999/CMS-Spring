@@ -1,11 +1,13 @@
 package cms.api.company.agreement;
 
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.service.AgreementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -29,13 +31,20 @@ public class AgreementCompanyController {
     @GetMapping
     @RequestMapping("/company/agreements")
     @PreAuthorize("hasRole('COMPANY')")
-    ResponseEntity<List<AgreementCompanyReadModel>> readCompanyAgreements() {
-        try {
+    ResponseEntity<List<AgreementCompanyReadModel>> readCompanyAgreements(@AuthenticationPrincipal UserDetailsImpl userDetails) {
             logger.info("Reading company agreements");
-            return ResponseEntity.ok(service.readCompanyAgreements());
-        }catch (Exception e){
-            logger.error(e.getMessage());
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.ok(service.readCompanyAgreements(userDetails.getId()));
+    }
+
+    @GetMapping
+    @RequestMapping("/company/agreement/{id}")
+    ResponseEntity<AgreementDetailCompanyReadModel> readCompanyAgreementDetails(@PathVariable int id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        try {
+            logger.info("reading agreement with id: " + id);
+            return ResponseEntity.ok(service.readCompanyDetails(userDetails.getId(), id));
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
         }
     }
 }
