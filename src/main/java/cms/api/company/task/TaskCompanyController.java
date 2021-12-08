@@ -32,7 +32,7 @@ public class TaskCompanyController {
                                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             return ResponseEntity.ok(service.addNewTask(request, employeeId, userDetails.getId()));
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) { // Todo wyzrzucic null pointer exception
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
@@ -40,7 +40,7 @@ public class TaskCompanyController {
 
     @GetMapping
     @RequestMapping("/company/tasks")
-    List<TaskCompanyReadModel> readCompanyTasks(Pageable page, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    ReadCompanyTasksResponse readCompanyTasks(Pageable page, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         logger.info("Reading company tasks");
         return service.readCompanyTasks(page, userDetails.getId());
     }

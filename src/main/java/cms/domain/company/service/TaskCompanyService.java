@@ -1,8 +1,8 @@
 package cms.domain.company.service;
 
+import cms.api.company.task.ReadCompanyTasksResponse;
 import cms.api.company.task.TaskCompanyReadModel;
 import cms.api.company.task.TaskRequest;
-import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Task;
 import cms.domain.company.repository.TaskRepository;
@@ -12,11 +12,10 @@ import cms.domain.user.entity.User;
 import cms.domain.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,17 +61,19 @@ public class TaskCompanyService {
         return "Ok";
     }
 
-    public List<TaskCompanyReadModel> readCompanyTasks(Pageable page, Long id) {
-         return repository.findAllByCompanyTask_User_Id(page,id).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+    public ReadCompanyTasksResponse readCompanyTasks(Pageable page, Long id) {
+        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_Id(page, id).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+        Page<Task> pageInformation = repository.findAllByCompanyTask_User_Id(page, id);
+        return new ReadCompanyTasksResponse(pageInformation, list);
     }
 
-    public List<Task> getAllTasks(Long id){
+    public List<Task> getAllTasks(Long id) {
         return repository.findAllByCompanyTask_User_Id(id);
     }
 
     public void checkIfCompanyExist(Company company) {
         if (company == null) {
-             throw new IllegalArgumentException("Firma nie istnieje");
+            throw new IllegalArgumentException("Firma nie istnieje");
         }
     }
     public void checkIfEmployeeExist(Employee employee) {

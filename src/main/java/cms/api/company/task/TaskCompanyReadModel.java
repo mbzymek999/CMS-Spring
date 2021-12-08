@@ -8,14 +8,14 @@ import java.time.LocalDate;
 @Data
 public class TaskCompanyReadModel {
 
-    private Long idCompany;
-    private String employeeName;
-    private String name;
-    private String type;
-    private int statusTask;
-    private String description;
-    private LocalDate createdDate;
-    private LocalDate dateTo;
+    private final Long idCompany;
+    private final String employeeName;
+    private final String name;
+    private final String type;
+    private final int statusTask;
+    private final String description;
+    private final LocalDate createdDate;
+    private final LocalDate dateTo;
 
     public TaskCompanyReadModel(Task task) {
         this.idCompany = task.getCompanyTask().getId();

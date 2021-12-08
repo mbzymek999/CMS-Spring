@@ -23,10 +23,10 @@ public class User {
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String idClient;
 
-    @NotBlank
-    @Size(max = 20)
+    @Column(length = 20)
     private String username;
 
     @NotBlank
