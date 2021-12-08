@@ -25,10 +25,8 @@ public class EmployeeTaskService {
         this.repository = repository;
     }
 
-    public List<EmployeeTaskReadModel> readEmployeeTasks(int statusTask) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByEmployeeTask_User_IdAndStatusTask(userImpl.getId(), statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
+    public List<EmployeeTaskReadModel> readEmployeeTasks(int statusTask, Long id) {
+        return repository.findAllByEmployeeTask_User_IdAndStatusTask(id, statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
     }
 
     public EmployeeTaskReadModel updateTask(int id, UpdateTaskResponse updateTaskRequest) {

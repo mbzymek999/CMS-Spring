@@ -18,11 +18,8 @@ public class CompanyPaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public List<CompanyPaymentReadModel> readCompanyPayments() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-
-        return paymentRepository.findAllByCompany_User_Id(userImpl.getId()).stream().map(CompanyPaymentReadModel::new).collect(Collectors.toList());
+    public List<CompanyPaymentReadModel> readCompanyPayments(Long id) {
+        return paymentRepository.findAllByCompany_User_Id(id).stream().map(CompanyPaymentReadModel::new).collect(Collectors.toList());
     }
 
 }

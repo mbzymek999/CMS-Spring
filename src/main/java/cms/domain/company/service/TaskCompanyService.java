@@ -35,10 +35,9 @@ public class TaskCompanyService {
         this.employeeRepository = employeeRepository;
     }
 
-    public String addNewTask(TaskRequest taskRequest, Long employeeId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        User user = userRepository.findById(userImpl.getId()).orElse(null);
+    public String addNewTask(TaskRequest taskRequest, Long employeeId, Long idUser) {
+
+        User user = userRepository.findById(idUser).orElse(null);
 
         Company company = user.getCompanyUser();
         checkIfCompanyExist(company);
@@ -63,16 +62,12 @@ public class TaskCompanyService {
         return "Ok";
     }
 
-    public List<TaskCompanyReadModel> readCompanyTasks(Pageable page) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-         return repository.findAllByCompanyTask_User_Id(page,userImpl.getId()).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+    public List<TaskCompanyReadModel> readCompanyTasks(Pageable page, Long id) {
+         return repository.findAllByCompanyTask_User_Id(page,id).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
     }
 
-    public List<Task> getAllTasks(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return repository.findAllByCompanyTask_User_Id(userImpl.getId());
+    public List<Task> getAllTasks(Long id){
+        return repository.findAllByCompanyTask_User_Id(id);
     }
 
     public void checkIfCompanyExist(Company company) {

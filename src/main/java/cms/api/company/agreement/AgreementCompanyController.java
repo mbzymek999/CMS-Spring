@@ -24,8 +24,8 @@ public class AgreementCompanyController {
     @PostMapping("/create/agreement")
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request) throws Exception {
-            return ResponseEntity.ok(service.registerUser(request.validate()));
+    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+            return ResponseEntity.ok(service.registerUser(request.validate(),userDetails.getId()));
     }
 
     @GetMapping
@@ -38,6 +38,7 @@ public class AgreementCompanyController {
 
     @GetMapping
     @RequestMapping("/company/agreement/{id}")
+    @PreAuthorize("hasRole('COMPANY')")
     ResponseEntity<AgreementDetailCompanyReadModel> readCompanyAgreementDetails(@PathVariable int id, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
             logger.info("reading agreement with id: " + id);

@@ -1,13 +1,14 @@
 package cms.api.company.task;
 
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +28,10 @@ public class TaskCompanyController {
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addNewTask(@RequestBody TaskRequest request,
-                                             @RequestParam(value = "employeeId") Long employeeId) {
+                                             @RequestParam(value = "employeeId") Long employeeId,
+                                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
-            return ResponseEntity.ok(service.addNewTask(request, employeeId));
+            return ResponseEntity.ok(service.addNewTask(request, employeeId, userDetails.getId()));
         }catch (NullPointerException e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();
@@ -38,14 +40,14 @@ public class TaskCompanyController {
 
     @GetMapping
     @RequestMapping("/company/tasks")
-    List<TaskCompanyReadModel> readCompanyTasks(Pageable page) {
+    List<TaskCompanyReadModel> readCompanyTasks(Pageable page, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         logger.info("Reading company tasks");
-        return service.readCompanyTasks(page);
+        return service.readCompanyTasks(page, userDetails.getId());
     }
 
     @GetMapping("/all/task/company")
-    public List<TaskDTO> getAllBrands(){
-        return service.getAllTasks().stream().map(TaskConverter::toDTO).collect(Collectors.toList());
+    public List<TaskDTO> getAllTasks(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return service.getAllTasks(userDetails.getId()).stream().map(TaskConverter::toDTO).collect(Collectors.toList());
     }
 
 }

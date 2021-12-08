@@ -21,9 +21,7 @@ public class EmployeeCompanyService {
         this.agreementRepository = agreementRepository;
     }
 
-    public List<EmployeeCompanyReadModel> readCompanyEmployees() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        return agreementRepository.findAllByCompanyAgreement_User_Id(userImpl.getId()).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
+    public List<EmployeeCompanyReadModel> readCompanyEmployees(Long id) {
+        return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
     }
 }

@@ -1,12 +1,14 @@
 package cms.api.company.employee;
 
 import cms.api.company.agreement.AgreementCompanyReadModel;
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.service.AgreementService;
 import cms.domain.company.service.EmployeeCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +26,10 @@ public class EmployeeCompanyController {
     @GetMapping
     @RequestMapping("/company/employees")
     @PreAuthorize("hasRole('COMPANY')")
-    ResponseEntity<List<EmployeeCompanyReadModel>> readCompanyEmployees() {
+    ResponseEntity<List<EmployeeCompanyReadModel>> readCompanyEmployees(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             logger.info("Reading company employees");
-            return ResponseEntity.ok(service.readCompanyEmployees());
+            return ResponseEntity.ok(service.readCompanyEmployees(userDetails.getId()));
         }catch (Exception e){
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();

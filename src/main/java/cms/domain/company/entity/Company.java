@@ -24,6 +24,8 @@ public class Company {
     @Size(max = 10)
     private String nip;
 
+    private String representativePerson;
+
     private String regon;
 
     private String phone;
@@ -119,6 +121,14 @@ public class Company {
 
     public void setNip(String nip) {
         this.nip = nip;
+    }
+
+    public String getRepresentativePerson() {
+        return representativePerson;
+    }
+
+    public void setRepresentativePerson(String representativePerson) {
+        this.representativePerson = representativePerson;
     }
 
     public String getRegon() {

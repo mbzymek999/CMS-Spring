@@ -12,6 +12,7 @@ public class TaskCompanyReadModel {
     private String employeeName;
     private String name;
     private String type;
+    private int statusTask;
     private String description;
     private LocalDate createdDate;
     private LocalDate dateTo;
@@ -21,6 +22,7 @@ public class TaskCompanyReadModel {
         this.employeeName = task.getEmployeeTask().getName();
         this.name = task.getName();
         this.type = task.getType();
+        this.statusTask = task.getStatusTask();
         this.description = task.getDescription();
         this.createdDate = task.getCreatedDate();
         this.dateTo = task.getDateTo();

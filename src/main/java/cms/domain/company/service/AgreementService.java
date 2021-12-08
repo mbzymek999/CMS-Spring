@@ -51,15 +51,13 @@ public class AgreementService {
 
     private final String randomPassword = UUID.randomUUID().toString().replace("-", "");
 
-    public String registerUser(AgreementRequest signUpRequest) {
+    public String registerUser(AgreementRequest signUpRequest, Long id) {
 
         checkIfUserNameAlreadyExist(signUpRequest);
 
         checkIfEmailAlreadyExist(signUpRequest);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-        User userId = userRepository.findById(userImpl.getId()).orElse(null);
+        User userId = userRepository.findById(id).orElse(null);
         Company company = userId.getCompanyUser();
 
         checkIfCompanyExist(company);

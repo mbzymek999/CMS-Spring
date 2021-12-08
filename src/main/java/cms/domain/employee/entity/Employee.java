@@ -19,6 +19,8 @@ public class Employee {
 
     private String lastName;
 
+    private int pesel;
+
     private String position;
 
     private String phone;
@@ -78,6 +80,14 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public int getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(int pesel) {
+        this.pesel = pesel;
     }
 
     public String getPosition() {

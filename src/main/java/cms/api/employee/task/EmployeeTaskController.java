@@ -1,9 +1,11 @@
 package cms.api.employee.task;
 
+import cms.config.security.services.UserDetailsImpl;
 import cms.domain.employee.service.EmployeeTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +22,10 @@ public class EmployeeTaskController {
 
     @GetMapping
     @RequestMapping("/employee/tasks/{statusTask}")
-    ResponseEntity<List<EmployeeTaskReadModel>> readCompanyTasks(@PathVariable int statusTask) {
+    ResponseEntity<List<EmployeeTaskReadModel>> readCompanyTasks(@PathVariable int statusTask, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             logger.info("Reading employee tasks");
-            return ResponseEntity.ok(service.readEmployeeTasks(statusTask));
+            return ResponseEntity.ok(service.readEmployeeTasks(statusTask, userDetails.getId()));
         }catch (Exception e){
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();

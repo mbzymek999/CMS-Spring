@@ -1,4 +1,4 @@
-package cms.config.pdf;
+package cms.domain.company.service;
 
 import cms.api.company.agreement.AgreementRequest;
 import cms.config.security.services.UserDetailsImpl;
