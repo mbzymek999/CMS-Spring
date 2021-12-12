@@ -1,16 +1,9 @@
 package cms.domain.company.service;
 
-import cms.api.company.agreement.AgreementRequest;
-import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
-import cms.domain.company.entity.Company;
 import cms.domain.company.repository.AgreementRepository;
-import cms.domain.user.entity.User;
-import cms.domain.user.repository.UserRepository;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +47,7 @@ public class PDFGeneratorService {
                 agreement.getCompanyAgreement().getRegon(), fontParagraph);
             paragraph4.setAlignment(Paragraph.ALIGN_LEFT);
 
-        Paragraph paragraph5 = new Paragraph("reprezentowanym przez: "+ "przedstawiciel", fontParagraph);
+        Paragraph paragraph5 = new Paragraph("reprezentowanym przez: " + agreement.getCompanyAgreement().getRepresentativePerson(), fontParagraph);
             paragraph5.setAlignment(Paragraph.ALIGN_LEFT);
 
         Paragraph paragraph6 = new Paragraph("a " + agreement.getEmployeeAgreement().getName() + " " + agreement.getEmployeeAgreement().getLastName(),

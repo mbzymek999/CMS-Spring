@@ -47,6 +47,7 @@ public class RegisterCompanyService {
                 signUpRequest.getShortCompanyName(),
                 signUpRequest.getNip(),
                 signUpRequest.getRegon(),
+                signUpRequest.getRepresentativePerson(),
                 signUpRequest.getPhone(),
                 signUpRequest.getStreet(),
                 signUpRequest.getStreetNumber(),

@@ -61,11 +61,12 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Payment> payment;
 
-    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
+    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String representativePerson, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
         this.companyName = companyName;
         this.shortCompanyName = shortCompanyName;
         this.nip = nip;
         this.regon = regon;
+        this.representativePerson = representativePerson;
         this.phone = phone;
         this.street = street;
         this.streetNumber = streetNumber;

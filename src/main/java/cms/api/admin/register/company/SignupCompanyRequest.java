@@ -21,6 +21,8 @@ public class SignupCompanyRequest {
 
     private String regon;
 
+    private String representativePerson;
+
     private String phone;
 
     private String street;
@@ -90,6 +92,10 @@ public class SignupCompanyRequest {
 
     public void setRegon(String regon) {
         this.regon = regon;
+    }
+
+    public String getRepresentativePerson() {
+        return representativePerson;
     }
 
     public String getPhone() {
