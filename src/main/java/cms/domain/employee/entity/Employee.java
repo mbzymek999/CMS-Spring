@@ -19,7 +19,7 @@ public class Employee {
 
     private String lastName;
 
-    private int pesel;
+    private Long pesel;
 
     private String position;
 
@@ -42,9 +42,10 @@ public class Employee {
     @OneToMany(mappedBy = "employeeTask")
     private Set<Task> employeeTask;
 
-    public Employee(String name, String lastName, String position, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, User user) {
+    public Employee(String name, String lastName, Long pesel, String position, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, User user) {
         this.name = name;
         this.lastName = lastName;
+        this.pesel = pesel;
         this.position = position;
         this.phone = phone;
         this.street = street;
@@ -82,11 +83,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public int getPesel() {
+    public Long getPesel() {
         return pesel;
     }
 
-    public void setPesel(int pesel) {
+    public void setPesel(Long pesel) {
         this.pesel = pesel;
     }
 

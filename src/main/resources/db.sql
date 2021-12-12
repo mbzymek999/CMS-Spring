@@ -25,7 +25,7 @@ CREATE table employees
     id          BIGINT primary key auto_increment,
     name    varchar(100),
     last_name    varchar(100),
-    pesel int,
+    pesel BIGINT,
     position varchar(100),
     phone    varchar(50),
     street    varchar(50),

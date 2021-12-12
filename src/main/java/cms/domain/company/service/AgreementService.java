@@ -3,8 +3,6 @@ package cms.domain.company.service;
 import cms.api.company.agreement.AgreementCompanyReadModel;
 import cms.api.company.agreement.AgreementDetailCompanyReadModel;
 import cms.api.company.agreement.AgreementRequest;
-import cms.external.email.service.MailService;
-import cms.config.security.services.UserDetailsImpl;
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.entity.Company;
 import cms.domain.company.repository.AgreementRepository;
@@ -15,10 +13,10 @@ import cms.domain.user.entity.Role;
 import cms.domain.user.entity.User;
 import cms.domain.user.repository.RoleRepository;
 import cms.domain.user.repository.UserRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import cms.external.email.service.MailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,6 +71,7 @@ public class AgreementService {
         Employee employee = new Employee(
                 signUpRequest.getName(),
                 signUpRequest.getLastName(),
+                signUpRequest.getPesel(),
                 signUpRequest.getPosition(),
                 signUpRequest.getPhone(),
                 signUpRequest.getStreet(),

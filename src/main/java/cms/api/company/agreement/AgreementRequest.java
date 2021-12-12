@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -35,6 +34,7 @@ public class AgreementRequest {
     //employee
     private String name;
     private String lastName;
+    private Long pesel;
     private String position;
     private String phone;
     private String street;
@@ -98,6 +98,10 @@ public class AgreementRequest {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Long getPesel() {
+        return pesel;
     }
 
     public String getPosition() {

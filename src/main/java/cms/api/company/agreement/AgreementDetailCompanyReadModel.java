@@ -18,6 +18,7 @@ public class AgreementDetailCompanyReadModel {
     //employee
     private String name;
     private String lastName;
+    private Long pesel;
     private String position;
     private String streetEmployee;
     private String streetNumberEmployee;
@@ -29,6 +30,7 @@ public class AgreementDetailCompanyReadModel {
     private String companyName;
     private String nip;
     private String regon;
+    private String representativePerson;
     private String streetCompany;
     private String streetNumberCompany;
     private String buildingNumberCompany;
@@ -43,6 +45,7 @@ public class AgreementDetailCompanyReadModel {
         this.salary = agreement.getSalary();
         this.name = agreement.getEmployeeAgreement().getName();
         this.lastName = agreement.getEmployeeAgreement().getLastName();
+        this.pesel = agreement.getEmployeeAgreement().getPesel();
         this.position = agreement.getEmployeeAgreement().getPosition();
         this.streetEmployee = agreement.getEmployeeAgreement().getStreet();
         this.streetNumberEmployee = agreement.getEmployeeAgreement().getStreetNumber();
@@ -52,6 +55,7 @@ public class AgreementDetailCompanyReadModel {
         this.companyName = agreement.getCompanyAgreement().getCompanyName();
         this.nip = agreement.getCompanyAgreement().getNip();
         this.regon = agreement.getCompanyAgreement().getRegon();
+        this.representativePerson = agreement.getCompanyAgreement().getRepresentativePerson();
         this.streetCompany = agreement.getCompanyAgreement().getStreet();
         this.streetNumberCompany = agreement.getCompanyAgreement().getStreetNumber();
         this.buildingNumberCompany = agreement.getCompanyAgreement().getBuildingNumber();

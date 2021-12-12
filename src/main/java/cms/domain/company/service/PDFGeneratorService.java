@@ -54,13 +54,13 @@ public class PDFGeneratorService {
                 fontParagraph);
 
         paragraph6.setAlignment(Paragraph.ALIGN_LEFT);
-        Paragraph paragraph7 = new Paragraph("zamieszkala/ym "+ agreement.getEmployeeAgreement().getStreet() + " " +
-                agreement.getEmployeeAgreement().getStreetNumber() + " " + agreement.getEmployeeAgreement().getBuildingNumber() +
+        Paragraph paragraph7 = new Paragraph("zamieszkala/ym " + agreement.getEmployeeAgreement().getStreet() + " " +
+                agreement.getEmployeeAgreement().getStreetNumber() + " " + agreement.getEmployeeAgreement().getBuildingNumber() + " " +
                 agreement.getEmployeeAgreement().getPostcode() + " " + agreement.getEmployeeAgreement().getCity(), fontParagraph);
             paragraph7.setAlignment(Paragraph.ALIGN_LEFT);
 
-        Paragraph paragraph8 = new Paragraph("na czas określony od "+ agreement.getDateFrom() + " do " + agreement.getDateTo() +
-                ". Wynagrodzenie: " + agreement.getSalary() + "zl", fontParagraph);
+        Paragraph paragraph8 = new Paragraph("na czas określony od " + agreement.getDateFrom() + " do " + agreement.getDateTo() +
+                ". Wynagrodzenie: " + agreement.getSalary() + " zl", fontParagraph);
             paragraph8.setAlignment(Paragraph.ALIGN_LEFT);
 
         paragraph.setSpacingAfter(5);
