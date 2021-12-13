@@ -3,6 +3,7 @@ package cms.api.admin.users.company;
 import cms.domain.admin.service.CompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CompanyController {
     private final CompanyService service;
     Logger logger = LoggerFactory.getLogger(CompanyController.class);
+
     public CompanyController(CompanyService service) {
         this.service = service;
     }
@@ -24,5 +26,11 @@ public class CompanyController {
     @RequestMapping("/companies")
     ResponseEntity<List<CompanyReadModel>> readAllCompanies() {
         return ResponseEntity.ok(service.readAll());
+    }
+
+    @GetMapping
+    @RequestMapping("/companies/read")
+    ResponseEntity<List<CompanyReadModel>> readAllCompaniesWithFilters(@Param("nip") String nip) {
+        return ResponseEntity.ok(service.readAllWithFilters(nip));
     }
 }

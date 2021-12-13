@@ -21,4 +21,17 @@ public class CompanyService {
     public List<CompanyReadModel> readAll() {
         return repository.findAll().stream().map(CompanyReadModel::new).collect(Collectors.toList());
     }
+
+    public List<CompanyReadModel> readByNip(String nip) {
+        return repository.findAllByNip(nip).stream().map(CompanyReadModel::new).collect(Collectors.toList());
+    }
+
+    public List<CompanyReadModel> readAllWithFilters(String nip) {
+        if (nip == null || nip.equals("")) {
+            logger.info("everything nulls");
+            return readAll();
+        } else {
+            return readByNip(nip);
+        }
+    }
 }
