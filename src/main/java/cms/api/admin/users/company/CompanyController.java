@@ -30,7 +30,8 @@ public class CompanyController {
 
     @GetMapping
     @RequestMapping("/companies/read")
-    ResponseEntity<List<CompanyReadModel>> readAllCompaniesWithFilters(@Param("nip") String nip) {
-        return ResponseEntity.ok(service.readAllWithFilters(nip));
+    ResponseEntity<List<CompanyReadModel>> readAllCompaniesWithNipFilter(@Param("nip") String nip, @Param("companyName") String companyName) {
+        return ResponseEntity.ok(service.readAllWithNipOrCompanyName(nip, companyName));
     }
+
 }

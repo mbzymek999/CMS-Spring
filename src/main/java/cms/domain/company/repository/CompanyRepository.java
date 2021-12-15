@@ -17,6 +17,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @RestResource(exported = false)
     void delete(Company Company);
 
-    List<Company> findAllByNip(String nip);
+    List<Company> findAllByNipOrCompanyName(String nip, String companyName);
 
 }

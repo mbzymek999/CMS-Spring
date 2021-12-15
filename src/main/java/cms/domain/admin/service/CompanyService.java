@@ -22,16 +22,15 @@ public class CompanyService {
         return repository.findAll().stream().map(CompanyReadModel::new).collect(Collectors.toList());
     }
 
-    public List<CompanyReadModel> readByNip(String nip) {
-        return repository.findAllByNip(nip).stream().map(CompanyReadModel::new).collect(Collectors.toList());
+    public List<CompanyReadModel> readByNipOrCompanyName(String nip, String companyName) {
+        return repository.findAllByNipOrCompanyName(nip, companyName).stream().map(CompanyReadModel::new).collect(Collectors.toList());
     }
 
-    public List<CompanyReadModel> readAllWithFilters(String nip) {
-        if (nip == null || nip.equals("")) {
-            logger.info("everything nulls");
+    public List<CompanyReadModel> readAllWithNipOrCompanyName(String nip, String companyName) {
+        if ((nip == null || nip.equals("")) && (companyName == null || companyName.equals(""))) {
             return readAll();
         } else {
-            return readByNip(nip);
+            return readByNipOrCompanyName(nip, companyName);
         }
     }
 }
