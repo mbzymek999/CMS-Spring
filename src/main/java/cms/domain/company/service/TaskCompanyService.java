@@ -67,6 +67,20 @@ public class TaskCompanyService {
         return new ReadCompanyTasksResponse(pageInformation, list);
     }
 
+    public ReadCompanyTasksResponse readByStatusTask(Pageable page, Long id, int statusTask) {
+        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_IdAndStatusTask(page, id, statusTask).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+        Page<Task> pageInformation = repository.findAllByCompanyTask_User_IdAndStatusTask(page, id, statusTask);
+        return new ReadCompanyTasksResponse(pageInformation, list);
+    }
+
+    public ReadCompanyTasksResponse readAllWithStatusTask(Pageable page, Long id, int statusTask) {
+        if ((statusTask < 0 || statusTask > 2)) {
+            return readCompanyTasks(page, id);
+        } else {
+            return readByStatusTask(page, id, statusTask);
+        }
+    }
+
     public List<Task> getAllTasks(Long id) {
         return repository.findAllByCompanyTask_User_Id(id);
     }

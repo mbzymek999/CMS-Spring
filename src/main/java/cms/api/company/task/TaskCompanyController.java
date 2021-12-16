@@ -5,14 +5,12 @@ import cms.domain.company.service.TaskCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -45,9 +43,13 @@ public class TaskCompanyController {
         return service.readCompanyTasks(page, userDetails.getId());
     }
 
-    @GetMapping("/all/task/company")
-    public List<TaskDTO> getAllTasks(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return service.getAllTasks(userDetails.getId()).stream().map(TaskConverter::toDTO).collect(Collectors.toList());
+    @GetMapping
+    @RequestMapping("/company/tasks/read")
+    ReadCompanyTasksResponse readCompanyTasksWithStatusTaskFilter(Pageable page,
+                                                                  @AuthenticationPrincipal UserDetailsImpl userDetails,
+                                                                  @Param("statusTask") int statusTask) {
+        logger.info("Reading company tasks");
+        return service.readAllWithStatusTask(page, userDetails.getId(), statusTask);
     }
 
 }

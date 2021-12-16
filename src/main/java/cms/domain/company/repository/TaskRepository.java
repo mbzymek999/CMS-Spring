@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TaskRepository  extends JpaRepository<Task, Integer> {
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 
         @Override
         <S extends Task> S save(S s);
@@ -19,4 +19,7 @@ public interface TaskRepository  extends JpaRepository<Task, Integer> {
         Page<Task> findAllByCompanyTask_User_Id(Pageable page, Long id);
 
         List<Task> findAllByCompanyTask_User_Id(Long id);
+
+        Page<Task> findAllByCompanyTask_User_IdAndStatusTask(Pageable page, Long id, int statusTask);
+
 }
