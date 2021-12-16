@@ -14,9 +14,7 @@ public interface TaskRepository  extends JpaRepository<Task, Integer> {
         @Override
         <S extends Task> S save(S s);
 
-//        List<Task> findAllByCompanyTask(Long id);
-
-        List<Task> findAllByEmployeeTask_User_IdAndStatusTask(Long id, int statusTask);
+        Page<Task> findAllByEmployeeTask_User_IdAndStatusTask(Pageable page, Long id, int statusTask);
 
         Page<Task> findAllByCompanyTask_User_Id(Pageable page, Long id);
 
