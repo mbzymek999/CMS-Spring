@@ -15,7 +15,7 @@
 
                 <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
                 <div th:unless='${error}'>
-                    <h3 style='color: green;'>Sukces!</h3>
+                    <h3 style='color: green;'>Płatność została zrealizowana!</h3>
                     <div>Id.: <span th:text='${id}'/></div>
                     <div>Status: <span th:text='${status}'/></div>
                     <div>Opłata id.: <span th:text='${chargeId}'/></div>
