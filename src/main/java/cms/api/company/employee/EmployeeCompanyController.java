@@ -34,6 +34,13 @@ public class EmployeeCompanyController {
         }
     }
 
+    @GetMapping
+    @RequestMapping("/company/employee/{id}")
+    @PreAuthorize("hasRole('COMPANY')")
+    EmployeeCompanyReadModel readEmployeeDetails(@PathVariable Long id) {
+        return service.readEmployeeDetails(id);
+    }
+
     @RequestMapping(value = "/company/employee/update/{id}", method = RequestMethod.PUT)
     EmployeeCompanyReadModel updateEmployee(@PathVariable(value = "id") Long id, @RequestBody UpdateEmployeeResponse updateEmployeeResponse) {
         return service.updateEmployee(id, updateEmployeeResponse);

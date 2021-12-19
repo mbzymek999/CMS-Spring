@@ -25,6 +25,12 @@ public class EmployeeCompanyService {
         return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
     }
 
+
+    public EmployeeCompanyReadModel readEmployeeDetails(Long id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        return new EmployeeCompanyReadModel(employee);
+    }
+
     public EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeResponse updateEmployeeResponse) {
         Employee employee = employeeRepository.findById(id).orElseThrow();
         updateEmployeeResponse.updateEntity(employee);

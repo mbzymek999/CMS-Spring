@@ -29,6 +29,8 @@ public class EmployeeCompanyReadModel {
 
     public EmployeeCompanyReadModel(Employee employee) {
         this.employeeId = employee.getId();
+        this.name = employee.getName();
+        this.lastName = employee.getLastName();
         this.position = employee.getPosition();
         this.phone = employee.getPhone();
         this.street = employee.getStreet();
