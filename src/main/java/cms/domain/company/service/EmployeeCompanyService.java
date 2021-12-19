@@ -1,12 +1,10 @@
 package cms.domain.company.service;
 
-import cms.api.company.agreement.AgreementCompanyReadModel;
 import cms.api.company.employee.EmployeeCompanyReadModel;
-import cms.config.security.services.UserDetailsImpl;
+import cms.api.company.employee.UpdateEmployeeResponse;
 import cms.domain.company.repository.AgreementRepository;
-import cms.domain.user.repository.UserRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import cms.domain.employee.entity.Employee;
+import cms.domain.employee.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +14,21 @@ import java.util.stream.Collectors;
 public class EmployeeCompanyService {
 
     private final AgreementRepository agreementRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeCompanyService(AgreementRepository agreementRepository) {
+    public EmployeeCompanyService(AgreementRepository agreementRepository, EmployeeRepository employeeRepository) {
         this.agreementRepository = agreementRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     public List<EmployeeCompanyReadModel> readCompanyEmployees(Long id) {
         return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
+    }
+
+    public EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeResponse updateEmployeeResponse) {
+        Employee employee = employeeRepository.findById(id).orElseThrow();
+        updateEmployeeResponse.updateEntity(employee);
+        employeeRepository.save(employee);
+        return new EmployeeCompanyReadModel(employee);
     }
 }

@@ -1,8 +1,6 @@
 package cms.api.company.employee;
 
-import cms.api.company.agreement.AgreementCompanyReadModel;
 import cms.config.security.services.UserDetailsImpl;
-import cms.domain.company.service.AgreementService;
 import cms.domain.company.service.EmployeeCompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +28,14 @@ public class EmployeeCompanyController {
         try {
             logger.info("Reading company employees");
             return ResponseEntity.ok(service.readCompanyEmployees(userDetails.getId()));
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();
         }
+    }
+
+    @RequestMapping(value = "/company/employee/update/{id}", method = RequestMethod.PUT)
+    EmployeeCompanyReadModel updateEmployee(@PathVariable(value = "id") Long id, @RequestBody UpdateEmployeeResponse updateEmployeeResponse) {
+        return service.updateEmployee(id, updateEmployeeResponse);
     }
 }

@@ -1,6 +1,7 @@
 package cms.api.company.employee;
 
 import cms.domain.company.entity.Agreement;
+import cms.domain.employee.entity.Employee;
 import lombok.Data;
 
 @Data
@@ -11,6 +12,11 @@ public class EmployeeCompanyReadModel {
     private String position;
     private String phone;
     private String email;
+    private String street;
+    private String streetNumber;
+    private String buildingNumber;
+    private String city;
+    private String postcode;
 
     public EmployeeCompanyReadModel(Agreement agreement) {
         this.employeeId = agreement.getEmployeeAgreement().getId();
@@ -19,5 +25,16 @@ public class EmployeeCompanyReadModel {
         this.position = agreement.getEmployeeAgreement().getPosition();
         this.phone = agreement.getEmployeeAgreement().getPhone();
         this.email = agreement.getEmployeeAgreement().getUser().getEmail();
+    }
+
+    public EmployeeCompanyReadModel(Employee employee) {
+        this.employeeId = employee.getId();
+        this.position = employee.getPosition();
+        this.phone = employee.getPhone();
+        this.street = employee.getStreet();
+        this.streetNumber = employee.getStreetNumber();
+        this.buildingNumber = employee.getBuildingNumber();
+        this.city = employee.getCity();
+        this.postcode = employee.getPostcode();
     }
 }
