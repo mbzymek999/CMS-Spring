@@ -26,11 +26,19 @@ public class CompanyService {
         return repository.findAllByNipOrCompanyName(nip, companyName).stream().map(CompanyReadModel::new).collect(Collectors.toList());
     }
 
+    public List<CompanyReadModel> readByNip(String nip) {
+        return repository.findAllByNip(nip).stream().map(CompanyReadModel::new).collect(Collectors.toList());
+    }
+
+    public List<CompanyReadModel> readByCompanyName(String companyName) {
+        return repository.findAllByCompanyName(companyName).stream().map(CompanyReadModel::new).collect(Collectors.toList());
+    }
+
     public List<CompanyReadModel> readAllWithNipOrCompanyName(String nip, String companyName) {
-        if ((nip == null || nip.equals("")) && (companyName == null || companyName.equals(""))) {
+        if ((nip.equals("")) && (companyName.equals(""))) {
             return readAll();
-        } else {
-            return readByNipOrCompanyName(nip, companyName);
-        }
+        } else if (nip.equals("")) {
+            return readByCompanyName(companyName);
+        } else return readByNip(nip);
     }
 }

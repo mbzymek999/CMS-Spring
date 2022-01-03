@@ -10,6 +10,7 @@ public class TaskCompanyReadModel {
 
     private final Long idCompany;
     private final String employeeName;
+    private final String employeeLastName;
     private final String name;
     private final String type;
     private final int statusTask;
@@ -20,6 +21,7 @@ public class TaskCompanyReadModel {
     public TaskCompanyReadModel(Task task) {
         this.idCompany = task.getCompanyTask().getId();
         this.employeeName = task.getEmployeeTask().getName();
+        this.employeeLastName = task.getEmployeeTask().getLastName();
         this.name = task.getName();
         this.type = task.getType();
         this.statusTask = task.getStatusTask();
