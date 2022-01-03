@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,15 +18,28 @@ import java.util.List;
 public class AgreementCompanyController {
     private final AgreementService service;
     Logger logger = LoggerFactory.getLogger(AgreementCompanyController.class);
+
     public AgreementCompanyController(AgreementService service) {
         this.service = service;
     }
 
+//    @PostMapping("/create/agreement")
+//    @PreAuthorize("hasRole('COMPANY')")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+//        try {
+//            String result = service.registerUser(request.validate(),userDetails.getId());
+//            return ResponseEntity.ok(result);
+//        }catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        }
+//    }
+
     @PostMapping("/create/agreement")
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
-            return ResponseEntity.ok(service.registerUser(request.validate(),userDetails.getId()));
+    public String addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+        return service.registerUser(request.validate(), userDetails.getId());
     }
 
     @GetMapping

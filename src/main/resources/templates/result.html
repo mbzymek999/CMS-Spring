@@ -13,7 +13,7 @@
         <div class="card bg-light">
             <div class="card-body">
 
-                <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
+                <h3 style='color: red;' th:if='${error}'>Płatność została odrzucona!</h3>
                 <div th:unless='${error}'>
                     <h3 style='color: green;'>Płatność została zrealizowana!</h3>
                     <div>Id.: <span th:text='${id}'/></div>
@@ -21,7 +21,7 @@
                     <div>Opłata id.: <span th:text='${chargeId}'/></div>
                     <div>Saldo transakcji id.: <span th:text='${balance_transaction}'/></div>
                 </div>
-                <a href='http://localhost:8081/profile'>Powrót</a>
+                <a href='https://www.cmssoftware.click/company_payments'>Powrót</a>
             </div>
             <div class="col-4">
 

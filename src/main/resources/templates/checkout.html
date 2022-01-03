@@ -27,16 +27,15 @@
 
                     <input type='hidden' th:value='${amount}' name='amount'/>
                     <input type='hidden' th:value='${paymentId}' name='paymentId'/>
-                    <p class="text-center">Nazwa firmy:<span th:text='${companyName}' /><span/></p>
-                    <p class="text-center">id Platnosci:<span th:text='${paymentId}' /><span/></p>
-                    <label class="text-center">Cena:<span th:text='${amount/100}' /><span th:text=" zł" /></label>
+                    <p class="text-center">Nazwa firmy: <span th:text='${companyName}'/><span/></p>
+                    <p class="text-center">Cena: <span th:text='${amount/100}'/> <span th:text=" zł"/></p>
                     <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
                     <script
                             src='https://checkout.stripe.com/checkout.js'
                             class='stripe-button'
                             th:attr='data-key=${stripePublicKey},
-                         data-amount=${amount},
-                         data-currency=${currency}'
+                            data-amount=${amount},
+                            data-currency=${currency}'
                             data-name='Cms'
                             data-description='Opłata abonamentu'
                             data-image=''
