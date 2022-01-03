@@ -1,6 +1,7 @@
 package cms.domain.company.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -32,6 +33,22 @@ public class Payment {
         this.datePayment = datePayment;
         this.price = price;
         this.paymentDone = paymentDone;
+    }
+
+    public int calculatePayment(int numberEmployees) {
+        int sum;
+        if (numberEmployees > 0 && numberEmployees <= 5) {
+            sum = numberEmployees * 12;
+        } else if (numberEmployees <= 10) {
+            sum = numberEmployees * 11;
+        } else if (numberEmployees <= 20) {
+            sum = numberEmployees * 10;
+        } else if (numberEmployees <= 50) {
+            sum = numberEmployees * 9;
+        } else {
+            sum = numberEmployees * 8;
+        }
+        return sum;
     }
 
     public int getId() {

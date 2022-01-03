@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +24,10 @@ public class TaskCompanyController {
     @PostMapping("/task/add")
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewTask(@RequestBody TaskRequest request,
-                                             @RequestParam(value = "employeeId") Long employeeId,
-                                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        try {
-            return ResponseEntity.ok(service.addNewTask(request, employeeId, userDetails.getId()));
-        } catch (NullPointerException e) { // Todo wyzrzucic null pointer exception
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
-        }
+    public String addNewTask(@RequestBody TaskRequest request,
+                             @RequestParam(value = "employeeId") Long employeeId,
+                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return service.addNewTask(request, employeeId, userDetails.getId());
     }
 
     @GetMapping

@@ -1,6 +1,7 @@
 package cms.api.admin.payment;
 
 import cms.domain.company.entity.Company;
+import cms.domain.company.entity.Payment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +15,9 @@ public class PaymentCompanyReadModel {
 
 
     public PaymentCompanyReadModel(Company company) {
+        Payment payment = new Payment();
         this.id = company.getId();
         this.companyName = company.getCompanyName();
-        this.pricePackage = company.getMaxEmployees() * 10;
+        this.pricePackage = payment.calculatePayment(company.getMaxEmployees());
     }
 }
