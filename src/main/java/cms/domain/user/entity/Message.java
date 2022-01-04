@@ -31,4 +31,20 @@ public class Message {
     public void setIdClient(String idClient) {
         this.idClient = idClient;
     }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
