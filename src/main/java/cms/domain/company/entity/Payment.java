@@ -35,18 +35,18 @@ public class Payment {
         this.paymentDone = paymentDone;
     }
 
-    public int calculatePayment(int numberEmployees) {
-        int sum;
+    public double calculatePayment(int numberEmployees) {
+        double sum;
         if (numberEmployees > 0 && numberEmployees <= 5) {
-            sum = numberEmployees * 12;
+            sum = numberEmployees * 5.5;
         } else if (numberEmployees <= 10) {
-            sum = numberEmployees * 11;
+            sum = numberEmployees * 5.2;
         } else if (numberEmployees <= 20) {
-            sum = numberEmployees * 10;
+            sum = numberEmployees * 5.0;
         } else if (numberEmployees <= 50) {
-            sum = numberEmployees * 9;
+            sum = numberEmployees * 4.8;
         } else {
-            sum = numberEmployees * 8;
+            sum = numberEmployees * 4.5;
         }
         return sum;
     }

@@ -1,4 +1,4 @@
-package cms.api.user.controller;
+package cms.api.user;
 
 import cms.config.security.jwt.JwtUtils;
 import cms.config.security.payload.request.LoginRequest;

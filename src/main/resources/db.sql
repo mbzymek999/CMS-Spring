@@ -4,7 +4,7 @@ create table roles
     name varchar(20)
 );
 
-CREATE table users
+create table users
 (
     id          BIGINT primary key auto_increment,
     id_client   varchar(100),
@@ -20,7 +20,7 @@ create table user_roles
     role_id int not null
 );
 
-CREATE table employees
+create table employees
 (
     id          BIGINT primary key auto_increment,
     name    varchar(100),
@@ -37,7 +37,7 @@ CREATE table employees
     foreign key (user_id) references users (id)
 );
 
-CREATE table companies
+create table companies
 (
     id          BIGINT primary key auto_increment,
     company_name    varchar(50),
@@ -101,7 +101,17 @@ create table payments
     foreign key (company_id) references companies (id)
 );
 
-INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_COMPANY');
-INSERT INTO roles(name) VALUES('ROLE_EMPLOYEE');
-INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+create table messages
+(
+    id int primary key auto_increment,
+    id_client varchar(50),
+    company_name varchar(50),
+    email varchar(50),
+    phone varchar(20),
+    message varchar(1000)
+);
+
+insert into roles(name) values('ROLE_USER');
+insert into roles(name) values('ROLE_COMPANY');
+insert into roles(name) values('ROLE_EMPLOYEE');
+insert into roles(name) values('ROLE_ADMIN');
