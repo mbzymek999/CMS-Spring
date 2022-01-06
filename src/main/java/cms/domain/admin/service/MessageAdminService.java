@@ -1,6 +1,7 @@
 package cms.domain.admin.service;
 
 import cms.api.admin.message.MessageDetailReadModel;
+import cms.api.admin.message.MessageEmailRequest;
 import cms.api.admin.message.MessageReadModel;
 import cms.domain.user.entity.Message;
 import cms.domain.user.repository.MessageRepository;
@@ -32,4 +33,11 @@ public class MessageAdminService {
         }
         throw new NullPointerException("MessageDetailReadModel - returned value from repository is null");
     }
+
+    public String sendEmail(MessageEmailRequest request, String clientEmail) {
+        String emailBody = request.getAnswer();
+        mailService.sendEmail(clientEmail, "Dane logowania pracownika", emailBody);
+        return "Email został wysłany!";
+    }
+
 }
