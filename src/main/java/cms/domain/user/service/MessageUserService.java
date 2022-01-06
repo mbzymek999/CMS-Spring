@@ -35,6 +35,6 @@ public class MessageUserService {
         message.setIdClient(randomId);
         messageRepository.save(message);
 
-        return "Ok";
+        return "Wiadomość została wysłana";
     }
 }

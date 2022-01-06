@@ -90,7 +90,7 @@ public class RegisterCompanyService {
         userRepository.save(user);
         companyRepository.save(company);
 
-        return "Company registered successfully!";
+        return "Firma została pomyślnie dodana do systemu!";
     }
 
     private void checkIfUserNameAlreadyExist(SignupCompanyRequest signUpRequest) {

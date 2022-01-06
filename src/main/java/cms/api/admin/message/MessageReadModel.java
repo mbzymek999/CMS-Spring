@@ -5,12 +5,14 @@ import lombok.Data;
 
 @Data
 public class MessageReadModel {
+    private String idClient;
     private String companyName;
     private String email;
     private String phone;
     private String message;
 
     public MessageReadModel(Message message) {
+        this.idClient = message.getIdClient();
         this.companyName = message.getCompanyName();
         this.email = message.getEmail();
         this.phone = message.getPhone();

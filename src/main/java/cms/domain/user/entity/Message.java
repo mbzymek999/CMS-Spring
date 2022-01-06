@@ -28,6 +28,10 @@ public class Message {
     public Message() {
     }
 
+    public String getIdClient() {
+        return idClient;
+    }
+
     public void setIdClient(String idClient) {
         this.idClient = idClient;
     }
