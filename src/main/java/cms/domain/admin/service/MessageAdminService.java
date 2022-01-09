@@ -36,7 +36,7 @@ public class MessageAdminService {
 
     public String sendEmail(MessageEmailRequest request, String clientEmail) {
         String emailBody = request.getAnswer();
-        mailService.sendEmail(clientEmail, "Dane logowania pracownika", emailBody);
+        mailService.sendEmail(clientEmail, "CmsSoftware", emailBody);
         return "Email został wysłany!";
     }
 

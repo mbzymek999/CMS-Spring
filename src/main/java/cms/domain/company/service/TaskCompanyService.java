@@ -41,7 +41,7 @@ public class TaskCompanyService {
         Company company = user.getCompanyUser();
         checkIfCompanyExist(company);
 
-        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow();
         checkIfEmployeeExist(employee);
 
 

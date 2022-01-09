@@ -68,8 +68,8 @@ create table tasks
     status_task int,
     created_date DATE,
     date_to DATE,
-    company_id BIGINT,
-    employee_id BIGINT,
+    company_id BIGINT not null,,
+    employee_id BIGINT not null,,
     foreign key (company_id) references companies (id),
     foreign key (employee_id) references employees (id)
 );

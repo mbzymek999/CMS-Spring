@@ -36,6 +36,22 @@ public class Message {
         this.idClient = idClient;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

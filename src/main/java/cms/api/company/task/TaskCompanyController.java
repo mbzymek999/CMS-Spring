@@ -11,12 +11,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TaskCompanyController {
 
     private final TaskCompanyService service;
     Logger logger = LoggerFactory.getLogger(TaskCompanyController.class);
+
     public TaskCompanyController(TaskCompanyService service) {
         this.service = service;
     }
@@ -25,6 +28,7 @@ public class TaskCompanyController {
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
     public String addNewTask(@RequestBody TaskRequest request,
+                             @Valid
                              @RequestParam(value = "employeeId") Long employeeId,
                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return service.addNewTask(request, employeeId, userDetails.getId());

@@ -32,7 +32,7 @@ public class MessageController {
     @GetMapping
     @RequestMapping("/message/read/{idClient}")
     @PreAuthorize("hasRole('ADMIN')")
-    MessageDetailReadModel readCompanyAgreementDetails(@PathVariable String idClient) {
+    MessageDetailReadModel readMessageDetails(@PathVariable String idClient) {
         return service.readDetailMessage(idClient);
     }
 

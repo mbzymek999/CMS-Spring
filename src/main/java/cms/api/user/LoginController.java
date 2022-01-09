@@ -48,4 +48,10 @@ public class LoginController {
                 userDetails.getEmail(),
                 roles));
     }
+
+    @GetMapping("/secured")
+    public String secured() {
+        return "secured";
+    }
+
 }

@@ -54,8 +54,6 @@ public class AgreementRequest {
         }
         if (assignedDate.isAfter(dateFrom)) {
             throw new Exception("Data podpisania nie może być po dacie rozpoczęcia");
-        } else if(assignedDate.isEqual(dateFrom)){
-            throw new Exception("Data podpisania nie może być taka sama jak data rozpoczęcia");
         }
         return this;
     }
