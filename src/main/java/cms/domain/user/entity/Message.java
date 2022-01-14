@@ -25,6 +25,14 @@ public class Message {
         this.message = message;
     }
 
+    public Message(String idClient, String companyName, String email, String phone, String message) {
+        this.idClient = idClient;
+        this.companyName = companyName;
+        this.email = email;
+        this.phone = phone;
+        this.message = message;
+    }
+
     public Message() {
     }
 

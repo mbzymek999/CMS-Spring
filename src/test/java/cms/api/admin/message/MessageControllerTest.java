@@ -3,6 +3,8 @@ package cms.api.admin.message;
 import cms.domain.user.entity.Message;
 import cms.domain.user.repository.MessageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,9 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +39,26 @@ class MessageControllerTest {
 
     @Test
     void readAllMessage() {
+        // given
+        MessageController messageController = mock(MessageController.class);
+        when(messageController.readAllMessage()).thenReturn(prepareMockData());
+        // when
+        List<MessageReadModel> messageReadModels = messageController.readAllMessage();
+        // then
+        Assert.assertThat(messageReadModels, Matchers.hasSize(2));
+    }
+
+    private List<MessageReadModel> prepareMockData() {
+        Message message1 = new Message("abcdef1234", "Firma Test 1",
+                "test1@example.pl", "123456788", "Wiadomosc testowa 1");
+        Message message2 = new Message("zaqwer1234", "Firma Test2",
+                "test2@example.pl", "4444446788", "Wiadomosc testowa 2");
+
+        List<MessageReadModel> messages = new ArrayList<>();
+        messages.add(new MessageReadModel(message1));
+        messages.add(new MessageReadModel(message2));
+
+        return messages;
     }
 
     @Test
