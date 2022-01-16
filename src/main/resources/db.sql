@@ -7,8 +7,8 @@ create table roles
 create table users
 (
     id          BIGINT primary key auto_increment,
-    id_client   varchar(100),
-    username    varchar(100),
+    id_client   varchar(100) not null,
+    username    varchar(100) not null,
     email       varchar(100) not null,
     password    varchar(100) not null
 );
@@ -23,16 +23,16 @@ create table user_roles
 create table employees
 (
     id          BIGINT primary key auto_increment,
-    name    varchar(100),
-    last_name    varchar(100),
-    pesel BIGINT,
+    name    varchar(100) not null,
+    last_name    varchar(100) not null,
+    pesel BIGINT not null,
     position varchar(100),
-    phone    varchar(50),
+    phone    varchar(50) not null,
     street    varchar(50),
     street_number    varchar(50),
-    building_number    varchar(50),
-    city    varchar(50),
-    postcode    varchar(50),
+    building_number    varchar(50) not null,
+    city    varchar(50) not null,
+    postcode    varchar(50) not null,
     user_id         BIGINT not null,
     foreign key (user_id) references users (id)
 );
@@ -40,21 +40,21 @@ create table employees
 create table companies
 (
     id          BIGINT primary key auto_increment,
-    company_name    varchar(50),
+    company_name    varchar(50) not null,
     short_company_name    varchar(50),
     representative_person varchar (50),
-    nip    varchar(10),
-    regon    varchar(50),
-    phone    varchar(50),
+    nip    varchar(10) not null,
+    regon    varchar(50) not null,
+    phone    varchar(50) not null,
     street    varchar(50),
     street_number    varchar(50),
-    building_number    varchar(50),
-    city    varchar(50),
-    postcode    varchar(50),
+    building_number    varchar(50) not null,
+    city    varchar(50) not null,
+    postcode    varchar(50) not null,
     province    varchar(50),
     country    varchar(50),
     additional_fields varchar(300),
-    max_employees int,
+    max_employees int not null,
     user_id         BIGINT not null,
     foreign key (user_id) references users (id)
 );
@@ -62,14 +62,14 @@ create table companies
 create table tasks
 (
     id int primary key auto_increment,
-    name varchar(100),
+    name varchar(100) not null,
     type varchar(100),
     description varchar(100),
     status_task int,
-    created_date DATE,
-    date_to DATE,
-    company_id BIGINT not null,,
-    employee_id BIGINT not null,,
+    created_date DATE not null,
+    date_to DATE not null,
+    company_id BIGINT not null,
+    employee_id BIGINT not null,
     foreign key (company_id) references companies (id),
     foreign key (employee_id) references employees (id)
 );
@@ -78,11 +78,12 @@ create table agreements
 (
     id int primary key auto_increment,
     agreement_type varchar(50),
-    assigned_date DATE,
-    date_from DATE,
-    date_to DATE,
-    salary double,
-    company_id BIGINT,
+    assigned_date DATE not null,
+    date_from DATE not null,
+    date_to DATE not null,
+    salary double not null,
+    bank_account varchar(50) not null,
+    company_id BIGINT not null,
     user_id         BIGINT not null,
     employee_id         BIGINT not null,
     foreign key (company_id) references companies (id),
@@ -93,22 +94,22 @@ create table agreements
 create table payments
 (
     id int primary key auto_increment,
-    date_payment date,
+    date_payment date not null,
     term_payment date,
-    price double,
+    price double not null,
     payment_done bit,
-    company_id BIGINT,
+    company_id BIGINT not null,
     foreign key (company_id) references companies (id)
 );
 
 create table messages
 (
     id int primary key auto_increment,
-    id_client varchar(50),
+    id_client varchar(50) not null,
     company_name varchar(50),
-    email varchar(50),
+    email varchar(50) not null,
     phone varchar(20),
-    message varchar(1000)
+    message varchar(1000) not null
 );
 
 insert into roles(name) values('ROLE_USER');

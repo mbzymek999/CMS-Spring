@@ -89,6 +89,7 @@ public class AgreementService {
                 signUpRequest.getDateFrom(),
                 signUpRequest.getDateTo(),
                 signUpRequest.getSalary(),
+                signUpRequest.getBankAccount(),
                 company,
                 user,
                 employee

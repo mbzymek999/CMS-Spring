@@ -30,6 +30,7 @@ public class AgreementRequest {
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private double salary;
+    private String bankAccount;
 
     //employee
     private String name;
@@ -88,6 +89,10 @@ public class AgreementRequest {
 
     public double getSalary() {
         return salary;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
     }
 
     public String getName() {
