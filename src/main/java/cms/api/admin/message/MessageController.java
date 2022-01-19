@@ -1,8 +1,6 @@
 package cms.api.admin.message;
 
-import cms.domain.admin.service.MessageAdminService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.admin.serviceImpl.MessageAdminServiceImpl;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,32 +13,31 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class MessageController {
 
-    private final MessageAdminService service;
-    Logger logger = LoggerFactory.getLogger(MessageController.class);
+    private final MessageAdminServiceImpl messageAdminServiceImpl;
 
-    public MessageController(MessageAdminService service) {
-        this.service = service;
+    public MessageController(MessageAdminServiceImpl messageAdminServiceImpl) {
+        this.messageAdminServiceImpl = messageAdminServiceImpl;
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/message/read")
     List<MessageReadModel> readAllMessage() {
-        return service.readAll();
+        return messageAdminServiceImpl.readAll();
     }
 
     @GetMapping
     @RequestMapping("/message/read/{idClient}")
     @PreAuthorize("hasRole('ADMIN')")
     MessageDetailReadModel readMessageDetails(@PathVariable String idClient) {
-        return service.readDetailMessage(idClient);
+        return messageAdminServiceImpl.readDetailMessage(idClient);
     }
 
     @PostMapping("/message/email")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public String sendEmail(@RequestBody @Valid MessageEmailRequest request, @Param("clientEmail") String clientEmail) {
-        return service.sendEmail(request, clientEmail);
+        return messageAdminServiceImpl.sendEmail(request, clientEmail);
     }
 
 }

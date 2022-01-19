@@ -2,6 +2,7 @@ package cms.domain.company.service;
 
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.repository.AgreementRepository;
+import cms.domain.company.serviceImpl.PDFGeneratorServiceImpl;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Service
-public class PDFGeneratorService {
+public class PDFGeneratorService implements PDFGeneratorServiceImpl {
 
     private final AgreementRepository agreementRepository;
 

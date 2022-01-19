@@ -1,6 +1,7 @@
 package cms.domain.admin.service;
 
 import cms.api.admin.users.company.CompanyReadModel;
+import cms.domain.admin.serviceImpl.CompanyServiceImpl;
 import cms.domain.company.repository.CompanyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CompanyService {
+public class CompanyService implements CompanyServiceImpl {
     private final CompanyRepository repository;
     Logger logger = LoggerFactory.getLogger(CompanyService.class);
 

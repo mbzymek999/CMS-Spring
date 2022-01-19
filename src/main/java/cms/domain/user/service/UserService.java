@@ -3,11 +3,12 @@ package cms.domain.user.service;
 import cms.api.user.UserRequest;
 import cms.domain.user.entity.User;
 import cms.domain.user.repository.UserRepository;
+import cms.domain.user.serviceImpl.UserServiceImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceImpl {
 
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;

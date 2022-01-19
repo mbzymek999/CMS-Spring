@@ -1,6 +1,6 @@
 package cms.api.company.agreement;
 
-import cms.domain.company.service.PDFGeneratorService;
+import cms.domain.company.serviceImpl.PDFGeneratorServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +16,10 @@ import java.util.Date;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PDFExportController {
 
-    private final PDFGeneratorService pdfGeneratorService;
-    public PDFExportController(PDFGeneratorService pdfGeneratorService) {
-        this.pdfGeneratorService = pdfGeneratorService;
+    private final PDFGeneratorServiceImpl pdfGeneratorServiceImpl;
+
+    public PDFExportController(PDFGeneratorServiceImpl pdfGeneratorServiceImpl) {
+        this.pdfGeneratorServiceImpl = pdfGeneratorServiceImpl;
     }
 
     @GetMapping("/pdf/generate/{id}")
@@ -28,9 +29,9 @@ public class PDFExportController {
         String currentDateTime = dateFormat.format(new Date());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Umowa_"+currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=Umowa_" + currentDateTime + ".pdf";
         response.setHeader(headerKey,headerValue);
 
-        this.pdfGeneratorService.export(response, id);
+        this.pdfGeneratorServiceImpl.export(response, id);
     }
 }

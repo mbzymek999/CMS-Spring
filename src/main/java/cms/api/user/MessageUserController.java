@@ -1,8 +1,6 @@
 package cms.api.user;
 
-import cms.domain.user.service.MessageUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.user.serviceImpl.MessageUserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,17 +13,15 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class MessageUserController {
 
-    private final MessageUserService service;
-    Logger logger = LoggerFactory.getLogger(MessageUserController.class);
+    private final MessageUserServiceImpl messageUserServiceImpl;
 
-    public MessageUserController(MessageUserService service) {
-        this.service = service;
+    public MessageUserController(MessageUserServiceImpl messageUserServiceImpl) {
+        this.messageUserServiceImpl = messageUserServiceImpl;
     }
-
 
     @PostMapping("/message/send")
     public ResponseEntity<String> sendNewMessage(@RequestBody @Valid MessageRequest request) {
-        return ResponseEntity.ok(service.sendMessage(request));
+        return ResponseEntity.ok(messageUserServiceImpl.sendMessage(request));
     }
 
 }

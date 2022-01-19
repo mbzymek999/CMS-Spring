@@ -1,7 +1,7 @@
 package cms.api.company.employee;
 
 import cms.config.security.services.UserDetailsImpl;
-import cms.domain.company.service.EmployeeCompanyService;
+import cms.domain.company.serviceImpl.EmployeeCompanyServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +15,13 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class EmployeeCompanyController {
 
-    private final EmployeeCompanyService service;
-    Logger logger = LoggerFactory.getLogger(EmployeeCompanyController.class);
-    public EmployeeCompanyController(EmployeeCompanyService service) {
-        this.service = service;
+    private final EmployeeCompanyServiceImpl employeeCompanyServiceImpl;
+
+    public EmployeeCompanyController(EmployeeCompanyServiceImpl employeeCompanyServiceImpl) {
+        this.employeeCompanyServiceImpl = employeeCompanyServiceImpl;
     }
+
+    Logger logger = LoggerFactory.getLogger(EmployeeCompanyController.class);
 
     @GetMapping
     @RequestMapping("/company/employees")
@@ -27,7 +29,7 @@ public class EmployeeCompanyController {
     ResponseEntity<List<EmployeeCompanyReadModel>> readCompanyEmployees(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             logger.info("Reading company employees");
-            return ResponseEntity.ok(service.readCompanyEmployees(userDetails.getIdClient()));
+            return ResponseEntity.ok(employeeCompanyServiceImpl.readCompanyEmployees(userDetails.getIdClient()));
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();
@@ -38,11 +40,11 @@ public class EmployeeCompanyController {
     @RequestMapping("/company/employee/{id}")
     @PreAuthorize("hasRole('COMPANY')")
     EmployeeCompanyReadModel readEmployeeDetails(@PathVariable Long id) {
-        return service.readEmployeeDetails(id);
+        return employeeCompanyServiceImpl.readEmployeeDetails(id);
     }
 
     @RequestMapping(value = "/company/employee/update/{id}", method = RequestMethod.PUT)
     EmployeeCompanyReadModel updateEmployee(@PathVariable(value = "id") Long id, @RequestBody UpdateEmployeeResponse updateEmployeeResponse) {
-        return service.updateEmployee(id, updateEmployeeResponse);
+        return employeeCompanyServiceImpl.updateEmployee(id, updateEmployeeResponse);
     }
 }

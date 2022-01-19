@@ -1,7 +1,7 @@
 package cms.api.company.payment;
 
 import cms.config.security.services.UserDetailsImpl;
-import cms.domain.company.service.CompanyPaymentService;
+import cms.domain.company.serviceImpl.CompanyPaymentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,13 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PaymentController {
-    private final CompanyPaymentService service;
+
     Logger logger = LoggerFactory.getLogger(PaymentController.class);
-    public PaymentController(CompanyPaymentService service) {
-        this.service = service;
+
+    private final CompanyPaymentServiceImpl companyPaymentServiceImpl;
+
+    public PaymentController(CompanyPaymentServiceImpl companyPaymentServiceImpl) {
+        this.companyPaymentServiceImpl = companyPaymentServiceImpl;
     }
 
     @GetMapping
@@ -29,8 +32,8 @@ public class PaymentController {
     ResponseEntity<List<CompanyPaymentReadModel>> readCompanyPayments(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             logger.info("Reading company payments");
-            return ResponseEntity.ok(service.readCompanyPayments(userDetails.getIdClient()));
-        }catch (Exception e){
+            return ResponseEntity.ok(companyPaymentServiceImpl.readCompanyPayments(userDetails.getIdClient()));
+        } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();
         }

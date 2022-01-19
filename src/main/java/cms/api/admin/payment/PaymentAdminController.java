@@ -1,9 +1,6 @@
 package cms.api.admin.payment;
 
-import cms.api.company.payment.PaymentController;
-import cms.domain.admin.service.PaymentAdminService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.admin.serviceImpl.PaymentAdminServiceImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -14,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PaymentAdminController {
 
-    private final PaymentAdminService service;
-    Logger logger = LoggerFactory.getLogger(PaymentController.class);
-    public PaymentAdminController(PaymentAdminService service) {
-        this.service = service;
+    private final PaymentAdminServiceImpl paymentAdminServiceImpl;
+
+    public PaymentAdminController(PaymentAdminServiceImpl paymentAdminServiceImpl) {
+        this.paymentAdminServiceImpl = paymentAdminServiceImpl;
     }
 
     @PostMapping("/api/payment")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public String createPayment(@RequestParam(value = "companyId") Long companyId) {
-        return service.createPayment(companyId);
+        return paymentAdminServiceImpl.createPayment(companyId);
     }
 
     @GetMapping
@@ -32,6 +29,6 @@ public class PaymentAdminController {
     @RequestMapping("/payments/read")
     PaymentAdminResponse readAllPayments(Pageable page,
                                          @Param("paymentDone") Boolean paymentDone) {
-        return service.readAllWithPaymentDone(page, paymentDone);
+        return paymentAdminServiceImpl.readAllWithPaymentDone(page, paymentDone);
     }
 }

@@ -1,6 +1,7 @@
 package cms.domain.admin.service;
 
 import cms.api.admin.register.admin.SignupAdminRequest;
+import cms.domain.admin.serviceImpl.RegisterAdminServiceImpl;
 import cms.domain.user.entity.ERole;
 import cms.domain.user.entity.Role;
 import cms.domain.user.entity.User;
@@ -8,12 +9,13 @@ import cms.domain.user.repository.RoleRepository;
 import cms.domain.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class RegisterAdminService {
+public class RegisterAdminService implements RegisterAdminServiceImpl {
 
     private final UserRepository userRepository;
 
@@ -68,7 +70,7 @@ public class RegisterAdminService {
         return "Admin registered successfully!";
     }
 
-    private void checkIfUserNameAlreadyExist(SignupAdminRequest signUpRequest) {
+    public void checkIfUserNameAlreadyExist(SignupAdminRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
         }

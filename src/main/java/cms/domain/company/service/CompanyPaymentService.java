@@ -2,13 +2,14 @@ package cms.domain.company.service;
 
 import cms.api.company.payment.CompanyPaymentReadModel;
 import cms.domain.company.repository.PaymentRepository;
+import cms.domain.company.serviceImpl.CompanyPaymentServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CompanyPaymentService {
+public class CompanyPaymentService implements CompanyPaymentServiceImpl {
 
     private final PaymentRepository paymentRepository;
 

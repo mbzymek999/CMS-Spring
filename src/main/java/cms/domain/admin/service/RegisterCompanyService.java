@@ -1,6 +1,7 @@
 package cms.domain.admin.service;
 
 import cms.api.admin.register.company.SignupCompanyRequest;
+import cms.domain.admin.serviceImpl.RegisterCompanyServiceImpl;
 import cms.domain.company.entity.Company;
 import cms.domain.company.repository.CompanyRepository;
 import cms.domain.user.entity.ERole;
@@ -16,7 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class RegisterCompanyService {
+public class RegisterCompanyService implements RegisterCompanyServiceImpl {
     private final UserRepository userRepository;
 
     private final CompanyRepository companyRepository;
@@ -94,7 +95,7 @@ public class RegisterCompanyService {
         return "Firma została pomyślnie dodana do systemu!";
     }
 
-    private void checkIfUserNameAlreadyExist(SignupCompanyRequest signUpRequest) {
+    public void checkIfUserNameAlreadyExist(SignupCompanyRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
         }

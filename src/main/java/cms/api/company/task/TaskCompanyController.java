@@ -1,7 +1,7 @@
 package cms.api.company.task;
 
 import cms.config.security.services.UserDetailsImpl;
-import cms.domain.company.service.TaskCompanyService;
+import cms.domain.company.serviceImpl.TaskCompanyServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +17,12 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TaskCompanyController {
 
-    private final TaskCompanyService service;
     Logger logger = LoggerFactory.getLogger(TaskCompanyController.class);
 
-    public TaskCompanyController(TaskCompanyService service) {
-        this.service = service;
+    private final TaskCompanyServiceImpl taskCompanyServiceImpl;
+
+    public TaskCompanyController(TaskCompanyServiceImpl taskCompanyServiceImpl) {
+        this.taskCompanyServiceImpl = taskCompanyServiceImpl;
     }
 
     @PostMapping("/task/add")
@@ -31,14 +32,14 @@ public class TaskCompanyController {
                              @Valid
                              @RequestParam(value = "employeeId") Long employeeId,
                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return service.addNewTask(request, employeeId, userDetails.getIdClient());
+        return taskCompanyServiceImpl.addNewTask(request, employeeId, userDetails.getIdClient());
     }
 
     @GetMapping
     @RequestMapping("/company/tasks")
     ReadCompanyTasksResponse readCompanyTasks(Pageable page, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         logger.info("Reading company tasks");
-        return service.readCompanyTasks(page, userDetails.getIdClient());
+        return taskCompanyServiceImpl.readCompanyTasks(page, userDetails.getIdClient());
     }
 
     @GetMapping
@@ -47,7 +48,7 @@ public class TaskCompanyController {
                                                                   @AuthenticationPrincipal UserDetailsImpl userDetails,
                                                                   @Param("statusTask") int statusTask) {
         logger.info("Reading company tasks");
-        return service.readAllWithStatusTask(page, userDetails.getIdClient(), statusTask);
+        return taskCompanyServiceImpl.readAllWithStatusTask(page, userDetails.getIdClient(), statusTask);
     }
 
 }

@@ -1,8 +1,6 @@
 package cms.api.admin.users.company;
 
-import cms.domain.admin.service.CompanyService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.admin.serviceImpl.CompanyServiceImpl;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,23 +13,23 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CompanyController {
-    private final CompanyService service;
-    Logger logger = LoggerFactory.getLogger(CompanyController.class);
 
-    public CompanyController(CompanyService service) {
-        this.service = service;
+    private final CompanyServiceImpl companyServiceImpl;
+
+    public CompanyController(CompanyServiceImpl companyServiceImpl) {
+        this.companyServiceImpl = companyServiceImpl;
     }
 
     @GetMapping
     @RequestMapping("/companies")
     ResponseEntity<List<CompanyReadModel>> readAllCompanies() {
-        return ResponseEntity.ok(service.readAll());
+        return ResponseEntity.ok(companyServiceImpl.readAll());
     }
 
     @GetMapping
     @RequestMapping("/companies/read")
     List<CompanyReadModel> readAllCompaniesWithNipFilter(@Param("nip") String nip, @Param("companyName") String companyName) {
-        return service.readAllWithNipOrCompanyName(nip, companyName);
+        return companyServiceImpl.readAllWithNipOrCompanyName(nip, companyName);
     }
 
 }

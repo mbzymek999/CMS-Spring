@@ -5,9 +5,7 @@ import cms.api.employee.task.EmployeeTaskResponse;
 import cms.api.employee.task.UpdateTaskResponse;
 import cms.domain.company.entity.Task;
 import cms.domain.company.repository.TaskRepository;
-import cms.domain.company.service.TaskCompanyService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.employee.serviceImpl.EmployeeTaskServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,10 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeTaskService {
+public class EmployeeTaskService implements EmployeeTaskServiceImpl {
 
     private final TaskRepository repository;
-    Logger logger = LoggerFactory.getLogger(TaskCompanyService.class);
 
     public EmployeeTaskService(TaskRepository repository) {
         this.repository = repository;

@@ -1,7 +1,7 @@
 package cms.api.user;
 
 import cms.config.security.services.UserDetailsImpl;
-import cms.domain.user.service.UserService;
+import cms.domain.user.serviceImpl.UserServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private final UserService service;
+    private final UserServiceImpl userServiceImpl;
 
-    public UserController(UserService service) {
-        this.service = service;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     @PreAuthorize("hasAnyRole('COMPANY','EMPLOYEE')")
     @RequestMapping(value = "/user/update", method = RequestMethod.PUT)
     String updateUser(@AuthenticationPrincipal UserDetailsImpl userDetails,
                       @RequestBody UserRequest userRequest) {
-        return service.updateUser(userDetails.getIdClient(), userRequest);
+        return userServiceImpl.updateUser(userDetails.getIdClient(), userRequest);
     }
 }

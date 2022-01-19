@@ -6,6 +6,7 @@ import cms.api.company.task.TaskRequest;
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Task;
 import cms.domain.company.repository.TaskRepository;
+import cms.domain.company.serviceImpl.TaskCompanyServiceImpl;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
 import cms.domain.user.entity.User;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskCompanyService {
+public class TaskCompanyService implements TaskCompanyServiceImpl {
 
     private final TaskRepository repository;
     private final UserRepository userRepository;

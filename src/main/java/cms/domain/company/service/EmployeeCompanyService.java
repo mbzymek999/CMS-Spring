@@ -3,6 +3,7 @@ package cms.domain.company.service;
 import cms.api.company.employee.EmployeeCompanyReadModel;
 import cms.api.company.employee.UpdateEmployeeResponse;
 import cms.domain.company.repository.AgreementRepository;
+import cms.domain.company.serviceImpl.EmployeeCompanyServiceImpl;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeCompanyService {
+public class EmployeeCompanyService implements EmployeeCompanyServiceImpl {
 
     private final AgreementRepository agreementRepository;
     private final EmployeeRepository employeeRepository;

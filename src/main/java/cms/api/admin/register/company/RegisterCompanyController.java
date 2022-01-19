@@ -1,8 +1,6 @@
 package cms.api.admin.register.company;
 
-import cms.domain.admin.service.RegisterCompanyService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cms.domain.admin.serviceImpl.RegisterCompanyServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +12,17 @@ import javax.validation.Valid;
 @RequestMapping("/api/auth")
 public class RegisterCompanyController {
 
-    private final RegisterCompanyService service;
-    Logger logger = LoggerFactory.getLogger(RegisterCompanyController.class);
+    private final RegisterCompanyServiceImpl registerCompanyServiceImpl;
 
-    public RegisterCompanyController(RegisterCompanyService service) {
-        this.service = service;
+    public RegisterCompanyController(RegisterCompanyServiceImpl registerCompanyServiceImpl) {
+        this.registerCompanyServiceImpl = registerCompanyServiceImpl;
     }
 
     @PostMapping("/signup/company")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public String addNewCompany(@Valid @RequestBody SignupCompanyRequest request) {
-        return service.registerUser(request);
+        return registerCompanyServiceImpl.registerUser(request);
     }
 
 }

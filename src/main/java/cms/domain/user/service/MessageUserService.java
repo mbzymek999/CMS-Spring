@@ -3,13 +3,14 @@ package cms.domain.user.service;
 import cms.api.user.MessageRequest;
 import cms.domain.user.entity.Message;
 import cms.domain.user.repository.MessageRepository;
+import cms.domain.user.serviceImpl.MessageUserServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 
 @Service
-public class MessageUserService {
+public class MessageUserService implements MessageUserServiceImpl {
 
     private final MessageRepository messageRepository;
 

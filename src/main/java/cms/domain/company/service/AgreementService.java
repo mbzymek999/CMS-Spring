@@ -6,6 +6,7 @@ import cms.api.company.agreement.AgreementRequest;
 import cms.domain.company.entity.Agreement;
 import cms.domain.company.entity.Company;
 import cms.domain.company.repository.AgreementRepository;
+import cms.domain.company.serviceImpl.AgreementServiceImpl;
 import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
 import cms.domain.user.entity.ERole;
@@ -24,7 +25,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class AgreementService {
+public class AgreementService implements AgreementServiceImpl {
 
     private final UserRepository userRepository;
 
@@ -152,7 +153,7 @@ public class AgreementService {
         mailService.sendEmail(signUpRequest.getEmail(), "Dane logowania pracownika", emailBody);
     }
 
-    private void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {
+    public void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
         }

@@ -3,6 +3,7 @@ package cms.domain.admin.service;
 import cms.api.admin.message.MessageDetailReadModel;
 import cms.api.admin.message.MessageEmailRequest;
 import cms.api.admin.message.MessageReadModel;
+import cms.domain.admin.serviceImpl.MessageAdminServiceImpl;
 import cms.domain.user.entity.Message;
 import cms.domain.user.repository.MessageRepository;
 import cms.external.email.service.MailService;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MessageAdminService {
+public class MessageAdminService implements MessageAdminServiceImpl {
 
     private final MailService mailService;
     private final MessageRepository repository;

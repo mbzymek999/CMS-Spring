@@ -3,6 +3,7 @@ package cms.domain.admin.service;
 import cms.api.admin.payment.PaymentAdminResponse;
 import cms.api.admin.payment.PaymentReadModel;
 import cms.api.admin.payment.PaymentWriteModel;
+import cms.domain.admin.serviceImpl.PaymentAdminServiceImpl;
 import cms.domain.company.entity.Company;
 import cms.domain.company.entity.Payment;
 import cms.domain.company.repository.CompanyRepository;
@@ -15,10 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PaymentAdminService {
+public class PaymentAdminService implements PaymentAdminServiceImpl {
 
     private final PaymentRepository paymentRepository;
     private final CompanyRepository companyRepository;
+
     public PaymentAdminService(PaymentRepository paymentRepository, CompanyRepository companyRepository) {
         this.paymentRepository = paymentRepository;
         this.companyRepository = companyRepository;
