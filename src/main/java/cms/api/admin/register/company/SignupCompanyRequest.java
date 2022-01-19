@@ -10,29 +10,33 @@ public class SignupCompanyRequest {
     @Size(min = 3, max = 20)
     private String username;
 
-    @Size(max = 50)
+    @NotBlank
     private String companyName;
 
-    @Size(max = 20)
     private String shortCompanyName;
 
-    @Size(max = 10)
+    @NotBlank
     private String nip;
 
+    @NotBlank
     private String regon;
 
     private String representativePerson;
 
+    @NotBlank
     private String phone;
 
     private String street;
 
+    @NotBlank
     private String streetNumber;
 
     private String buildingNumber;
 
+    @NotBlank
     private String city;
 
+    @NotBlank
     private String postcode;
 
     private String province;
@@ -74,24 +78,12 @@ public class SignupCompanyRequest {
         return shortCompanyName;
     }
 
-    public void setShortCompanyName(String shortCompanyName) {
-        this.shortCompanyName = shortCompanyName;
-    }
-
     public String getNip() {
         return nip;
     }
 
-    public void setNip(String nip) {
-        this.nip = nip;
-    }
-
     public String getRegon() {
         return regon;
-    }
-
-    public void setRegon(String regon) {
-        this.regon = regon;
     }
 
     public String getRepresentativePerson() {
@@ -110,72 +102,36 @@ public class SignupCompanyRequest {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public String getStreetNumber() {
         return streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
     }
 
     public String getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(String buildingNumber) {
-        this.buildingNumber = buildingNumber;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
     public String getProvince() {
         return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getAdditionalFields() {
         return additionalFields;
     }
 
-    public void setAdditionalFields(String additionalFields) {
-        this.additionalFields = additionalFields;
-    }
-
     public int getMaxEmployees() {
         return maxEmployees;
-    }
-
-    public void setMaxEmployees(int maxEmployees) {
-        this.maxEmployees = maxEmployees;
     }
 
     public String getEmail() {
@@ -198,7 +154,4 @@ public class SignupCompanyRequest {
         return this.role;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
 }

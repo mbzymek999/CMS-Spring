@@ -15,29 +15,33 @@ public class Company {
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
 
-    @Size(max = 50)
+    @Column(unique = true, nullable = false)
     private String companyName;
 
-    @Size(max = 20)
     private String shortCompanyName;
 
-    @Size(max = 10)
+    @Column(nullable = false)
     private String nip;
 
     private String representativePerson;
 
+    @Column(nullable = false)
     private String regon;
 
+    @Column(nullable = false)
     private String phone;
 
     private String street;
 
+    @Column(nullable = false)
     private String streetNumber;
 
     private String buildingNumber;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String postcode;
 
     private String province;
@@ -46,6 +50,7 @@ public class Company {
 
     private String additionalFields;
 
+    @Column(nullable = false)
     private int maxEmployees;
 
     @OneToOne
