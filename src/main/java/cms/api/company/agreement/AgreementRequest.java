@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
@@ -26,22 +27,32 @@ public class AgreementRequest {
 
     // agreement
     private String agreementType;
+    @NotNull
     private LocalDate assignedDate;
+    @NotNull
     private LocalDate dateFrom;
+    @NotNull
     private LocalDate dateTo;
     private double salary;
     private String bankAccount;
 
     //employee
+    @NotBlank
     private String name;
+    @NotBlank
     private String lastName;
+    @NotNull
     private Long pesel;
     private String position;
+    @NotBlank
     private String phone;
     private String street;
+    @NotBlank
     private String streetNumber;
     private String buildingNumber;
+    @NotBlank
     private String city;
+    @NotBlank
     private String postcode;
 
     public AgreementRequest validate() throws Exception {

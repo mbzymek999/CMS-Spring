@@ -62,10 +62,15 @@ public class AgreementService {
 
         System.out.println();
 
+        String randomId = UUID.randomUUID().toString().replace("-", "");
+
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+        User user = new User(
+                randomId,
+                signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(randomPassword));
+
 
         // Create new Employee
         Employee employee = new Employee(
