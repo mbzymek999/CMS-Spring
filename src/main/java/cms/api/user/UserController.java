@@ -20,6 +20,6 @@ public class UserController {
     @RequestMapping(value = "/user/update", method = RequestMethod.PUT)
     String updateUser(@AuthenticationPrincipal UserDetailsImpl userDetails,
                       @RequestBody UserRequest userRequest) {
-        return service.updateUser(userDetails.getId(), userRequest);
+        return service.updateUser(userDetails.getIdClient(), userRequest);
     }
 }

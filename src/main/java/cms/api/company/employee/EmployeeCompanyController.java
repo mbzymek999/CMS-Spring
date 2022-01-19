@@ -27,7 +27,7 @@ public class EmployeeCompanyController {
     ResponseEntity<List<EmployeeCompanyReadModel>> readCompanyEmployees(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
             logger.info("Reading company employees");
-            return ResponseEntity.ok(service.readCompanyEmployees(userDetails.getId()));
+            return ResponseEntity.ok(service.readCompanyEmployees(userDetails.getIdClient()));
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.status(500).build();

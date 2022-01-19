@@ -21,8 +21,8 @@ public class EmployeeCompanyService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<EmployeeCompanyReadModel> readCompanyEmployees(Long id) {
-        return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
+    public List<EmployeeCompanyReadModel> readCompanyEmployees(String idClient) {
+        return agreementRepository.findAllByCompanyAgreement_User_IdClient(idClient).stream().map(EmployeeCompanyReadModel::new).collect(Collectors.toList());
     }
 
 

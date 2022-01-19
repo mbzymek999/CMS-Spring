@@ -13,7 +13,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
     @Override
     <S extends Payment> S save(S s);
 
-    List<Payment> findAllByCompany_User_Id(Long id);
+    List<Payment> findAllByCompany_User_IdClient(String idClient);
 
     Page<Payment> findAll(Pageable page);
 

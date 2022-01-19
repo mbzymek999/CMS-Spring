@@ -34,9 +34,9 @@ public class TaskCompanyService {
         this.employeeRepository = employeeRepository;
     }
 
-    public String addNewTask(TaskRequest taskRequest, Long employeeId, Long idUser) {
+    public String addNewTask(TaskRequest taskRequest, Long employeeId, String idClient) {
 
-        User user = userRepository.findById(idUser).orElse(null);
+        User user = userRepository.findByIdClient(idClient).orElse(null);
 
         Company company = user.getCompanyUser();
         checkIfCompanyExist(company);
@@ -61,28 +61,28 @@ public class TaskCompanyService {
         return "Ok";
     }
 
-    public ReadCompanyTasksResponse readCompanyTasks(Pageable page, Long id) {
-        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_Id(page, id).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
-        Page<Task> pageInformation = repository.findAllByCompanyTask_User_Id(page, id);
+    public ReadCompanyTasksResponse readCompanyTasks(Pageable page, String idClient) {
+        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_IdClient(page, idClient).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+        Page<Task> pageInformation = repository.findAllByCompanyTask_User_IdClient(page, idClient);
         return new ReadCompanyTasksResponse(pageInformation, list);
     }
 
-    public ReadCompanyTasksResponse readByStatusTask(Pageable page, Long id, int statusTask) {
-        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_IdAndStatusTask(page, id, statusTask).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
-        Page<Task> pageInformation = repository.findAllByCompanyTask_User_IdAndStatusTask(page, id, statusTask);
+    public ReadCompanyTasksResponse readByStatusTask(Pageable page, String idClient, int statusTask) {
+        List<TaskCompanyReadModel> list = repository.findAllByCompanyTask_User_IdClientAndStatusTask(page, idClient, statusTask).stream().map(TaskCompanyReadModel::new).collect(Collectors.toList());
+        Page<Task> pageInformation = repository.findAllByCompanyTask_User_IdClientAndStatusTask(page, idClient, statusTask);
         return new ReadCompanyTasksResponse(pageInformation, list);
     }
 
-    public ReadCompanyTasksResponse readAllWithStatusTask(Pageable page, Long id, int statusTask) {
+    public ReadCompanyTasksResponse readAllWithStatusTask(Pageable page, String idClient, int statusTask) {
         if ((statusTask < 0 || statusTask > 2)) {
-            return readCompanyTasks(page, id);
+            return readCompanyTasks(page, idClient);
         } else {
-            return readByStatusTask(page, id, statusTask);
+            return readByStatusTask(page, idClient, statusTask);
         }
     }
 
-    public List<Task> getAllTasks(Long id) {
-        return repository.findAllByCompanyTask_User_Id(id);
+    public List<Task> getAllTasks(String idClient) {
+        return repository.findAllByCompanyTask_User_IdClient(idClient);
     }
 
     public void checkIfCompanyExist(Company company) {
@@ -90,8 +90,9 @@ public class TaskCompanyService {
             throw new IllegalArgumentException("Firma nie istnieje");
         }
     }
+
     public void checkIfEmployeeExist(Employee employee) {
-        if(employee == null){
+        if (employee == null) {
             throw new IllegalArgumentException("Pracownik nie istnieje");
         }
     }

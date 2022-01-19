@@ -39,7 +39,7 @@ public class AgreementCompanyController {
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
     public String addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
-        return service.registerUser(request.validate(), userDetails.getId());
+        return service.registerUser(request.validate(), userDetails.getIdClient());
     }
 
     @GetMapping
@@ -47,7 +47,7 @@ public class AgreementCompanyController {
     @PreAuthorize("hasRole('COMPANY')")
     ResponseEntity<List<AgreementCompanyReadModel>> readCompanyAgreements(@AuthenticationPrincipal UserDetailsImpl userDetails) {
             logger.info("Reading company agreements");
-            return ResponseEntity.ok(service.readCompanyAgreements(userDetails.getId()));
+        return ResponseEntity.ok(service.readCompanyAgreements(userDetails.getIdClient()));
     }
 
     @GetMapping
@@ -56,7 +56,7 @@ public class AgreementCompanyController {
     ResponseEntity<AgreementDetailCompanyReadModel> readCompanyAgreementDetails(@PathVariable int id, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
             logger.info("reading agreement with id: " + id);
-            return ResponseEntity.ok(service.readCompanyDetails(userDetails.getId(), id));
+            return ResponseEntity.ok(service.readCompanyDetails(userDetails.getIdClient(), id));
         }catch (NullPointerException e){
             e.printStackTrace();
             return ResponseEntity.notFound().build();

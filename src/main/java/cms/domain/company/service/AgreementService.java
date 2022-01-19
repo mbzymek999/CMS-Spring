@@ -49,13 +49,16 @@ public class AgreementService {
 
     private final String randomPassword = UUID.randomUUID().toString().replace("-", "");
 
-    public String registerUser(AgreementRequest signUpRequest, Long id) {
+    public String registerUser(AgreementRequest signUpRequest, String idClient) {
 
         checkIfUserNameAlreadyExist(signUpRequest);
 
         checkIfEmailAlreadyExist(signUpRequest);
 
-        User userId = userRepository.findById(id).orElse(null);
+//        User userId = userRepository.findById(id).orElse(null);
+//        Company company = userId.getCompanyUser();
+
+        User userId = userRepository.findByIdClient(idClient).orElse(null);
         Company company = userId.getCompanyUser();
 
         checkIfCompanyExist(company);
@@ -132,21 +135,21 @@ public class AgreementService {
         return "Employee registered successfully!";
     }
 
-    public List<AgreementCompanyReadModel> readCompanyAgreements(Long id) {
-        return agreementRepository.findAllByCompanyAgreement_User_Id(id).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
+    public List<AgreementCompanyReadModel> readCompanyAgreements(String idClient) {
+        return agreementRepository.findAllByCompanyAgreement_User_IdClient(idClient).stream().map(AgreementCompanyReadModel::new).collect(Collectors.toList());
     }
 
-    public AgreementDetailCompanyReadModel readCompanyDetails(Long id, int agreementId) {
-        Agreement agreement =  agreementRepository.findAllByCompanyAgreement_User_IdAndId(id, agreementId).orElse(null);
-        if(agreement != null){
+    public AgreementDetailCompanyReadModel readCompanyDetails(String idClient, int agreementId) {
+        Agreement agreement = agreementRepository.findAllByCompanyAgreement_User_IdClientAndId(idClient, agreementId).orElse(null);
+        if (agreement != null) {
             return new AgreementDetailCompanyReadModel(agreement);
         }
         throw new NullPointerException("AgreementDetailCompanyReadModel - returned value from repository is null");
     }
 
     public void sendEmail(AgreementRequest signUpRequest) {
-        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: "+ randomPassword;
-        mailService.sendEmail(signUpRequest.getEmail(),"Dane logowania pracownika", emailBody);
+        String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: " + randomPassword;
+        mailService.sendEmail(signUpRequest.getEmail(), "Dane logowania pracownika", emailBody);
     }
 
     private void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {

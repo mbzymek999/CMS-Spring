@@ -31,14 +31,14 @@ public class TaskCompanyController {
                              @Valid
                              @RequestParam(value = "employeeId") Long employeeId,
                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return service.addNewTask(request, employeeId, userDetails.getId());
+        return service.addNewTask(request, employeeId, userDetails.getIdClient());
     }
 
     @GetMapping
     @RequestMapping("/company/tasks")
     ReadCompanyTasksResponse readCompanyTasks(Pageable page, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         logger.info("Reading company tasks");
-        return service.readCompanyTasks(page, userDetails.getId());
+        return service.readCompanyTasks(page, userDetails.getIdClient());
     }
 
     @GetMapping
@@ -47,7 +47,7 @@ public class TaskCompanyController {
                                                                   @AuthenticationPrincipal UserDetailsImpl userDetails,
                                                                   @Param("statusTask") int statusTask) {
         logger.info("Reading company tasks");
-        return service.readAllWithStatusTask(page, userDetails.getId(), statusTask);
+        return service.readAllWithStatusTask(page, userDetails.getIdClient(), statusTask);
     }
 
 }

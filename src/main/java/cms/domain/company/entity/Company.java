@@ -4,7 +4,6 @@ import cms.domain.user.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -50,7 +49,6 @@ public class Company {
 
     private String additionalFields;
 
-    @Column(nullable = false)
     private int maxEmployees;
 
     @OneToOne
@@ -66,7 +64,7 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Payment> payment;
 
-    public Company(@Size(max = 50) String companyName, @Size(max = 20) String shortCompanyName, @Size(max = 10) String nip, String regon, String representativePerson, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
+    public Company(String companyName, String shortCompanyName, String nip, String regon, String representativePerson, String phone, String street, String streetNumber, String buildingNumber, String city, String postcode, String province, String country, String additionalFields, int maxEmployees, User user) {
         this.companyName = companyName;
         this.shortCompanyName = shortCompanyName;
         this.nip = nip;
@@ -89,7 +87,7 @@ public class Company {
         this.user = user;
     }
 
-    public Company(@Size(max = 50) String companyName, User user) {
+    public Company(String companyName, User user) {
         this.companyName = companyName;
         this.user = user;
     }

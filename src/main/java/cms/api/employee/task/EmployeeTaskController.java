@@ -21,7 +21,7 @@ public class EmployeeTaskController {
     @GetMapping
     @RequestMapping("/employee/tasks/{statusTask}")
     EmployeeTaskResponse readCompanyTasks(Pageable page, @PathVariable int statusTask, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return service.readEmployeeTasks(page, userDetails.getId(), statusTask);
+        return service.readEmployeeTasks(page, userDetails.getIdClient(), statusTask);
     }
 
     @RequestMapping(value = "/employee/task/update/{id}", method = RequestMethod.PUT)

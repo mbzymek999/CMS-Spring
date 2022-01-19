@@ -1,7 +1,6 @@
 package cms.domain.company.repository;
 
 import cms.domain.company.entity.Agreement;
-import cms.domain.company.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
@@ -21,8 +20,8 @@ public interface AgreementRepository extends JpaRepository<Agreement, Integer> {
     @RestResource(exported = false)
     void delete(Agreement agreementTest);
 
-    List<Agreement> findAllByCompanyAgreement_User_Id(Long id);
+    List<Agreement> findAllByCompanyAgreement_User_IdClient(String idClient);
 
-    Optional<Agreement> findAllByCompanyAgreement_User_IdAndId(Long id, int idAgreement);
+    Optional<Agreement> findAllByCompanyAgreement_User_IdClientAndId(String idClient, int idAgreement);
 
 }

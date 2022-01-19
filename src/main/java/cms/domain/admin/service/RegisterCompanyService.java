@@ -90,6 +90,7 @@ public class RegisterCompanyService {
         userRepository.save(user);
         companyRepository.save(company);
 
+
         return "Firma została pomyślnie dodana do systemu!";
     }
 

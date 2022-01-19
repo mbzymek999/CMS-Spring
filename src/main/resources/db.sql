@@ -116,3 +116,15 @@ insert into roles(name) values('ROLE_USER');
 insert into roles(name) values('ROLE_COMPANY');
 insert into roles(name) values('ROLE_EMPLOYEE');
 insert into roles(name) values('ROLE_ADMIN');
+
+drop table messages;
+drop table agreements;
+drop table roles;
+drop table employees;
+drop table companies;
+drop table employees;
+drop table user_roles;
+drop table users;
+drop table user_roles;
+drop table tasks;
+drop table payments;

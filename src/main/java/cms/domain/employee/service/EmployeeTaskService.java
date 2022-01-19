@@ -26,9 +26,9 @@ public class EmployeeTaskService {
     }
 
 
-    public EmployeeTaskResponse readEmployeeTasks(Pageable page, Long id, int statusTask) {
-        List<EmployeeTaskReadModel> list = repository.findAllByEmployeeTask_User_IdAndStatusTask(page, id, statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
-        Page<Task> pageInformation = repository.findAllByEmployeeTask_User_IdAndStatusTask(page, id, statusTask);
+    public EmployeeTaskResponse readEmployeeTasks(Pageable page, String idClient, int statusTask) {
+        List<EmployeeTaskReadModel> list = repository.findAllByEmployeeTask_User_IdClientAndStatusTask(page, idClient, statusTask).stream().map(EmployeeTaskReadModel::new).collect(Collectors.toList());
+        Page<Task> pageInformation = repository.findAllByEmployeeTask_User_IdClientAndStatusTask(page, idClient, statusTask);
         return new EmployeeTaskResponse(pageInformation, list);
     }
 

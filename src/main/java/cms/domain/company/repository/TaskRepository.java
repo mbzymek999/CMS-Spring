@@ -14,12 +14,12 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
         @Override
         <S extends Task> S save(S s);
 
-        Page<Task> findAllByEmployeeTask_User_IdAndStatusTask(Pageable page, Long id, int statusTask);
+        Page<Task> findAllByEmployeeTask_User_IdClientAndStatusTask(Pageable page, String idClient, int statusTask);
 
-        Page<Task> findAllByCompanyTask_User_Id(Pageable page, Long id);
+        Page<Task> findAllByCompanyTask_User_IdClient(Pageable page, String id);
 
-        List<Task> findAllByCompanyTask_User_Id(Long id);
+        List<Task> findAllByCompanyTask_User_IdClient(String id);
 
-        Page<Task> findAllByCompanyTask_User_IdAndStatusTask(Pageable page, Long id, int statusTask);
+        Page<Task> findAllByCompanyTask_User_IdClientAndStatusTask(Pageable page, String idClient, int statusTask);
 
 }
