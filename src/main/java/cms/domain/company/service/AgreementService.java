@@ -14,7 +14,7 @@ import cms.domain.user.entity.Role;
 import cms.domain.user.entity.User;
 import cms.domain.user.repository.RoleRepository;
 import cms.domain.user.repository.UserRepository;
-import cms.external.email.service.MailService;
+import cms.external.email.facade.EmailServiceFacade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,15 +37,15 @@ public class AgreementService implements AgreementServiceImpl {
 
     private final AgreementRepository agreementRepository;
 
-    private final MailService mailService;
+    private final EmailServiceFacade mailServiceFacade;
 
-    public AgreementService(UserRepository userRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository, MailService mailService) {
+    public AgreementService(UserRepository userRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder encoder, AgreementRepository agreementRepository, EmailServiceFacade mailServiceFacade) {
         this.userRepository = userRepository;
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.agreementRepository = agreementRepository;
-        this.mailService = mailService;
+        this.mailServiceFacade = mailServiceFacade;
     }
 
     private final String randomPassword = UUID.randomUUID().toString().replace("-", "");
@@ -126,12 +126,12 @@ public class AgreementService implements AgreementServiceImpl {
             });
         }
 
-        sendEmail(signUpRequest);
-
         user.setRoles(roles);
         userRepository.save(user);
         employeeRepository.save(employee);
         agreementRepository.save(agreement);
+
+        sendEmail(signUpRequest);
 
         return "Employee registered successfully!";
     }
@@ -150,7 +150,7 @@ public class AgreementService implements AgreementServiceImpl {
 
     public void sendEmail(AgreementRequest signUpRequest) {
         String emailBody = "Login: " + signUpRequest.getUsername() + "\n" + "Hasło: " + randomPassword;
-        mailService.sendEmail(signUpRequest.getEmail(), "Dane logowania pracownika", emailBody);
+        mailServiceFacade.sendEmail(signUpRequest.getEmail(), "Dane logowania pracownika", emailBody);
     }
 
     public void checkIfUserNameAlreadyExist(AgreementRequest signUpRequest) {

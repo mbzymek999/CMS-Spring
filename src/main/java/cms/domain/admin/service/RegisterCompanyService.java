@@ -37,7 +37,6 @@ public class RegisterCompanyService implements RegisterCompanyServiceImpl {
 
         checkIfUserNameAlreadyExist(signUpRequest);
         checkIfEmailAlreadyExist(signUpRequest);
-
         String randomId = UUID.randomUUID().toString().replace("-", "");
 
         // Create new user's account
@@ -46,7 +45,6 @@ public class RegisterCompanyService implements RegisterCompanyServiceImpl {
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-
         // Create new company
         Company company = new Company(
                 signUpRequest.getCompanyName(),
@@ -100,7 +98,6 @@ public class RegisterCompanyService implements RegisterCompanyServiceImpl {
             throw new IllegalArgumentException("Error: Nazwa użytkownika zajęta");
         }
     }
-
     public void checkIfEmailAlreadyExist(SignupCompanyRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new IllegalArgumentException("Error: Email jest już zajęty");

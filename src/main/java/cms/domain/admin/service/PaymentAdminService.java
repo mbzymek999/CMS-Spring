@@ -29,8 +29,7 @@ public class PaymentAdminService implements PaymentAdminServiceImpl {
     public String createPayment(Long companyId) {
         Company company = companyRepository.findById(companyId).orElse(null);
         checkIfCompanyExist(company);
-
-        // Create payment
+        assert company != null;
         Payment payment = new PaymentWriteModel().toPayment(company);
         payment.setCompany(company);
         paymentRepository.save(payment);
@@ -39,13 +38,16 @@ public class PaymentAdminService implements PaymentAdminServiceImpl {
     }
 
     public PaymentAdminResponse readAll(Pageable page) {
-        List<PaymentReadModel> list = paymentRepository.findAll(page).stream().map(PaymentReadModel::new).collect(Collectors.toList());
+        List<PaymentReadModel> list = paymentRepository.findAll(page).stream().map(PaymentReadModel::new)
+                .collect(Collectors.toList());
         Page<Payment> pageInformation = paymentRepository.findAll(page);
         return new PaymentAdminResponse(pageInformation, list);
     }
 
     public PaymentAdminResponse readByPaymentDone(Pageable page, boolean paymentDone) {
-        List<PaymentReadModel> list = paymentRepository.findAllByPaymentDone(page, paymentDone).stream().map(PaymentReadModel::new).collect(Collectors.toList());
+        List<PaymentReadModel> list = paymentRepository.findAllByPaymentDone(page, paymentDone).stream()
+                .map(PaymentReadModel::new)
+                .collect(Collectors.toList());
         Page<Payment> pageInformation = paymentRepository.findAllByPaymentDone(page, paymentDone);
         return new PaymentAdminResponse(pageInformation, list);
     }

@@ -13,7 +13,6 @@ import javax.validation.Valid;
 public class RegisterCompanyController {
 
     private final RegisterCompanyServiceImpl registerCompanyServiceImpl;
-
     public RegisterCompanyController(RegisterCompanyServiceImpl registerCompanyServiceImpl) {
         this.registerCompanyServiceImpl = registerCompanyServiceImpl;
     }
@@ -24,5 +23,5 @@ public class RegisterCompanyController {
     public String addNewCompany(@Valid @RequestBody SignupCompanyRequest request) {
         return registerCompanyServiceImpl.registerUser(request);
     }
-
 }
+

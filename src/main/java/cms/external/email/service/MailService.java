@@ -1,15 +1,18 @@
 package cms.external.email.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cms.external.email.facade.EmailServiceFacade;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MailService {
+public class MailService implements EmailServiceFacade {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
+
+    public MailService(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     public void sendEmail(String to, String subject, String body) {
         System.out.println("Sending email");
@@ -21,5 +24,4 @@ public class MailService {
         javaMailSender.send(simpleMailMessage);
         System.out.println("sent email...");
     }
-
 }

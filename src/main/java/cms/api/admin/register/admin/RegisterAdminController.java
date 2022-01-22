@@ -2,7 +2,6 @@ package cms.api.admin.register.admin;
 
 import cms.domain.admin.serviceImpl.RegisterAdminServiceImpl;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,13 +19,8 @@ public class RegisterAdminController {
 
     @PostMapping("/signup/admin")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addNewAdmin(@RequestBody @Valid SignupAdminRequest request) {
-        try {
-            return ResponseEntity.ok(registerAdminServiceImpl.registerAdmin(request));
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
-        }
+    public String addNewAdmin(@RequestBody @Valid SignupAdminRequest request) {
+        return registerAdminServiceImpl.registerAdmin(request);
     }
 
 }

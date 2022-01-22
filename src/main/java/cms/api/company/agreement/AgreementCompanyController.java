@@ -30,7 +30,8 @@ public class AgreementCompanyController {
     @PostMapping("/create/agreement")
     @PreAuthorize("hasRole('COMPANY')")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addNewAgreement(@RequestBody @Valid AgreementRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+    public String addNewAgreement(@RequestBody @Valid AgreementRequest request,
+                                  @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
         return agreementServiceImpl.registerUser(request.validate(), userDetails.getIdClient());
     }
 
