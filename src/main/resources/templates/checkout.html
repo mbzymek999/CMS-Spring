@@ -27,8 +27,12 @@
 
                     <input type='hidden' th:value='${amount}' name='amount'/>
                     <input type='hidden' th:value='${paymentId}' name='paymentId'/>
-                    <p class="text-center">Nazwa firmy: <span th:text='${companyName}'/><span/></p>
-                    <p class="text-center">Cena: <span th:text='${amount/100}'/> <span th:text=" zł"/></p>
+
+                    <p style="margin-bottom: 0">Nazwa firmy: <span style="font-weight: bold"
+                                                                   th:text='${companyName}'/><span/></p>
+                    <p style="margin-bottom: 0">Cena: <span style="font-weight: bold" th:text='${amount/100}'/> <span
+                            th:text=" zł"/></p>
+                    <p>Data wystawienia: <span style="font-weight: bold" th:text='${datePayment}'/> <span/></p>
                     <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
                     <script
                             src='https://checkout.stripe.com/checkout.js'

@@ -1,9 +1,9 @@
 package cms.api.company.payment;
 
-import cms.external.payment.service.StripeService;
 import cms.domain.company.entity.Payment;
 import cms.domain.company.repository.PaymentRepository;
 import cms.domain.user.repository.UserRepository;
+import cms.external.payment.service.StripeService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import org.springframework.stereotype.Controller;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ChargeController {
 
     PaymentRepository paymentRepository;
-    private StripeService paymentsService;
-    private UserRepository userRepository;
+    private final StripeService paymentsService;
+    private final UserRepository userRepository;
 
     public ChargeController(PaymentRepository paymentRepository, StripeService paymentsService, UserRepository userRepository) {
         this.paymentRepository = paymentRepository;
@@ -29,19 +29,6 @@ public class ChargeController {
         Payment payment = paymentRepository.findById(chargeRequest.getPaymentId()).orElseThrow();
         if(payment.isPaymentDone())
             throw new IllegalStateException("Pakiet został opłacony");
-
-        // nie pobiera tokena
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetailsImpl userImpl = (UserDetailsImpl)authentication.getPrincipal();
-//
-//        User user = userRepository.findById(userImpl.getId()).orElse(null);
-//
-//        if(user == null)
-//            throw new NullPointerException("nie znaleziono uzytkowonika");
-//
-//        if(user.getCompanyUser().getPayment().getId() != chargeRequest.getPaymentId())
-//            throw new SecurityException("użytkownik nie może dokonać płatności");
-
 
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(ChargeRequest.Currency.PLN);
