@@ -1,7 +1,7 @@
 package cms.domain.company.serviceImpl;
 
 import cms.api.company.employee.EmployeeCompanyReadModel;
-import cms.api.company.employee.UpdateEmployeeResponse;
+import cms.api.company.employee.UpdateEmployeeRequest;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ public interface EmployeeCompanyServiceImpl {
 
     EmployeeCompanyReadModel readEmployeeDetails(Long id);
 
-    EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeResponse updateEmployeeResponse);
+    EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeRequest updateEmployeeRequest);
 
 }

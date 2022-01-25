@@ -4,7 +4,7 @@ import cms.domain.employee.entity.Employee;
 import lombok.Data;
 
 @Data
-public class UpdateEmployeeResponse {
+public class UpdateEmployeeRequest {
 
     private String position;
     private String phone;

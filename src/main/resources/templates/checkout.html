@@ -24,10 +24,8 @@
         <div class="card bg-light">
             <div class="card-body">
                 <form action='/charge' method='POST' id='checkout-form'>
-
                     <input type='hidden' th:value='${amount}' name='amount'/>
                     <input type='hidden' th:value='${paymentId}' name='paymentId'/>
-
                     <p style="margin-bottom: 0">Nazwa firmy: <span style="font-weight: bold"
                                                                    th:text='${companyName}'/><span/></p>
                     <p style="margin-bottom: 0">Cena: <span style="font-weight: bold" th:text='${amount/100}'/> <span
@@ -48,7 +46,6 @@
                             data-label='Zapłać'
                             data-panel-label="Zapłać kartą">
                     </script>
-
                 </form>
             </div>
             <div class="col-4">

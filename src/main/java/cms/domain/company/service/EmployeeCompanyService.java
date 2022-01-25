@@ -1,7 +1,7 @@
 package cms.domain.company.service;
 
 import cms.api.company.employee.EmployeeCompanyReadModel;
-import cms.api.company.employee.UpdateEmployeeResponse;
+import cms.api.company.employee.UpdateEmployeeRequest;
 import cms.domain.company.repository.AgreementRepository;
 import cms.domain.company.serviceImpl.EmployeeCompanyServiceImpl;
 import cms.domain.employee.entity.Employee;
@@ -32,10 +32,11 @@ public class EmployeeCompanyService implements EmployeeCompanyServiceImpl {
         return new EmployeeCompanyReadModel(employee);
     }
 
-    public EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeResponse updateEmployeeResponse) {
+    public EmployeeCompanyReadModel updateEmployee(Long id, UpdateEmployeeRequest updateEmployeeRequest) {
         Employee employee = employeeRepository.findById(id).orElseThrow();
-        updateEmployeeResponse.updateEntity(employee);
+        updateEmployeeRequest.updateEntity(employee);
         employeeRepository.save(employee);
         return new EmployeeCompanyReadModel(employee);
     }
+
 }

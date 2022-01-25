@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ChargeController {
 
     PaymentRepository paymentRepository;
-    private final StripeService paymentsService;
+    private final StripeService stripeService;
     private final UserRepository userRepository;
 
-    public ChargeController(PaymentRepository paymentRepository, StripeService paymentsService, UserRepository userRepository) {
+    public ChargeController(PaymentRepository paymentRepository, StripeService stripeService, UserRepository userRepository) {
         this.paymentRepository = paymentRepository;
-        this.paymentsService = paymentsService;
+        this.stripeService = stripeService;
         this.userRepository = userRepository;
     }
 
@@ -29,10 +29,9 @@ public class ChargeController {
         Payment payment = paymentRepository.findById(chargeRequest.getPaymentId()).orElseThrow();
         if(payment.isPaymentDone())
             throw new IllegalStateException("Pakiet został opłacony");
-
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(ChargeRequest.Currency.PLN);
-        Charge charge = paymentsService.charge(chargeRequest);
+        Charge charge = stripeService.charge(chargeRequest);
         payment.setPaymentDone(true);
         paymentRepository.save(payment);
         model.addAttribute("id", charge.getId());

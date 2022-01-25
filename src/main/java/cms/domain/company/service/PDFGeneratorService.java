@@ -58,19 +58,26 @@ public class PDFGeneratorService implements PDFGeneratorServiceImpl {
         Paragraph paragraph7 = new Paragraph("zamieszkala/ym " + agreement.getEmployeeAgreement().getStreet() + " " +
                 agreement.getEmployeeAgreement().getStreetNumber() + " " + agreement.getEmployeeAgreement().getBuildingNumber() + " " +
                 agreement.getEmployeeAgreement().getPostcode() + " " + agreement.getEmployeeAgreement().getCity(), fontParagraph);
-            paragraph7.setAlignment(Paragraph.ALIGN_LEFT);
+        paragraph7.setAlignment(Paragraph.ALIGN_LEFT);
 
         Paragraph paragraph8 = new Paragraph("na czas określony od " + agreement.getDateFrom() + " do " + agreement.getDateTo() +
                 ". Wynagrodzenie: " + agreement.getSalary() + " zl", fontParagraph);
-            paragraph8.setAlignment(Paragraph.ALIGN_LEFT);
+        paragraph8.setAlignment(Paragraph.ALIGN_LEFT);
 
-        paragraph.setSpacingAfter(5);
+        Paragraph paragraph9 = new Paragraph("....................................................                              ....................................................");
+        paragraph9.setAlignment(Paragraph.ALIGN_LEFT);
+
+        Paragraph paragraph10 = new Paragraph("Firma                                                                         Pracownik");
+        paragraph10.setAlignment(Paragraph.ALIGN_LEFT);
+
+        paragraph.setSpacingAfter(10);
         paragraph2.setSpacingAfter(5);
         paragraph3.setSpacingAfter(5);
         paragraph4.setSpacingAfter(5);
         paragraph5.setSpacingAfter(5);
         paragraph6.setSpacingAfter(5);
         paragraph7.setSpacingAfter(5);
+        paragraph8.setSpacingAfter(40);
 
         document.add(paragraph);
         document.add(paragraph2);
@@ -80,6 +87,14 @@ public class PDFGeneratorService implements PDFGeneratorServiceImpl {
         document.add(paragraph6);
         document.add(paragraph7);
         document.add(paragraph8);
+        document.add(paragraph9);
+        document.add(paragraph10);
         document.close();
     }
+
+    public String employeeFullName(int idAgreement) {
+        Agreement agreement = agreementRepository.getById(idAgreement);
+        return agreement.getEmployeeAgreement().getName() + agreement.getEmployeeAgreement().getLastName();
+    }
+
 }

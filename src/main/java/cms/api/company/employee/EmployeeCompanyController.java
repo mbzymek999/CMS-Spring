@@ -44,7 +44,8 @@ public class EmployeeCompanyController {
     }
 
     @RequestMapping(value = "/company/employee/update/{id}", method = RequestMethod.PUT)
-    EmployeeCompanyReadModel updateEmployee(@PathVariable(value = "id") Long id, @RequestBody UpdateEmployeeResponse updateEmployeeResponse) {
-        return employeeCompanyServiceImpl.updateEmployee(id, updateEmployeeResponse);
+    EmployeeCompanyReadModel updateEmployee(@PathVariable(value = "id") Long id, @RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
+        return employeeCompanyServiceImpl.updateEmployee(id, updateEmployeeRequest);
     }
+
 }

@@ -7,4 +7,6 @@ public interface PDFGeneratorServiceImpl {
 
     void export(HttpServletResponse response, int idAgreement) throws IOException;
 
+    String employeeFullName(int idAgreement);
+
 }
