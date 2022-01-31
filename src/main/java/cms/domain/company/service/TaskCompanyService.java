@@ -11,8 +11,6 @@ import cms.domain.employee.entity.Employee;
 import cms.domain.employee.repository.EmployeeRepository;
 import cms.domain.user.entity.User;
 import cms.domain.user.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,6 @@ public class TaskCompanyService implements TaskCompanyServiceImpl {
     private final TaskRepository repository;
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
-    Logger logger = LoggerFactory.getLogger(TaskCompanyService.class);
 
     public TaskCompanyService(TaskRepository repository, UserRepository userRepository, EmployeeRepository employeeRepository) {
         this.repository = repository;

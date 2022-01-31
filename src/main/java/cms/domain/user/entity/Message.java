@@ -18,6 +18,10 @@ public class Message {
     private String phone;
     private String message;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Message(String companyName, String email, String phone, String message) {
         this.companyName = companyName;
         this.email = email;
@@ -74,5 +78,13 @@ public class Message {
 
     public String getMessage() {
         return message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

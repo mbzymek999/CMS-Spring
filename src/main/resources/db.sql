@@ -17,7 +17,9 @@ create table user_roles
 (
     id      int primary key auto_increment,
     user_id BIGINT not null,
-    role_id int not null
+    foreign key (user_id) references users (id),
+    role_id int not null,
+    foreign key (role_id) references roles (id)
 );
 
 create table employees
@@ -109,7 +111,9 @@ create table messages
     company_name varchar(50),
     email varchar(50) not null,
     phone varchar(20),
-    message varchar(1000) not null
+    message varchar(1000) not null,
+    user_id BIGINT ,
+    foreign key (user_id) references users (id)
 );
 
 insert into roles(name) values('ROLE_USER');
@@ -120,11 +124,9 @@ insert into roles(name) values('ROLE_ADMIN');
 drop table messages;
 drop table agreements;
 drop table roles;
+drop table tasks;
 drop table employees;
+drop table payments;
 drop table companies;
-drop table employees;
 drop table user_roles;
 drop table users;
-drop table user_roles;
-drop table tasks;
-drop table payments;

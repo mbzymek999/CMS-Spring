@@ -3,6 +3,7 @@ package cms.api.admin.users.company;
 import cms.domain.admin.serviceImpl.CompanyServiceImpl;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class CompanyController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/companies")
     ResponseEntity<List<CompanyReadModel>> readAllCompanies() {
         return ResponseEntity.ok(companyServiceImpl.readAll());

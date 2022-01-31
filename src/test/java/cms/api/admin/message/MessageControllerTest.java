@@ -2,6 +2,7 @@ package cms.api.admin.message;
 
 import cms.domain.user.entity.Message;
 import cms.domain.user.repository.MessageRepository;
+import cms.domain.user.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -36,6 +37,8 @@ class MessageControllerTest {
     private ObjectMapper objectMapper;
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     void readAllMessage() {
@@ -62,7 +65,6 @@ class MessageControllerTest {
     }
 
     @Test
-    //dzieki transactional test nie doda nowo utworzonego rekordu do bazy danych
     @Transactional
     void readMessageDetails() throws Exception {
         // given

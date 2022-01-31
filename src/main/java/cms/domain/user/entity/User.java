@@ -44,8 +44,11 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Company companyUser;
 
+    @OneToOne(mappedBy = "user")
+    private Message messageUser;
+
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -128,5 +131,13 @@ public class User {
 
     public void setCompanyUser(Company companyUser) {
         this.companyUser = companyUser;
+    }
+
+    public Message getMessageUser() {
+        return messageUser;
+    }
+
+    public void setMessageUser(Message messageUser) {
+        this.messageUser = messageUser;
     }
 }

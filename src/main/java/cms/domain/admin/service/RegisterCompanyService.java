@@ -88,8 +88,6 @@ public class RegisterCompanyService implements RegisterCompanyServiceImpl {
         user.setRoles(roles);
         userRepository.save(user);
         companyRepository.save(company);
-
-
         return "Firma została pomyślnie dodana do systemu!";
     }
 
