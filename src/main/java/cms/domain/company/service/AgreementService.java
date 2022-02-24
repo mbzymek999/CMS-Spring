@@ -126,12 +126,12 @@ public class AgreementService implements AgreementServiceImpl {
             });
         }
 
+        sendEmail(signUpRequest);
+
         user.setRoles(roles);
         userRepository.save(user);
         employeeRepository.save(employee);
         agreementRepository.save(agreement);
-
-        sendEmail(signUpRequest);
 
         return "Employee registered successfully!";
     }
